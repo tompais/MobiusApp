@@ -25,11 +25,10 @@ coverage:
         target: auto
         threshold: 0.5%
         if_not_found: success
-        
+
 comment:
   layout: "header, diff, tree, changes"
   behavior: new # Deletes old comment and post a new one
   require_changes: false # if true: only post the comment if coverage changes
   require_base: no # [yes :: must have a base report to post]
   require_head: no # [yes :: must have a head report to post]
-  
