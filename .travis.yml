@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+  - "12"
+
+addons:
+  chrome: stable
+
+env:
+  global: CODECOV_TOKEN=$CODECOV_TOKEN
+
+cache:
+  directories:
+    - ./node_modules
+
+before_install:
+  - pip install --user codecov
+
+before_script:
+  - npm install
+
+jobs:
+  include:
+    - stage: Test coverage
+      script:
+        - npm run test
+
+after_success:
+  - codecov
