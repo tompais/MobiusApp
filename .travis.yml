@@ -14,11 +14,13 @@ cache:
 
 before_script:
   - npm install
+  - npm ci
 
 jobs:
   include:
     - stage: Test coverage
       script:
-        - ng test --browsers=ChromeHeadlessNoSandbox --codeCoverage=true --watch=false
+        - npm run test
       after_script:
         - if [[ "$TRAVIS_TEST_RESULT" == 0 ]]; then ./node_modules/.bin/codecov; fi
+        - codecov
