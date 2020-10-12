@@ -1,0 +1,25 @@
+<!--<div>
+  <input type="email" name="email" id="email" [(ngModel)]="user.email">
+  <input type="password" name="password" id="password" [(ngModel)]="user.password">
+  <button type="submit" (click)="registro()">
+    ENVIAR
+  </button>
+</div>
+
+<div>
+  Email: {{user.email}}
+  Password: {{user.password}}
+</div>-->
+
+
+<ion-item>
+  <ion-label>Email:</ion-label>
+  <ion-input type="email" value="{{user.email}}"></ion-input>
+  <ion-label>Password:</ion-label>
+  <ion-input type="password" value="{{user.password}}"></ion-input>
+  <ion-button color="primary" (click)="registro()">ENVIAR</ion-button>
+</ion-item>
+
+<div (click)="registro()">
+  EMAIL: {{user.email}}
+</div>
