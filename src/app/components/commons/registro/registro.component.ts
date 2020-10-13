@@ -25,10 +25,10 @@ export class RegistroComponent implements OnInit {
   public registro() {
     this.commonService.login(this.user)
       .subscribe((resp: any) => {
-        console.log('DISPARO EL EVENT');
-        console.log('OK');
+      //  console.log('DISPARO EL EVENT');
+      //  console.log('OK');
       }, (error: Error) => {
-        console.log(error);
+        // console.log(error);
       });
   }
 
