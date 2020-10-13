@@ -11,13 +11,15 @@ export class RegistroComponent implements OnInit {
 
   user: User;
 
-  constructor(public commonService: CommonService) { }
-
-  ngOnInit() {
+  constructor(public commonService: CommonService) {
     this.user = new User();
   }
 
-  registro() {
+  ngOnInit() {
+    // this.user = new User();
+  }
+
+  public registro() {
     this.commonService.login(this.user)
       .subscribe((resp: any) => {
         console.log('DISPARO EL EVENT');
