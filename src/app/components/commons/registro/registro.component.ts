@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from 'src/app/app.component';
 import { CommonService } from 'src/app/services/common/common.service';
 import { User } from '../models/User';
 
@@ -9,14 +10,16 @@ import { User } from '../models/User';
 })
 export class RegistroComponent implements OnInit {
 
-  user: User;
+  user: User = null;
+  primaryApp: AppComponent = null;
 
-  constructor(public commonService: CommonService) {
+  constructor(public commonService: CommonService, public app: AppComponent) {
     this.user = new User();
+    this.primaryApp = app;
   }
 
   ngOnInit() {
-    // this.user = new User();
+    this.user = new User();
   }
 
   public registro() {

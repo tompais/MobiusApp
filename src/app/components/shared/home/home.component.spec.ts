@@ -21,4 +21,9 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should create 2', () => {
+    expect(component.ngOnInit()); // .toBeTruthy();
+  });
+
 });

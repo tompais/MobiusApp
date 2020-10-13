@@ -7,6 +7,7 @@ import { RegistroComponent } from './registro.component';
 import { CommonService } from 'src/app/services/common/common.service';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { User } from '../models/User';
+import { AppComponent } from 'src/app/app.component';
 
 describe('RegistroComponent', () => {
   // tslint:disable-next-line: prefer-const
@@ -17,29 +18,31 @@ describe('RegistroComponent', () => {
   let user: User;
   // tslint:disable-next-line: prefer-const
   let httpHandler: HttpHandler;
-
+  let app: AppComponent;
 
   beforeEach(() => {
     service = new CommonService(http, httpHandler);
-    component = new RegistroComponent(service);
+    component = new RegistroComponent(service, app);
+    app = component.primaryApp;
     user = new User();
     user.email = 'pepe@gmail.com';
     user.password = '123456';
   });
 
- /* afterEach(() => {
+  afterEach(() => {
     service = null;
     component = null;
-  });*/
+    user = null;
+  });
 
   it('Probando', () => {
     // expect(component.registro()).toBeTruthy();
     expect(component.registro());
   });
 
- // let fixture: ComponentFixture<RegistroComponent>;
+  /*let fixture: ComponentFixture<RegistroComponent>;
 
-  /*beforeEach(async(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RegistroComponent ],
       imports: [IonicModule.forRoot()]
@@ -54,6 +57,27 @@ describe('RegistroComponent', () => {
     expect(component.ngOnInit());
   });
 
+  it('Probando3', () => {
+    expect(component.user).toBeTruthy();
+  });
+
+  it('Probando4', () => {
+    component.user.email = 'pepe@gmail.com';
+    // tslint:disable-next-line: object-literal-key-quotes
+    expect('pepe@gmail.com').toEqual(user.email);
+ /* it('Probando3', () => {
+    expect(component.commonService.login(component.user));
+  });*/
+  });
+
+  it('Probando5', () => {
+    component.user.email = 'pepe@gmail.com';
+    // tslint:disable-next-line: object-literal-key-quotes
+    expect('123456').toEqual(user.password);
+ /* it('Probando3', () => {
+    expect(component.commonService.login(component.user));
+  });*/
+  });
  /* beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ RegistroComponent ],
