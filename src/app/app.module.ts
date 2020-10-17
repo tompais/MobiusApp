@@ -14,9 +14,11 @@ import { CommonService } from './services/common/common.service';
 import { RegistroComponent } from './components/commons/registro/registro.component';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/shared/home/home.component';
+import { LoginComponent } from './components/commons/login/login.component';
+
 
 @NgModule({
-  declarations: [AppComponent, RegistroComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
