@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { tick } from '@angular/core/testing';
 import { NgForm } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
 import { CommonService } from 'src/app/services/common/common.service';
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   user: User;
   primaryApp: AppComponent = null;
   retorno = true;
+
   constructor(public commonService: CommonService, public app: AppComponent) {
     this.user = new User();
   }
@@ -29,13 +31,12 @@ export class LoginComponent implements OnInit {
     }else{
       this.commonService.login(this.user)
       .subscribe((resp: any) => {
-       this.retorno = true;
+        // this.retorno = true;
       }, (error: Error) => {
-        this.retorno = false;
+        // this.retorno = false;
       });
+      this.retorno = true;
     }
-
-    return this.retorno;
   }
 
 }

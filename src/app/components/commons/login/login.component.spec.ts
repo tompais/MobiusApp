@@ -9,7 +9,9 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { User } from '../models/User';
 import { AppComponent } from 'src/app/app.component';
 import { NgForm } from '@angular/forms';
-import { Input } from '@angular/core';
+import { Input, NO_ERRORS_SCHEMA } from '@angular/core';
+import { of } from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -21,12 +23,10 @@ describe('LoginComponent', () => {
   // tslint:disable-next-line: prefer-const
   let httpHandler: HttpHandler;
   let app: AppComponent;
-  // let form:NgForm;
 
   beforeEach(() => {
     service = new CommonService(http, httpHandler);
     component = new LoginComponent(service, app);
-
     app = component.primaryApp;
     user = new User();
     user.email = 'pepe@gmail.com';
@@ -49,8 +49,9 @@ describe('LoginComponent', () => {
       invalid: false
      } as NgForm;
     component.login(testForm);
-    tick(); // deja pasar el tiempo, también podrías usar flush();
-    expect(component.retorno).toBe(false);
+
+    tick(1); // deja pasar el tiempo, también podrías usar flush();
+    expect(component.retorno).toBe(true);
   }));
 
   it('Probando Login Compoenent FALSE', fakeAsync(() => {
@@ -61,6 +62,7 @@ describe('LoginComponent', () => {
      },
      invalid: true
     } as NgForm;
+
     component.login(testForm);
     tick(); // deja pasar el tiempo
     expect(component.retorno).toBe(false);
