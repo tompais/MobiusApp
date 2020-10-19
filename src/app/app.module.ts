@@ -14,12 +14,15 @@ import { CommonService } from './services/common/common.service';
 import { RegistroComponent } from './components/commons/registro/registro.component';
 import { FormsModule, NgForm } from '@angular/forms';
 import { HomeComponent } from './components/shared/home/home.component';
+import { LoginComponent } from './components/commons/login/login.component';
 import { EmailConfirmationComponent } from './components/commons/email-confirmation/email-confirmation.component';
 import { AtencionCalculoComponent } from './components/test/atencion-calculo/atencion-calculo.component';
+import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
 
 
 @NgModule({
-  declarations: [AppComponent, RegistroComponent, HomeComponent, EmailConfirmationComponent, AtencionCalculoComponent],
+  declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, IntroduccionComponent,
+    EmailConfirmationComponent, AtencionCalculoComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
