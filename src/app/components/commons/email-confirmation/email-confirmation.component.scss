@@ -1,0 +1,29 @@
+body {
+    background-color: #ffffff;
+}
+
+button{
+    background-color: #54157C;
+    color: #ffffff;
+    width: 50%;
+    height: 5%;
+    margin: 0;
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+div{
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+}
+
+btn_color{
+   background: #54157C;
+}
