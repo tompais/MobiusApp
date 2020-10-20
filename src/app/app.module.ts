@@ -15,10 +15,11 @@ import { RegistroComponent } from './components/commons/registro/registro.compon
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/shared/home/home.component';
 import { LoginComponent } from './components/commons/login/login.component';
+import { TextValidationComponent } from './components/commons/text-validation/text-validation.component';
 
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent],
+  declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
