@@ -119,6 +119,24 @@ describe('RegistroComponent', () => {
     expect(component.user.enviarForm()).toBe(true);
   });
 
+  it('Probando UsuarioRequest Password No Coinciden', async () => {
+    component.user.password = '1234567';
+    component.user.passwordRepeat = '123456';
+    expect(component.user.passwordNoCoinciden()).toBe(true);
+  });
+
+  /*it('Probando UsuarioRequest Enviar Form False', async () => {
+    component.user.firstName = 'Pepe';
+    component.user.lastName = 'pepe';
+    component.user.birthday = '1968-10-13';
+    component.user.patientEmail = 'pepe@gmail.com';
+    component.user.guardianEmail = 'lol@gmail.com';
+    component.user.password = '123456';
+    component.user.passwordRepeat = '123456';
+    component.user.age = 18;
+    expect(component.user.enviarForm()).toBe(false);
+  });*/
+
   /*it('Probando UsuarioRequest Enviar Form False', async () => {
     component.user.firstName = 'Pepe';
     component.user.lastName = 'pepe';

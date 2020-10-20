@@ -57,9 +57,17 @@ export class UserRequest {
         return resp;
     }
 
+    passwordNoCoinciden(): boolean {
+        let resp = false;
+        if (this.password !== this.passwordRepeat) {
+            resp = true;
+        }
+        return resp;
+    }
+
     enviarForm(): boolean {
         let resp = false;
-        if (!this.validarCamposVacios()) {
+        if (!this.validarCamposVacios() && !this.passwordNoCoinciden()) {
             resp = true;
         }
         return resp;
