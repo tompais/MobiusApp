@@ -7,6 +7,7 @@ import { RegistroComponent} from './components/commons/registro/registro.compone
 import { EmailConfirmationComponent } from './components/commons/email-confirmation/email-confirmation.component';
 import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
 import { AtencionCalculoComponent } from './components/test/atencion-calculo/atencion-calculo.component';
+import { OlvidoPasswordComponent } from './components/commons/olvido-password/olvido-password.component';
 
 const routes: Routes = [
   {
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'registrar', component: RegistroComponent},
   {path: 'email-confirmation', component: EmailConfirmationComponent},
   {path: 'test/introduccion', component: IntroduccionComponent},
-  {path: 'test/atencion-calculo', component: AtencionCalculoComponent}
+  {path: 'test/atencion-calculo', component: AtencionCalculoComponent},
+  {path: 'login/olvidoPassword', component: OlvidoPasswordComponent}
 ];
 @NgModule({
   imports: [
