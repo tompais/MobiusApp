@@ -18,11 +18,14 @@ import { LoginComponent } from './components/commons/login/login.component';
 import { EmailConfirmationComponent } from './components/commons/email-confirmation/email-confirmation.component';
 import { AtencionCalculoComponent } from './components/test/atencion-calculo/atencion-calculo.component';
 import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
+import { InfoConsultaServiceComponent } from './components/commons/info-consulta-service/info-consulta-service.component';
+import { InfoConsultaServiceGrupoComponent } from './components/commons/info-consulta-service-grupo/info-consulta-service-grupo.component';
+import { OlvidoPasswordComponent } from './components/commons/olvido-password/olvido-password.component';
 
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, IntroduccionComponent,
-    EmailConfirmationComponent, AtencionCalculoComponent],
+    EmailConfirmationComponent, AtencionCalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [

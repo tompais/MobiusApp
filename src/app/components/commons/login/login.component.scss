@@ -9,3 +9,7 @@ ion-item.item-has-focus>ion-input,
 a {
     color: #fff !important;
 }
+
+ion-item.item-has-focus>ion-label {
+    color: gray !important;
+}
