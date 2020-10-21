@@ -1,0 +1,5 @@
+<li>
+  {{ejecucionServicio.titulo}} <span>{{cargando()}}</span><a (click)="reintentar()" *ngIf="(habilitarReitento() == true)">Reintentar</a>&nbsp;
+  <a (click)="cancelar()" *ngIf="(habilitarReitento() == true)">Ignorar</a>
+  <br>{{ejecucionServicio.mensaje}}
+</li>

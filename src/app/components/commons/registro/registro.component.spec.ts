@@ -115,7 +115,12 @@ describe('RegistroComponent', () => {
     component.user.guardianEmail = 'lol@gmail.com';
     component.user.password = '123456';
     component.user.passwordRepeat = '123456';
-    component.user.age = 18;
+    expect(component.user.validarCamposVacios()).toBe(false);
+    expect(component.user.esMenorDe18Anios()).toBe(false);
+    expect(component.user.passwordNoCoinciden()).toBe(false);
+    console.log('VALIDAR CAMPOS VACIOS: ' + component.user.validarCamposVacios());
+    console.log('esMenorDe18Anios: ' + component.user.esMenorDe18Anios());
+    console.log('passwordNoCoinciden: ' + component.user.passwordNoCoinciden());
     expect(component.user.enviarForm()).toBe(true);
   });
 
@@ -123,6 +128,12 @@ describe('RegistroComponent', () => {
     component.user.password = '1234567';
     component.user.passwordRepeat = '123456';
     expect(component.user.passwordNoCoinciden()).toBe(true);
+  });
+
+  it('Probando UsuarioRequest esMenorDe18Anios True', async () => {
+    component.user.age = 18;
+    component.user.birthday = '2008-10-23';
+    expect(component.user.esMenorDe18Anios()).toBe(true);
   });
 
   /*it('Probando UsuarioRequest Enviar Form False', async () => {

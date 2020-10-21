@@ -65,9 +65,18 @@ export class UserRequest {
         return resp;
     }
 
+    esMenorDe18Anios(): boolean {
+        let resp = false;
+        if (Date.now() > this.age) {
+            resp = true;
+        }
+        return resp;
+    }
+
     enviarForm(): boolean {
         let resp = false;
-        if (!this.validarCamposVacios() && !this.passwordNoCoinciden()) {
+        if (!this.validarCamposVacios() && !this.esMenorDe18Anios() && !this.passwordNoCoinciden()) {
+            console.log('ENVIO FORM');
             resp = true;
         }
         return resp;

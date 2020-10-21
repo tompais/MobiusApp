@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AppComponent } from 'src/app/app.component';
 import { CommonService } from 'src/app/services/common/common.service';
+import { ErrorServicio } from '../models/errors/ErrorServicio';
+import { ErrorServicioGrupo } from '../models/errors/ErrorServicioGrupo';
 import { User } from '../models/User';
 import { UserRequest } from '../models/user/UserRequest';
+import { UserResponse } from '../models/user/UserResponse';
 
 @Component({
   selector: 'app-registro',
@@ -16,27 +19,54 @@ export class RegistroComponent implements OnInit {
   primaryApp: AppComponent = null;
   error = '';
   errorCode = false;
+  erroresServicio: ErrorServicioGrupo = null;
+  errorService: ErrorServicio = null;
 
   constructor(public commonService: CommonService, public app: AppComponent) {
     this.user = new UserRequest();
     this.primaryApp = app;
+    // console.log('ERRORES: ' + this.erroresServicio.errores);
+    // this.erroresServicio.errores.push(new ErrorServicio('registro', true, '', false, 'Registro'));
   }
 
   ngOnInit() {
     this.user = new UserRequest();
+    // console.log('ERRORES: ' + this.erroresServicio.errores);
+    // this.erroresServicio.errores.push(new ErrorServicio('registro', true, '', false, 'Registro'));
   }
 
-  public registro(form: NgForm) {
-    if (form.invalid) {
+  /*eventoError(error: ErrorServicio) {
+    switch (error.id) {
+      case 'registro':
+         this.registro();
+        break;
+      default:
+        break;
+    }
+  }*/
+
+  // public registro(form: NgForm) {
+    public registro(form: NgForm) {
+    // const errorSrv = this.erroresServicio.obtenerErrorServicio('registro');
+    // errorSrv.nuevoRequest();
+   /* if (form.invalid) {
       this.user.retorno = false;
-    } else {
-      this.commonService.registro(this.user).subscribe((resp: any) => {
+    } else {*/
+    this.commonService.registro(this.user).subscribe((resp: any) => {
+        // tslint:disable-next-line: no-shadowed-variable
+        /*errorSrv.procesarRespuesta(resp, (resp: any): void => {
+          console.log('PROCESO LA RESPUESTA OK');
+          resp.response.forEach((userResponse: UserResponse) => {
+            return true;
+          });
+        });*/
       }, (error: Error) => {
+        // errorSrv.getError(error);
         this.errorCode = true;
         this.error = error.message;
       });
-      this.user.retorno = true;
-    }
+    this.user.retorno = true;
+   // }
   }
 
 }

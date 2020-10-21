@@ -1,96 +1,97 @@
 <ion-header>
-  <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button defaultHref="/"></ion-back-button>
-      </ion-buttons>
-      <ion-title>Regístrese</ion-title>
-  </ion-toolbar>
+<ion-toolbar>
+    <ion-buttons slot="start">
+        <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Regístrese</ion-title>
+</ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid class="color-fondo-registro centrar">
-      <ion-row>
-          <ion-col size=12>
-              <img src="/assets/img/logo.png" alt="MobiusApp">
-          </ion-col>
-      </ion-row>
-      <ion-item color="danger" *ngIf="errorCode">
+<ion-grid class="color-fondo-registro centrar">
+    <ion-row>
+        <ion-col size=12>
+            <img src="/assets/img/logo.png" alt="MobiusApp">
+        </ion-col>
+    </ion-row>
+    <ion-item color="danger" *ngIf="errorCode">
         <ion-label>
             {{error}}
+            <!--<app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>-->
         </ion-label>
-      </ion-item>
-      <form (ngSubmit)="registro(formRegistro)" #formRegistro="ngForm">
-          <ion-row>
-              <ion-col size="12">
-                  <ion-item>
-                      <ion-label position="floating" color="ligth">Nombre</ion-label>
-                      <ion-input type="text" name="firstName" value="{{user.firstName}}" [(ngModel)]="user.firstName" required minlength="3" maxlength="50"></ion-input>
-                  </ion-item>
-                  <!--<app-text-validation [positionLabel]="floating" [colorLabel]="ligth" [nombreLabel]="Nombre" [nameInput]="firstName" [valueInput]="user.firstName"></app-text-validation>-->
-                  <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['firstName'].errors) && user.validarCamposVacios()">
+    </ion-item>
+    <form (ngSubmit)="registro(formRegistro)" #formRegistro="ngForm">
+        <ion-row>
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label position="floating" color="ligth">Nombre</ion-label>
+                    <ion-input type="text" name="firstName" value="{{user.firstName}}" [(ngModel)]="user.firstName" required minlength="3" maxlength="50"></ion-input>
+                </ion-item>
+                <!--<app-text-validation [positionLabel]="floating" [colorLabel]="ligth" [nombreLabel]="Nombre" [nameInput]="firstName" [valueInput]="user.firstName"></app-text-validation>-->
+                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['firstName'].errors) && user.validarCamposVacios()">
                     <ion-label>
                         No ingreso el nombre
                     </ion-label>
-                  </ion-item>
-              </ion-col>
-          </ion-row>
-          <ion-row>
-              <ion-col size="12">
-                  <ion-item>
-                      <ion-label position="floating">Apellido</ion-label>
-                      <ion-input type="text" name="lastName" [(ngModel)]="user.lastName" required minlength="3" maxlength="50"></ion-input>
-                  </ion-item>
-                  <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['lastName'].errors) && user.validarCamposVacios()">
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label position="floating">Apellido</ion-label>
+                    <ion-input type="text" name="lastName" [(ngModel)]="user.lastName" required minlength="3" maxlength="50"></ion-input>
+                </ion-item>
+                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['lastName'].errors) && user.validarCamposVacios()">
                     <ion-label>
                         No ingreso el apellido
                     </ion-label>
-                  </ion-item>
-              </ion-col>
-          </ion-row>
-          <ion-row>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
             <ion-col size="12">
                 <ion-item>
                     <ion-label position="floating">Correo electrónico</ion-label>
-                    <ion-input type="email" name="patientEmail" [(ngModel)]="user.patientEmail" required minlength="5" maxlength="50"></ion-input>
+                    <ion-input type="email" name="patientEmail" [(ngModel)]="user.patientEmail" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required minlength="5" maxlength="50"></ion-input>
                 </ion-item>
-                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['patientEmail'].errors) && user.validarCamposVacios()">
+                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['patientEmail'].errors)">
                     <ion-label>
-                        No ingreso el correo
+                        No ingreso un correo válido
                     </ion-label>
                 </ion-item>
             </ion-col>
-          </ion-row>
-          <ion-row>
+        </ion-row>
+        <ion-row>
             <ion-col size="12">
                 <ion-item>
                     <ion-label position="floating">Correo electrónico Guardián</ion-label>
-                    <ion-input type="email" name="guardianEmail" [(ngModel)]="user.guardianEmail" required minlength="5" maxlength="50"></ion-input>
+                    <ion-input type="email" name="guardianEmail" [(ngModel)]="user.guardianEmail" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required minlength="5" maxlength="50"></ion-input>
                 </ion-item>
-                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['guardianEmail'].errors) && user.validarCamposVacios()">
+                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['guardianEmail'].errors)">
                     <ion-label>
-                        No ingreso el correo del guardián
+                        No ingreso un correo del guardián válido
                     </ion-label>
                 </ion-item>
             </ion-col>
-          </ion-row>
-          <ion-row>
+        </ion-row>
+        <ion-row>
             <ion-col size="12">
                 <ion-item>
-                  <ion-label position="floating">Fecha de nacimiento</ion-label>
-                  <ion-input type="text" name="birthday" [(ngModel)]="user.birthday" required minlength="3" maxlength="16" (click)="user.queSeaMayorA18();"></ion-input>
-                  <!--<ion-datetime (click)="user.queSeaMayorA18();" [pickerOptions]="customPickerOptions" name="birthday" [(ngModel)]="user.birthday" displayFormat="YYYY/MM/DD"></ion-datetime>-->
+                <ion-label position="floating">Fecha de nacimiento</ion-label>
+                <ion-input type="text" name="birthday" [(ngModel)]="user.birthday" required minlength="3" maxlength="16" (click)="user.esMenorDe18Anios();"></ion-input>
+                <!--<ion-datetime (click)="user.queSeaMayorA18();" [pickerOptions]="customPickerOptions" name="birthday" [(ngModel)]="user.birthday" displayFormat="YYYY/MM/DD"></ion-datetime>-->
                 </ion-item>
-                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['birthday'].errors) && user.queSeaMayorA18()">
+                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['birthday'].errors) && user.esMenorDe18Anios()">
                     <ion-label>
                         Debe ser mayor a 18 años
                     </ion-label>
                 </ion-item>
             </ion-col>
-          </ion-row>
-          <ion-row>
+        </ion-row>
+        <ion-row>
             <ion-col size="12">
                 <ion-item>
                     <ion-label position="floating">Contraseña</ion-label>
-                    <ion-icon style="margin-left: 90%; margin-top: 2%; margin-bottom: -12%; background-color: red;" name="eye-off"></ion-icon>
+                    <ion-icon style="margin-left: 90%; margin-top: 2%; margin-bottom: -12%;" name="eye-off"></ion-icon>
                     <ion-input type="password" name="password" [(ngModel)]="user.password" required minlength="6" maxlength="16"></ion-input>
                 </ion-item>
                 <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['password'].errors) && user.validarCamposVacios()">
@@ -99,8 +100,8 @@
                     </ion-label>
                 </ion-item>
             </ion-col>
-          </ion-row>
-          <ion-row>
+        </ion-row>
+        <ion-row>
             <ion-col size="12">
                 <ion-item>
                     <ion-label position="floating">Repetir contraseña</ion-label>
@@ -118,12 +119,12 @@
                     </ion-label>
                 </ion-item>
             </ion-col>
-          </ion-row>
-          <ion-row>
-              <ion-col size="12">
-                  <ion-button shape="round" expand="block" color="primary" type="submit" (click)="user.enviarForm()">REGISTRAR</ion-button>
-              </ion-col>
-          </ion-row>
-      </form>
-  </ion-grid>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <ion-button shape="round" expand="block" color="primary" type="submit" (click)="user.enviarForm()">REGISTRAR</ion-button>
+            </ion-col>
+        </ion-row>
+    </form>
+</ion-grid>
 </ion-content> 
