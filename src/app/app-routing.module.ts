@@ -5,6 +5,7 @@ import { HomeComponent} from './components/shared/home/home.component';
 import { LoginComponent} from './components/commons/login/login.component';
 import { RegistroComponent} from './components/commons/registro/registro.component';
 import { EmailConfirmationComponent } from './components/commons/email-confirmation/email-confirmation.component';
+import { TestOrientacionComponent } from './components/test/test-orientacion/test-orientacion.component';
 import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
 import { AtencionCalculoComponent } from './components/test/atencion-calculo/atencion-calculo.component';
 import { OlvidoPasswordComponent } from './components/commons/olvido-password/olvido-password.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'email-confirmation', component: EmailConfirmationComponent},
   {path: 'test/introduccion', component: IntroduccionComponent},
   {path: 'test/atencion-calculo', component: AtencionCalculoComponent},
-  {path: 'login/olvidoPassword', component: OlvidoPasswordComponent}
+  {path: 'login/olvidoPassword', component: OlvidoPasswordComponent},
+  {path: 'test/orientacion', component: TestOrientacionComponent}
 ];
 @NgModule({
   imports: [

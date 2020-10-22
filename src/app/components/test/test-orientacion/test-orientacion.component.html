@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/test/introduccion"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Test Cognitivo</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid class="color-fondo centrar">
+    <ion-row>
+     <ion-col size="12">
+      <ion-item>
+        <p>
+          1.Indique en donde se encuentra actualmente actualmente.
+        </p>
+      </ion-item>
+     </ion-col>
+    </ion-row>
+    <form (ngSubmit)="getOrientacion()" #formLogin="ngForm">
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿En qué año estamos?</ion-label>
+          <ion-input type="text" name="anio" value="{{orientacionRequest.anio}}" [(ngModel)]="orientacionRequest.anio" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿En qué estación del año?</ion-label>
+          <ion-input type="text" name="estacion" value="{{orientacionRequest.estacion}}" [(ngModel)]="orientacionRequest.estacion" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿Qué día del mes es hoy?</ion-label>
+          <ion-input type="text" name="diaMes" value="{{orientacionRequest.diaMes}}"  [(ngModel)]="orientacionRequest.diaMes" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿Qué día de la semana es hoy?</ion-label>
+          <ion-input type="text" name="diaSemana" value="{{orientacionRequest.diaSemana}}"  [(ngModel)]="orientacionRequest.diaSemana" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿En qué mes del año estamos?</ion-label>
+          <ion-input type="text" name="mesAnio" value="{{orientacionRequest.mesAnio}}"  [(ngModel)]="orientacionRequest.mesAnio" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿En qué país estamos?</ion-label>
+          <ion-input type="text" name="pais" value="{{orientacionRequest.pais}}"  [(ngModel)]="orientacionRequest.pais" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿En qué provincia estamos?</ion-label>
+          <ion-input type="text" name="provincia" value="{{orientacionRequest.provincia}}"  [(ngModel)]="orientacionRequest.provincia" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿En qué ciudad estamos?</ion-label>
+          <ion-input type="text" name="ciudad" value="{{orientacionRequest.ciudad}}"  [(ngModel)]="orientacionRequest.ciudad" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿Dónde estamos en este momento?</ion-label>
+          <ion-input type="text" name="estamos" value="{{orientacionRequest.estamos}}" [(ngModel)]="orientacionRequest.estamos" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+          <ion-label position="floating" color="ligth">¿En qué piso/planta estamos?</ion-label>
+          <ion-input type="text" name="pisoPlanta" value="{{orientacionRequest.pisoPlanta}}" [(ngModel)]="orientacionRequest.pisoPlanta" required minlength="5" maxlength="50"></ion-input>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button routerLink="/test/atencion-calculo" shape="round" type="submit" expand="block" color="primary">
+          Siguiente
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<!--<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Ionic Action Sheet Demo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let location of locationTraces">
+      <ion-label class="ion-text-wrap">
+        <ion-label>Time: {{location.timestamp | date:'M/d/yy, h:mm a'}}</ion-label>
+        <ion-label>Latitude: {{location.latitude}} Longitude: {{location.longitude}}</ion-label>
+        <ion-label>Accuracy: {{location.accuracy}}</ion-label>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <div class="ion-text-center">
+    <ng-container *ngIf="!locationWatchStarted; else elseTemplate">
+      <ion-button color="primary" (click)="getCoordinates()">Start Location</ion-button>
+    </ng-container>
+    <ng-template #elseTemplate>
+      Location Watch Started!
+    </ng-template>
+  </div>
+</ion-content>-->
+
+<!-- home.page.html -->
+
+<!-- API GOOGLE MAPS -->
+<!--<ion-header [translucent]="true">
+
+  <ion-toolbar color="warning">
+    <ion-button (click)="loadMap()" shape="round" color="dark">
+      <ion-icon slot="start" name="locate"></ion-icon>
+      Where I Am
+    </ion-button>
+    <ion-title slot="end">Google Map</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="map-wrapper">
+    <div id="map_center">
+      <img src="../../../../assets/img/logo.png" />
+    </div>
+    <div #map id="map"></div>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="3">
+        <b>Lattitude</b>
+      </ion-col>
+      <ion-col>
+        {{latitude}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b>Longitude</b>
+      </ion-col>
+      <ion-col>
+        {{longitude}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="3">
+        <b>Address</b>
+      </ion-col>
+      <ion-col>
+        {{address}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>-->
