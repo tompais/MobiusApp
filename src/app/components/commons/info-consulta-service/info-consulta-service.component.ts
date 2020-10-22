@@ -8,15 +8,15 @@ import { ErrorServicio } from '../models/errors/ErrorServicio';
 })
 export class InfoConsultaServiceComponent implements OnInit {
 
- /* @Input() ejecucionServicio: ErrorServicio;
+  @Input() ejecucionServicio: ErrorServicio;
   @Input() forzarReitento = false;
-  @Output() reintento = new EventEmitter<boolean>();*/
+  @Output() reintento = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit() {}
 
-  /*cargando(): string {
+  cargando(): string {
     if (this.ejecucionServicio.estado === true) {
       return 'Ok';
     }
@@ -41,6 +41,6 @@ export class InfoConsultaServiceComponent implements OnInit {
 
   cancelar() {
     this.ejecucionServicio.cancelar();
-  }*/
+  }
 
 }

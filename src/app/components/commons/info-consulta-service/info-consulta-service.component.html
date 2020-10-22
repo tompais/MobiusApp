@@ -1,5 +1,12 @@
-<li>
-  {{ejecucionServicio.titulo}} <span>{{cargando()}}</span><a (click)="reintentar()" *ngIf="(habilitarReitento() == true)">Reintentar</a>&nbsp;
-  <a (click)="cancelar()" *ngIf="(habilitarReitento() == true)">Ignorar</a>
-  <br>{{ejecucionServicio.mensaje}}
-</li>
+<!--<li>
+  <!--{{ejecucionServicio.titulo}} 
+  <span>{{cargando()}}</span>-->
+  <!--<a (click)="reintentar()" *ngIf="(habilitarReitento() == true)">Reintentar</a>&nbsp;
+  <a (click)="cancelar()" *ngIf="(habilitarReitento() == true)">Ignorar</a>-->
+  <!--<br>{{ejecucionServicio.mensaje}}
+</li>-->
+<ion-item color="danger">
+  <ion-col size="12">
+    {{ejecucionServicio.mensaje}}
+  </ion-col>
+</ion-item>

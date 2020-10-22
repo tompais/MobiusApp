@@ -13,7 +13,7 @@ export class ErrorServicio {
     cantidadRequestsFinalizadosOk = 0;
     cantidadRequestsFinalizadosErr = 0;
 
-    /*constructor(id: string, requerido: boolean, mensaje: string, estado: boolean, titulo: string) {
+    constructor(id: string, requerido: boolean, mensaje: string, estado: boolean, titulo: string) {
         this.mensaje = mensaje;
         this.estado = estado;
         this.titulo = titulo;
@@ -80,5 +80,5 @@ export class ErrorServicio {
             resp = true;
         }
         return resp;
-    }*/
+    }
 }
