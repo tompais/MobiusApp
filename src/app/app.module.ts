@@ -27,6 +27,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { GoogleMapsComponent } from './components/commons/google-maps/google-maps.component';
 import { NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
 import { OrientacionService } from './services/test/orientacion.service';
+import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
@@ -42,6 +43,7 @@ import { OrientacionService } from './services/test/orientacion.service';
     Geolocation,
     NativeGeocoder,
     OrientacionService,
+    AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
