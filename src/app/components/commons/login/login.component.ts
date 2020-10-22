@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { CommonService } from 'src/app/services/common/common.service';
+import { StorageSession } from '../models/commons/StorageSession';
 import { User } from '../models/User';
 import { UserResponse } from '../models/user/UserResponse';
 
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   errorCode = false;
   cargando = false;
   userResponse: UserResponse[] = null;
+  storageSession: StorageSession = null;
 
   constructor(public commonService: CommonService, public app: AppComponent, public router: Router) {
     this.user = new User();
@@ -29,6 +31,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.user = new User();
     this.userResponse = new Array<UserResponse>();
+    this.storageSession = new StorageSession();
   }
 
   login(form: NgForm){
@@ -44,6 +47,10 @@ export class LoginComponent implements OnInit {
         user.id = resp.id;
         this.userResponse.push(user);
         console.log(this.userResponse);
+        // tslint:disable-next-line: radix
+        this.storageSession.guardar('id', user.id);
+        console.log('CONSULTA STORAGE');
+        console.log(this.storageSession.consultar('id'));
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
