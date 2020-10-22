@@ -7,6 +7,9 @@ import { RegistroComponent} from './components/commons/registro/registro.compone
 import { EmailConfirmationComponent } from './components/commons/email-confirmation/email-confirmation.component';
 import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
 import { AtencionCalculoComponent } from './components/test/atencion-calculo/atencion-calculo.component';
+import { ErrorComponent } from './components/commons/error/error.component';
+import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
+import { VisualizacionComponent } from './components/test/visualizacion/visualizacion.component';
 
 const routes: Routes = [
   {
@@ -18,7 +21,10 @@ const routes: Routes = [
   {path: 'registrar', component: RegistroComponent},
   {path: 'email-confirmation', component: EmailConfirmationComponent},
   {path: 'test/introduccion', component: IntroduccionComponent},
-  {path: 'test/atencion-calculo', component: AtencionCalculoComponent}
+  {path: 'test/atencion-calculo', component: AtencionCalculoComponent},
+  {path: 'error', component: ErrorComponent},
+  {path: 'test/ordenes', component: OrdenesComponent},
+  {path: 'test/visualizacion', component: VisualizacionComponent}
 ];
 @NgModule({
   imports: [

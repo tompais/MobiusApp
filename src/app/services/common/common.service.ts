@@ -1,6 +1,7 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/components/commons/models/User';
+import { AtencionCalculo } from 'src/app/components/test/models/AtencionCalculo';
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +29,10 @@ export class CommonService {
     return respuesta;
   }
 
+  /*public enviarCalculo(ac: AtencionCalculo){
+    // FALTA DETERMINAR CUAL ES LA RUTA PARA ENVIAR DATA DEL TEST DE CALCULO
+    const urlEnviarCalculo = this.url + '/test/calculo';
+    const respuesta = this.http.post(urlEnviarCalculo, ac);
+    return respuesta;
+  }*/
 }

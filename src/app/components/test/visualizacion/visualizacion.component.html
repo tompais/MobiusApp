@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-title>Visualización</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <h1>
+      Visualización
+     </h1>
+     <br/>
+<p>
+  Responda que ve en la siguiente imagen.
+ </p>
+  <ion-row>
+    <img src="/assets/img/tigre.png" alt="imagen" width="400px">
+  </ion-row>
+  <ion-row>
+  <form (ngSubmit)="verificar(formVisualizacion)" #formVisualizacion="ngForm">
+    <ion-item color="danger" *ngIf="formVisualizacion.submitted && (formVisualizacion.controls['res1'].errors)">
+      <ion-label>
+        Debe Completar todos los campos.
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Respuesta: </ion-label>
+      <ion-input type="text" [(ngModel)]="respuesta" name="res1" #res1="ngModel" required></ion-input>
+    </ion-item>
+    <br/>
+    <ion-button type="submit" shape="round" expand="block" color="primary">Siguiente</ion-button>
+  </form>
+</ion-row>
+</ion-grid>
+</ion-content>

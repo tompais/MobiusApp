@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AngularDelegate } from '@ionic/angular';
+import { CommonService } from 'src/app/services/common/common.service';
 import { AtencionCalculo } from '../models/AtencionCalculo';
 
 @Component({
@@ -18,7 +20,7 @@ export class AtencionCalculoComponent implements OnInit {
   numeroInicial: number;
   numeroResta: number;
 
-  constructor() { }
+  constructor(public commonService: CommonService, private router: Router) { }
 
   ngOnInit() {
     this.puntaje = 0;
@@ -49,8 +51,17 @@ export class AtencionCalculoComponent implements OnInit {
       this.ac.respuesta4 = this.respuestas[3];
       this.ac.respuesta5 = this.respuestas[4];
 // ACA DEBE IR EL SERVICIO QUE MANDA LOS DATOS AL BACK
-      this.retorno = true;
+     /* this.commonService.enviarCalculo(this.ac)
+      .subscribe(
+        data => this.retorno = true,
+        error => this.retorno = false
+      );
     }
-
+    if (this.retorno) {
+     this.router.navigate(['/test/memoria']);
+     }
+     else{
+      this.router.navigate(['/error']);
+     */}
   }
 }

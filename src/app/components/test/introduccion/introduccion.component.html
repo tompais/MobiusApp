@@ -1,4 +1,13 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Introducción</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
+  <ion-grid>
   <ion-slides pager="true" [options]="slideOpts">
     <ion-slide>
       <ion-card>
@@ -46,4 +55,5 @@
     </ion-slide>
   </ion-slides>
   <ion-button [routerLink]="['/test/orientacion']" shape="round" expand="block" color="primary">Comenzar Test</ion-button>
+  </ion-grid>
 </ion-content>
