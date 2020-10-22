@@ -1,4 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild, ɵConsole } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoderOptions, NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { OrientacionService } from 'src/app/services/test/orientacion.service';
@@ -62,40 +64,52 @@ export class TestOrientacionComponent implements OnInit {
 
   latitude: number;
   longitude: number;
-
+  retorno = true;
+  task: TaskAnswer<boolean> = null;
+  answer: Answer<boolean> = null;
+  cargando = false;
+  errorCode = false;
   /*constructor(
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder) {
   }*/
 
-  constructor(public orientacionService: OrientacionService) {
+  constructor(public orientacionService: OrientacionService, public router: Router) {
   }
 
 
   ngOnInit() {
     this.orientacionRequest = new OrientacionRequest();
-    this.getOrientacion();
+    this.task = new TaskAnswer<boolean>();
+    this.task.answers = new Array<boolean>();
+    this.answer = new Answer<boolean>();
     // this.loadMap();
   }
 
-  getOrientacion() {
-    let task: TaskAnswer<boolean> = null;
-    let answer: Answer<boolean> = null;
-    this.orientacionRequest.gameId = 1;
-    this.orientacionRequest.category = 'orientation';
-    task = new TaskAnswer<boolean>();
-    answer = new Answer();
-    answer.valor = true;
-    task.taskId = 1;
-    task.answers = new Array<boolean>();
-    answer.valor = true;
-    task.answers.push(true);
-    this.orientacionRequest.taskAnswers.push(task);
-    JSON.stringify(this.orientacionRequest);
-    this.orientacionService.orientacion(this.orientacionRequest)
-      .subscribe((resp: any) => {
+  getOrientacion(form: NgForm) {
+    if (form.invalid) {
+      this.retorno = false;
+    } else {
+      this.cargando = true;
+      this.orientacionRequest.gameId = 1;
+      this.orientacionRequest.category = 'orientation';
+      this.task.taskId = 1;
+      // this.task.answers.push(this.orientacionRequest.respuestasCorrectas);
+      this.task.answers.push(true);
+      this.orientacionRequest.taskAnswers.push(this.task);
+      JSON.stringify(this.orientacionRequest);
+      this.orientacionService.orientacion(this.orientacionRequest).subscribe((resp: any) => {
+        this.cargando = false;
+        this.errorCode = false;
+        if (this.errorCode === false) {
+          this.router.navigate(['/test/introduccion']);
+        }
       }, (error: Error) => {
+        this.cargando = false;
+        this.errorCode = true;
       });
+      this.retorno = true;
+    }
   }
 
   /*loadMap() {
