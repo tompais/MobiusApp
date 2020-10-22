@@ -5,7 +5,13 @@ img {
 }
 
 ion-item.item-has-focus>ion-label,
-ion-item.item-has-focus>ion-input,
-a {
+ion-item.item-has-focus>ion-input
+{
+    color: black !important;
+}
+a{
     color: #fff !important;
+}
+ion-item.item-has-focus>ion-label {
+    color: gray !important;
 }

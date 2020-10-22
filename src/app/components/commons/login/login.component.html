@@ -1,12 +1,12 @@
 <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/"></ion-back-button>
         </ion-buttons>
         <ion-title>Ingrese a su cuenta</ion-title>
     </ion-toolbar>
 </ion-header>
-
+<ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
 <ion-content>
     <ion-grid class="color-fondo centrar">
         <ion-row>
@@ -14,42 +14,48 @@
                 <img src="/assets/img/logo.png" alt="MobiusApp">
             </ion-col>
         </ion-row>
-
+        <ion-item color="danger" *ngIf="errorCode">
+            <ion-col size="12">
+                {{error}}
+                <!--<app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>-->
+            </ion-col>
+        </ion-item>
         <form (ngSubmit)="login(formLogin)" #formLogin="ngForm">
-            <ion-item color="danger" *ngIf="formLogin.submitted && (formLogin.controls['email'].errors || formLogin.controls['password'].errors)">
-                <ion-label>
-                    Email o contraseña invalida
-                </ion-label>
-            </ion-item>
-
             <ion-row>
                 <ion-col size="12">
                     <ion-item>
                         <ion-label position="floating" color="ligth">Email</ion-label>
-                        <ion-input type="email" name="email" value="{{user.email}}" [(ngModel)]="user.email" required minlength="5" maxlength="50"></ion-input>
+                        <ion-input type="email" name="email" value="{{user.email}}" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" [(ngModel)]="user.email" required minlength="5" maxlength="50"></ion-input>
+                    </ion-item>
+                    <ion-item color="danger" *ngIf="formLogin.submitted && (formLogin.controls['email'].errors)">
+                        <ion-label>
+                            Email inválido
+                        </ion-label>
                     </ion-item>
                 </ion-col>
             </ion-row>
-
             <ion-row>
                 <ion-col size="12">
                     <ion-item>
                         <ion-label position="floating">Password</ion-label>
                         <ion-input type="password" name="password" [(ngModel)]="user.password" required minlength="6" maxlength="16"></ion-input>
                     </ion-item>
+                    <ion-item color="danger" *ngIf="formLogin.submitted && (formLogin.controls['password'].errors)">
+                        <ion-label>
+                            Contraseña inválida
+                        </ion-label>
+                    </ion-item>
                 </ion-col>
             </ion-row>
-
             <ion-row>
                 <ion-col size="12">
                     <ion-button shape="round" expand="block" color="primary" type="submit">INGRESAR</ion-button>
                 </ion-col>
             </ion-row>
-
         </form>
         <ion-row>
             <ion-col size="12">
-                <a routerLink="/">¿Olvidó su contraseña?</a>
+                <a routerLink="/login/olvidoPassword">¿Olvidó su contraseña?</a>
             </ion-col>
         </ion-row>
         <ion-row>

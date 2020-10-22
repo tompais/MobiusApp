@@ -1,5 +1,7 @@
 {
   "name": "mobius-app",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

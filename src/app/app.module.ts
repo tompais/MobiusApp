@@ -12,20 +12,30 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonService } from './services/common/common.service';
 import { RegistroComponent } from './components/commons/registro/registro.component';
-import { FormsModule, NgForm } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './components/shared/home/home.component';
 import { LoginComponent } from './components/commons/login/login.component';
+import { TestOrientacionComponent } from './components/test/test-orientacion/test-orientacion.component';
+import { TextValidationComponent } from './components/commons/text-validation/text-validation.component';
+import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
+import { OlvidoPasswordComponent } from './components/commons/olvido-password/olvido-password.component';
 import { EmailConfirmationComponent } from './components/commons/email-confirmation/email-confirmation.component';
 import { AtencionCalculoComponent } from './components/test/atencion-calculo/atencion-calculo.component';
-import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
+import { InfoConsultaServiceComponent } from './components/commons/info-consulta-service/info-consulta-service.component';
+import { InfoConsultaServiceGrupoComponent } from './components/commons/info-consulta-service-grupo/info-consulta-service-grupo.component';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { GoogleMapsComponent } from './components/commons/google-maps/google-maps.component';
+import { NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
+import { OrientacionService } from './services/test/orientacion.service';
+import { AuthService } from './services/auth/auth.service';
 import { ErrorComponent } from './components/commons/error/error.component';
 import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
 import { VisualizacionComponent } from './components/test/visualizacion/visualizacion.component';
 
-
 @NgModule({
-  declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, IntroduccionComponent,
-    EmailConfirmationComponent, AtencionCalculoComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent],
+  declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
+    EmailConfirmationComponent, AtencionCalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
+    TestOrientacionComponent, GoogleMapsComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
@@ -33,6 +43,10 @@ import { VisualizacionComponent } from './components/test/visualizacion/visualiz
     SplashScreen,
     CommonService,
     HttpClientModule,
+    Geolocation,
+    NativeGeocoder,
+    OrientacionService,
+    AuthService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
