@@ -11,21 +11,20 @@ import { ErrorServicioGrupo } from '../models/errors/ErrorServicioGrupo';
 })
 export class InfoConsultaServiceGrupoComponent implements OnInit {
 
- /* @Input() erroresServicio: ErrorServicioGrupo;
+  @Input() erroresServicio: ErrorServicioGrupo;
   @Input() primaryApp: AppComponent;
   @Input() mostrarErrores = true;
   @Input() ancho = 60;
   @Input() alto = 60;
   @Input() tipoSpinner: TipoSpinner = TipoSpinner.dark;
-  @Output() eventoError = new EventEmitter<ErrorServicio>();*/
+  @Output() eventoError = new EventEmitter<ErrorServicio>();
 
   constructor() {
-    // this.erroresServicio.errores = new Array<ErrorServicio>();
    }
 
   ngOnInit() {}
 
- /* mostrarCargando(): boolean {
+  mostrarCargando(): boolean {
     let resp = false;
     if (this.erroresServicio != null) {
       resp = this.erroresServicio.mostrarCargando();
@@ -49,19 +48,6 @@ export class InfoConsultaServiceGrupoComponent implements OnInit {
       resp = 'rojo';
     }
     return resp;
-  }*/
-
-  /*getSpinnerIcon(): string {
-    let resp = '/assets/img/';
-    switch (this.tipoSpinner) {
-      case TipoSpinner.dark:
-        resp = resp + 'spinner.dark';
-        break;
-      case TipoSpinner.light:
-        resp = resp + 'spinner.light';
-        break;
-    }
-    return resp;
-  }*/
+  }
 
 }
