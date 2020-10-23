@@ -7,6 +7,11 @@ export class GameCategoryResponse {
     description: string;
     category: string;
     gameId: number;
-    taskId: Tasks[];
-    answers: Resources[];
+    tasks: Tasks[];
+    resources: Resources[];
+
+    constructor() {
+        this.tasks = new Array<Tasks>();
+        this.resources = new Array<Resources>();
+    }
 }
