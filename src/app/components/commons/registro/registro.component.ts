@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { CommonService } from 'src/app/services/common/common.service';
 import { ErrorServicio } from '../models/errors/ErrorServicio';
@@ -19,10 +20,14 @@ export class RegistroComponent implements OnInit {
   primaryApp: AppComponent = null;
   error = '';
   errorCode = false;
+  cargando = false;
   erroresServicio: ErrorServicioGrupo = null;
   errorService: ErrorServicio = null;
+  mostrarIcono = false;
+  mostrarIconoRepeat = false;
+  tipoInput = '';
 
-  constructor(public commonService: CommonService, public app: AppComponent) {
+  constructor(public commonService: CommonService, public app: AppComponent, public router: Router) {
     this.user = new UserRequest();
     this.primaryApp = app;
     // console.log('ERRORES: ' + this.erroresServicio.errores);
@@ -32,7 +37,10 @@ export class RegistroComponent implements OnInit {
   ngOnInit() {
     this.user = new UserRequest();
     // console.log('ERRORES: ' + this.erroresServicio.errores);
-    // this.erroresServicio.errores.push(new ErrorServicio('registro', true, '', false, 'Registro'));
+    this.erroresServicio = new ErrorServicioGrupo();
+    this.erroresServicio.errores.push(new ErrorServicio('registro', true, '', false, 'Registro'));
+    this.mostrarIcono = true;
+    this.mostrarIconoRepeat = true;
   }
 
   /*eventoError(error: ErrorServicio) {
@@ -45,13 +53,16 @@ export class RegistroComponent implements OnInit {
     }
   }*/
 
-  // public registro(form: NgForm) {
     public registro(form: NgForm) {
-    // const errorSrv = this.erroresServicio.obtenerErrorServicio('registro');
-    // errorSrv.nuevoRequest();
-   /* if (form.invalid) {
+     const errorSrv = this.erroresServicio.obtenerErrorServicio('registro');
+     errorSrv.nuevoRequest();
+     if (form.invalid) {
       this.user.retorno = false;
-    } else {*/
+    } else {
+    console.log('REQUEST USER');
+    console.log(this.user);
+    this.parsearFecha(this.user.birthday);
+    this.cargando = true;
     this.commonService.registro(this.user).subscribe((resp: any) => {
         // tslint:disable-next-line: no-shadowed-variable
         /*errorSrv.procesarRespuesta(resp, (resp: any): void => {
@@ -60,13 +71,56 @@ export class RegistroComponent implements OnInit {
             return true;
           });
         });*/
+        this.cargando = false;
+        this.errorCode = false;
+        if (this.errorCode === false) {
+          this.router.navigate(['/login']);
+        }
       }, (error: Error) => {
-        // errorSrv.getError(error);
+        errorSrv.getError(error);
+        this.cargando = false;
         this.errorCode = true;
         this.error = error.message;
       });
     this.user.retorno = true;
-   // }
+    }
+  }
+
+  cambiarIcono(): string {
+    let resp = '';
+    if (this.mostrarIcono) {
+      resp = 'eye-outline';
+      this.mostrarIcono = false;
+      this.tipoInput = 'password';
+    } else {
+      resp = 'eye-off';
+      this.mostrarIcono = true;
+      this.tipoInput = 'text';
+    }
+    console.log(resp);
+    return resp;
+  }
+
+  cambiarIconoRepeat(): string {
+    let resp = '';
+    if (this.mostrarIconoRepeat) {
+      resp = 'eye-outline';
+      this.mostrarIconoRepeat = false;
+      this.tipoInput = 'password';
+    } else {
+      resp = 'eye-off';
+      this.mostrarIconoRepeat = true;
+      this.tipoInput = 'text';
+    }
+    console.log(resp);
+    return resp;
+  }
+
+  parsearFecha(fecha: string): string {
+    const resp = fecha.substring(0, 10);
+    console.log('PARSEAR FECHA');
+    console.log(resp);
+    return resp;
   }
 
 }

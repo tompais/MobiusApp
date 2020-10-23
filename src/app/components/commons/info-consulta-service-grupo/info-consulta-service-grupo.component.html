@@ -1,17 +1,10 @@
 <div *ngIf="mostrarCargando()" class="contErrores">
-  <div class="cargando" *ngIf="erroresServicio.espera()">
-    cargando...
-    <!--<img [src]="getSpinnerIcon()" [attr.width]="ancho" [attr.height]="alto">-->
-  </div>
+  <!--<div class="cargando" *ngIf="erroresServicio.espera()">
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+  </div>-->
   <div class="errorCarga" *ngIf="erroresServicio.espera() == false && mostrarErrores == true">
-    <ul>
+    <!--<ul>-->
       <app-info-consulta-service [ejecucionServicio]="error" (reintento)="reintentar(error)" *ngFor="let error of erroresServicio.listadoErrores()"></app-info-consulta-service>
-    </ul>
-  </div>
-  <div class="errorCarga" *ngIf="erroresServicio.espera() == false && mostrarErrores == true">
-    <button (click)="cancelar()" title="Eror al ejecutar servicio">
-      <!--<img [src]="/assets/img/status_no_red.svg" [attr.width]="ancho" [attr.height]="alto">-->
-      cancelar
-    </button>
+    <!--</ul>-->
   </div>
 </div>

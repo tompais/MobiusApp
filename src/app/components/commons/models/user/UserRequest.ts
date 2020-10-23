@@ -49,6 +49,12 @@ export class UserRequest {
         return resp;
     } */
 
+    parsearFecha(fecha: string) {
+        const resp = fecha.substring(0, 10);
+        resp.replace('-', '/');
+        return resp;
+    }
+
     passwordCoinciden(): boolean {
         let resp = false;
         if (this.password === this.passwordRepeat) {

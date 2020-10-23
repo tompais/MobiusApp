@@ -43,7 +43,7 @@ export class CommonService {
     };
     mensaje.firstName = user.firstName;
     mensaje.lastName = user.lastName;
-    mensaje.birthday = user.birthday;
+    mensaje.birthday = user.parsearFecha(user.birthday);
     mensaje.patientEmail = user.patientEmail;
     mensaje.guardianEmail = user.guardianEmail;
     mensaje.password = user.password;

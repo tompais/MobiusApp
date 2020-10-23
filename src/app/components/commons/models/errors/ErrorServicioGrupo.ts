@@ -1,8 +1,7 @@
-import { Observable } from 'rxjs';
 import { ErrorServicio } from './ErrorServicio';
 
 export class ErrorServicioGrupo {
-   /* errores: ErrorServicio[];
+    errores: ErrorServicio[];
 
     constructor() {
         this.errores = new Array<ErrorServicio>();
@@ -19,7 +18,7 @@ export class ErrorServicioGrupo {
     }
 
     espera(): boolean {
-        let resp = false;
+        let resp = true;
         this.errores.forEach((error: ErrorServicio) => {
             if (error.falloRequest === true) {
                 resp = false;
@@ -49,5 +48,5 @@ export class ErrorServicioGrupo {
 
     listadoErrores(): ErrorServicio[] {
         return this.errores.filter(error => error.validarFiltroListadoErrores());
-    }*/
+    }
  }
