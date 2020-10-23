@@ -1,6 +1,7 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/components/commons/models/User';
+import { AtencionCalculo } from 'src/app/components/test/models/AtencionCalculo';
 import { UserRequest } from 'src/app/components/commons/models/user/UserRequest';
 
 @Injectable({
