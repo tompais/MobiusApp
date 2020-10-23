@@ -9,7 +9,8 @@ import { TestOrientacionComponent } from './components/test/test-orientacion/tes
 import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
 import { AtencionCalculoComponent } from './components/test/atencion-calculo/atencion-calculo.component';
 import { OlvidoPasswordComponent } from './components/commons/olvido-password/olvido-password.component';
-
+import { FijacionComponent } from './components/test/fijacion/fijacion.component';
+import { CommonModule } from '@angular/common';
 const routes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: 'principal' // path: '',
@@ -22,10 +23,12 @@ const routes: Routes = [
   {path: 'test/introduccion', component: IntroduccionComponent},
   {path: 'test/atencion-calculo', component: AtencionCalculoComponent},
   {path: 'login/olvidoPassword', component: OlvidoPasswordComponent},
-  {path: 'test/orientacion', component: TestOrientacionComponent}
+  {path: 'test/orientacion', component: TestOrientacionComponent},
+  {path: 'test/fijacion', component: FijacionComponent}
 ];
 @NgModule({
   imports: [
+    CommonModule,
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]

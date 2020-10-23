@@ -27,14 +27,18 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { GoogleMapsComponent } from './components/commons/google-maps/google-maps.component';
 import { NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
 import { OrientacionService } from './services/test/orientacion.service';
+import { FijacionService } from './services/test/fijacion.service';
 import { AuthService } from './services/auth/auth.service';
+import { FijacionComponent } from './components/test/fijacion/fijacion.component';
+import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
     EmailConfirmationComponent, AtencionCalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
-    TestOrientacionComponent, GoogleMapsComponent],
+    TestOrientacionComponent, GoogleMapsComponent, FijacionComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -44,6 +48,8 @@ import { AuthService } from './services/auth/auth.service';
     NativeGeocoder,
     OrientacionService,
     AuthService,
+    SpeechRecognition,
+    FijacionService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
