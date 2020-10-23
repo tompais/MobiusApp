@@ -21,6 +21,8 @@ export class RegistroComponent implements OnInit {
   errorCode = false;
   erroresServicio: ErrorServicioGrupo = null;
   errorService: ErrorServicio = null;
+  estadoIcono = false;
+  tipoInput = '';
 
   constructor(public commonService: CommonService, public app: AppComponent) {
     this.user = new UserRequest();
@@ -67,6 +69,18 @@ export class RegistroComponent implements OnInit {
       });
     this.user.retorno = true;
    // }
+  }
+
+  cambiarIcono(estado: boolean): boolean {
+    let resp = false;
+    this.tipoInput = 'password';
+    if (estado) {
+      this.tipoInput = 'text';
+      resp = true;
+    }
+    console.log('RESP ICONO');
+    console.log(resp);
+    return resp;
   }
 
 }

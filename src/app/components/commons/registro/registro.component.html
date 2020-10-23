@@ -1,10 +1,10 @@
 <ion-header>
-<ion-toolbar>
-    <ion-buttons slot="start">
-        <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <ion-title>Regístrese</ion-title>
-</ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Regístrese</ion-title>
+    </ion-toolbar>
 </ion-header>
 <ion-content>
 <ion-grid class="color-fondo-registro centrar">
@@ -26,7 +26,6 @@
                     <ion-label position="floating" color="ligth">Nombre</ion-label>
                     <ion-input type="text" name="firstName" value="{{user.firstName}}" [(ngModel)]="user.firstName" required minlength="3" maxlength="50"></ion-input>
                 </ion-item>
-                <!--<app-text-validation [positionLabel]="floating" [colorLabel]="ligth" [nombreLabel]="Nombre" [nameInput]="firstName" [valueInput]="user.firstName"></app-text-validation>-->
                 <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['firstName'].errors) && user.validarCamposVacios()">
                     <ion-label>
                         No ingreso el nombre
@@ -77,8 +76,8 @@
             <ion-col size="12">
                 <ion-item>
                 <ion-label position="floating">Fecha de nacimiento</ion-label>
-                <ion-input type="text" name="birthday" [(ngModel)]="user.birthday" required minlength="3" maxlength="16" (click)="user.esMenorDe18Anios();"></ion-input>
-                <!--<ion-datetime (click)="user.queSeaMayorA18();" [pickerOptions]="customPickerOptions" name="birthday" [(ngModel)]="user.birthday" displayFormat="YYYY/MM/DD"></ion-datetime>-->
+                <!--<ion-input type="text" name="birthday" [(ngModel)]="user.birthday" required minlength="3" maxlength="16" (click)="user.esMenorDe18Anios();"></ion-input>-->
+                <ion-datetime [pickerOptions]="customPickerOptions" name="birthday" [(ngModel)]="user.birthday" displayFormat="YYYY/MM/DD"></ion-datetime>
                 </ion-item>
                 <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['birthday'].errors) && user.esMenorDe18Anios()">
                     <ion-label>
@@ -91,8 +90,14 @@
             <ion-col size="12">
                 <ion-item>
                     <ion-label position="floating">Contraseña</ion-label>
-                    <ion-icon style="margin-left: 90%; margin-top: 2%; margin-bottom: -12%;" name="eye-off"></ion-icon>
-                    <ion-input type="password" name="password" [(ngModel)]="user.password" required minlength="6" maxlength="16"></ion-input>
+                        <button (click)="cambiarIcono(false)" style="background-color: red; margin-left: 50%;"  *ngIf="cambiarIcono(false)">
+                            <!--<ion-icon  name="eye-off"></ion-icon>-->
+                            BOTON 1
+                        </button>
+                        <ion-button (click)="cambiarIcono(true)" style="background-color: blue; margin-left: 80%;" *ngIf="cambiarIcono(true)">
+                            <!--<ion-icon name="eye-off"></ion-icon>-->BOTON 2
+                        </ion-button>
+                    <ion-input type="{{tipoInput}}" name="password" [(ngModel)]="user.password" required minlength="6" maxlength="16"></ion-input>
                 </ion-item>
                 <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['password'].errors) && user.validarCamposVacios()">
                     <ion-label>
@@ -122,7 +127,7 @@
         </ion-row>
         <ion-row>
             <ion-col size="12">
-                <ion-button shape="round" expand="block" color="primary" type="submit" (click)="user.enviarForm()">REGISTRAR</ion-button>
+                <ion-button shape="round" expand="block" color="primary" type="submit" [disabled]="user.enviarForm()">REGISTRAR</ion-button>
             </ion-col>
         </ion-row>
     </form>

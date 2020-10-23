@@ -35,4 +35,16 @@ export class OrientacionService {
     console.log(respuesta);
     return respuesta;
   }
+
+  public getOrientacion() {
+    const id = this.sessionStorage.consultar('id');
+    const urlService = `${this.url}/patients/${id}/mental-test/game?next-game-category=orientation`;
+    let hash: any;
+    const mensaje = {
+    };
+    hash = 'Bearer: '.concat(btoa('mensaje.email:mensaje.password'));
+    const respuesta = this.http.get(urlService, mensaje);
+    return respuesta;
+  }
+
 }

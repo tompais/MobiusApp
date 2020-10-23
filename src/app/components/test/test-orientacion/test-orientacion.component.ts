@@ -6,7 +6,10 @@ import { NativeGeocoderOptions, NativeGeocoder, NativeGeocoderResult } from '@io
 import { OrientacionService } from 'src/app/services/test/orientacion.service';
 import { Answer } from '../../commons/models/commons/Answer';
 import { TaskAnswer } from '../../commons/models/commons/TaskAnswer';
+import { ErrorServicio } from '../../commons/models/errors/ErrorServicio';
+import { ErrorServicioGrupo } from '../../commons/models/errors/ErrorServicioGrupo';
 import { OrientacionRequest } from '../../commons/models/test/orientacion/orientacionRequest';
+import { OrientacionResponse } from '../../commons/models/test/orientacion/OrientacionResponse';
 
 declare var google;
 
@@ -69,6 +72,8 @@ export class TestOrientacionComponent implements OnInit {
   answer: Answer<boolean> = null;
   cargando = false;
   errorCode = false;
+  erroresServicio: ErrorServicioGrupo = null;
+  orientacion: OrientacionResponse[] = null;
   /*constructor(
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder) {
@@ -83,10 +88,27 @@ export class TestOrientacionComponent implements OnInit {
     this.task = new TaskAnswer<boolean>();
     this.task.answers = new Array<boolean>();
     this.answer = new Answer<boolean>();
+    this.orientacion = new Array<OrientacionResponse>();
+    // this.erroresServicio.errores.push(new ErrorServicio('testOrientacionEnvio', true, '', false, 'Test Orientacion'));
+    this.getOrientacion();
     // this.loadMap();
   }
 
-  getOrientacion(form: NgForm) {
+  eventoError(error: ErrorServicio) {
+    // tslint:disable-next-line: prefer-const
+    let form: NgForm;
+    switch (error.id) {
+      case 'testOrientacionEnvio':
+         this.enviarDatosOrientacion(form);
+         break;
+      default:
+        break;
+    }
+  }
+
+  enviarDatosOrientacion(form: NgForm) {
+    const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
+    errorSrv.nuevoRequest();
     if (form.invalid) {
       this.retorno = false;
     } else {
@@ -99,17 +121,39 @@ export class TestOrientacionComponent implements OnInit {
       this.orientacionRequest.taskAnswers.push(this.task);
       JSON.stringify(this.orientacionRequest);
       this.orientacionService.orientacion(this.orientacionRequest).subscribe((resp: any) => {
-        this.cargando = false;
-        this.errorCode = false;
-        if (this.errorCode === false) {
-          this.router.navigate(['/test/introduccion']);
-        }
+        // tslint:disable-next-line: no-shadowed-variable
+        errorSrv.procesarRespuesta(resp, (resp: any): void => {
+          resp.response.forEach((or: OrientacionResponse) => {
+            this.cargando = false;
+            this.errorCode = false;
+            if (this.errorCode === false) {
+              this.router.navigate(['/test/introduccion']);
+            }
+        });
+      });
       }, (error: Error) => {
         this.cargando = false;
         this.errorCode = true;
       });
       this.retorno = true;
     }
+  }
+
+  getOrientacion() {
+    /*const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
+    errorSrv.nuevoRequest();*/
+    this.orientacionService.getOrientacion().subscribe((resp: any) => {
+      // errorSrv.procesarRespuesta(resp, (resp: any): void => {
+       // resp.response.forEach((or: OrientacionResponse) => {
+          const orientacion: OrientacionResponse = new OrientacionResponse();
+          orientacion.id = resp.id;
+          this.orientacion.push(orientacion);
+      //  });
+     // });
+    }, (error: Error) => {
+      this.cargando = false;
+      this.errorCode = true;
+    });
   }
 
   /*loadMap() {
