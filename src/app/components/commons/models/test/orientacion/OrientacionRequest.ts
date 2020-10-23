@@ -1,6 +1,4 @@
-import { Answer } from '../../commons/Answer';
-import { TaskAnswer } from '../../commons/TaskAnswer';
-import { UserRequest } from '../../user/UserRequest';
+import { PatientTaskAnswersList } from '../../commons/PatientTaskAnswersList';
 import { UserResponse } from '../../user/UserResponse';
 
 export class OrientacionRequest extends UserResponse {
@@ -14,18 +12,18 @@ export class OrientacionRequest extends UserResponse {
     ciudad: string;
     estamos: string;
     pisoPlanta: string;
-    respuestasCorrectas = false;
+    // respuestasCorrectas = false;
 
     category: string;
     gameId: number;
-    taskAnswers: TaskAnswer<boolean>[];
+    patientTaskAnswersList: PatientTaskAnswersList<boolean>[];
 
     constructor() {
         super();
-        this.taskAnswers = new Array<TaskAnswer<boolean>>();
+        this.patientTaskAnswersList = new Array<PatientTaskAnswersList<boolean>>();
     }
 
-    validarForm(): boolean {
+   /* validarForm(): boolean {
         let resp = false;
         if (this.anio !== '' && this.estacion !== '' && this.diaMes !== '' && this.diaSemana !== '' && this.mesAnio !== '' && this.pais !== '' && this.provincia !== ''
                 && this.ciudad !== '' && this.estamos !== '' && this.pisoPlanta !== '') {
@@ -33,5 +31,5 @@ export class OrientacionRequest extends UserResponse {
             this.respuestasCorrectas = resp;
         }
         return resp;
-    }
+    }*/
 }
