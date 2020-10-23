@@ -42,7 +42,7 @@ export class VisualizacionService {
     const id = this.sessionStorage.consultar('id');
     console.log('ID SESSION STORAGE');
     console.log(id);
-    // poner dentro de la ruta ${id}
+    // poner dentro de la ruta ${id} !!!!
     const urlService = `${this.url}/patients/${id}/mental-test/game?next-game-category=visualization`;
     const respuesta = this.http.get(urlService);
     return respuesta;
