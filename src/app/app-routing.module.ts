@@ -11,6 +11,7 @@ import { AtencionCalculoComponent } from './components/test/atencion-calculo/ate
 import { OlvidoPasswordComponent } from './components/commons/olvido-password/olvido-password.component';
 import { VisualizacionComponent } from './components/test/visualizacion/visualizacion.component';
 import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
+import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,8 @@ const routes: Routes = [
   {path: 'login/olvidoPassword', component: OlvidoPasswordComponent},
   {path: 'test/orientacion', component: TestOrientacionComponent},
   {path: 'test/visualizacion', component: VisualizacionComponent},
-  {path: 'test/ordenes', component: OrdenesComponent}
+  {path: 'test/ordenes', component: OrdenesComponent},
+  {path: 'test/finalizacion', component: FinalizacionComponent}
 ];
 @NgModule({
   imports: [

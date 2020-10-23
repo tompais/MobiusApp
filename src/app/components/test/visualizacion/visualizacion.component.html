@@ -10,10 +10,10 @@
      </h1>
      <br/>
 <p>
-  Responda que ve en la siguiente imagen.
+  {{ descripcion }}
  </p>
   <ion-row>
-    <img src="/assets/img/tigre.png" alt="imagen" width="400px">
+    <img src='{{ imagen }}' alt="imagen" width="400px">
   </ion-row>
   <ion-row>
   <form (ngSubmit)="verificar(formVisualizacion)" #formVisualizacion="ngForm">

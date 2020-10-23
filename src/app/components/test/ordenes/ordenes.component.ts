@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common/common.service';
+import { OrdenesService } from 'src/app/services/test/ordenes.service';
 
 @Component({
   selector: 'app-ordenes',
@@ -8,6 +11,7 @@ import { Component, OnInit } from '@angular/core';
 export class OrdenesComponent implements OnInit {
   cuadradoStatus: boolean;
   circuloStatus: boolean;
+  errorStatus: boolean;
   trianguloStatus: boolean;
   cruzStatus: boolean;
   rowsBotonesStatus: boolean;
@@ -15,8 +19,17 @@ export class OrdenesComponent implements OnInit {
   respuesta: string[] = [];
   contador: number;
   resetNextStatus: boolean;
+  gameId: number;
+  category: string;
+  taskId: number;
+  descripcion: string;
+  url = 'https://stage-blue-mobius-mind-api.herokuapp.com/';
+  audioName: string;
+  cargando = false;
+  errorCode = false;
+  audio: string;
 
-  constructor() { }
+  constructor(public commonService: CommonService, private router: Router, public ordenesServ: OrdenesService) { }
 
   ngOnInit() {
     this.contador = 0;
@@ -27,6 +40,21 @@ export class OrdenesComponent implements OnInit {
     this.audioStatus = true;
     this.rowsBotonesStatus = false;
     this.resetNextStatus = false;
+
+    this.ordenesServ.traerDatos().subscribe((resp: any) => {
+      this.descripcion = resp.tasks[0].description;
+      this.audioName = resp.resources[0].fileName;
+      this.gameId = resp.id;
+      this.category = resp.category;
+      this.taskId = resp.tasks[0].id;
+      this.audio = `${this.url}${this.audioName}`;
+      console.log(this.gameId);
+      console.log(this.category);
+      console.log(this.taskId);
+      console.log(this.descripcion);
+      console.log(this.audioName);
+      console.log(resp);
+      });
 
   }
 
@@ -64,10 +92,35 @@ export class OrdenesComponent implements OnInit {
   }
 
   audioStart(){
-    const audio = new Audio('assets/audio/ordenes2.mp3');
+    const audio = new Audio(this.audio);
     audio.play();
-    this.audioStatus = false;
-    this.rowsBotonesStatus = true;
-    this.resetNextStatus = true;
+
+    setTimeout(() => {
+      this.audioStatus = false;
+      this.rowsBotonesStatus = true;
+      this.resetNextStatus = true;
+    }, 3.5 * 1000);
+
+  }
+
+  enviar(){
+  if (this.contador === 4){
+    this.errorStatus = false;
+
+    this.ordenesServ.enviarDatos(this.gameId, this.category, this.taskId, this.respuesta).subscribe((resp: any) => {
+      this.cargando = false;
+      this.errorCode = false;
+      if (this.errorCode === false) {
+        this.router.navigate(['/test/finalizacion']);
+      }
+    }, (error: Error) => {
+      this.cargando = false;
+      this.errorCode = true;
+    });
+
+  }
+  else{
+    this.errorStatus = true;
+  }
   }
 }

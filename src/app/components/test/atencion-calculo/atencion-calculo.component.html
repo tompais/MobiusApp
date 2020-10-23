@@ -11,7 +11,8 @@
 <br/>
 <p id="numeroInicial">{{numeroInicial}}</p>
 <p>
-  Al Numero de arriba debera restarle {{numeroResta}} unidades y tendra que escribirlo en los siguientes campos, haga esto 5 veces.
+  <!-- Al Numero de arriba debera restarle {{numeroResta}} unidades y tendra que escribirlo en los siguientes campos, haga esto 5 veces. -->
+  {{ descripcion }} , Numero a restar: {{numeroResta}}
  </p>
  <form (ngSubmit)="verificar(formCalculo)" #formCalculo="ngForm">
   <ion-item color="danger" *ngIf="formCalculo.submitted && (formCalculo.controls['res1'].errors || formCalculo.controls['res2'].errors || formCalculo.controls['res3'].errors || formCalculo.controls['res4'].errors || formCalculo.controls['res5'].errors)">

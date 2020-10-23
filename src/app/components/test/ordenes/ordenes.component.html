@@ -10,7 +10,8 @@
 </h1>
 <br/>
 <p>
-  Debera apretar los siguientes botones en el orden que se le dictara.
+  <!-- Luego de escuchar el siguiente audio, debera apretar los botones en el orden que se le indicara. -->
+  {{ descripcion }}
  </p>
  <ion-row *ngIf="audioStatus">
    <img (click)="audioStart()" src="/assets/img/reproducir.png" alt="reproductor" width="150px">
@@ -23,8 +24,14 @@
   <ion-col><img class="botones" *ngIf="circuloStatus" (click)="circulo()" src="/assets/img/circulo.png" alt="Circulo"></ion-col>
   <ion-col><img class="botones" *ngIf="cruzStatus" (click)="cruz()" src="/assets/img/cruz.png" alt="Cruz"></ion-col>
 </ion-row>
+<ion-item color="danger" *ngIf="errorStatus">
+  <ion-label>
+    Debe presionar los 4 botones para continuar.
+  </ion-label>
+</ion-item>
 <ion-button *ngIf="resetNextStatus" type="button" shape="round" expand="block" color="primary" (click)="reset()">Reset</ion-button>
-  
-<ion-button *ngIf="resetNextStatus" type="submit" shape="round" expand="block" color="primary">Siguiente</ion-button>
+
+<ion-button *ngIf="resetNextStatus" type="button" shape="round" expand="block" color="primary" (click)="enviar()">Siguiente</ion-button>
+    
   </ion-grid>
 </ion-content>

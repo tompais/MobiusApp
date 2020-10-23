@@ -31,11 +31,12 @@ import { AuthService } from './services/auth/auth.service';
 import { ErrorComponent } from './components/commons/error/error.component';
 import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
 import { VisualizacionComponent } from './components/test/visualizacion/visualizacion.component';
+import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
     EmailConfirmationComponent, AtencionCalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
-    TestOrientacionComponent, GoogleMapsComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent],
+    TestOrientacionComponent, GoogleMapsComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent, FinalizacionComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   providers: [
