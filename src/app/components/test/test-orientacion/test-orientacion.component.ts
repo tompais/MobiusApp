@@ -74,6 +74,7 @@ export class TestOrientacionComponent implements OnInit {
   errorCode = false;
   erroresServicio: ErrorServicioGrupo = null;
   orientacion: OrientacionResponse[] = null;
+  ori: OrientacionResponse = null;
   /*constructor(
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder) {
@@ -89,6 +90,7 @@ export class TestOrientacionComponent implements OnInit {
     this.task.answers = new Array<boolean>();
     this.answer = new Answer<boolean>();
     this.orientacion = new Array<OrientacionResponse>();
+    this.ori = new OrientacionResponse();
     // this.erroresServicio.errores.push(new ErrorServicio('testOrientacionEnvio', true, '', false, 'Test Orientacion'));
     this.getOrientacion();
     // this.loadMap();
@@ -145,9 +147,15 @@ export class TestOrientacionComponent implements OnInit {
     this.orientacionService.getOrientacion().subscribe((resp: any) => {
       // errorSrv.procesarRespuesta(resp, (resp: any): void => {
        // resp.response.forEach((or: OrientacionResponse) => {
-          const orientacion: OrientacionResponse = new OrientacionResponse();
-          orientacion.id = resp.id;
-          this.orientacion.push(orientacion);
+          // const orientacion: OrientacionResponse = new OrientacionResponse();
+          this.ori.id = resp.id;
+          this.ori.name = resp.name;
+          this.ori.description = resp.description;
+          this.ori.category = resp.category;
+          this.ori.gameId = resp.gameId;
+          this.ori.taskId = resp.taskId;
+          this.ori.answers = resp.answers;
+          this.orientacion.push(this.ori);
       //  });
      // });
     }, (error: Error) => {
