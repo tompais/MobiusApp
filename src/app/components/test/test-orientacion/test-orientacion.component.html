@@ -3,7 +3,7 @@
       <ion-buttons slot="start">
           <ion-back-button defaultHref="/test/introduccion"></ion-back-button>
       </ion-buttons>
-      <ion-title>Test Cognitivo</ion-title>
+      <ion-title>{{ori.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
@@ -13,7 +13,7 @@
      <ion-col size="12">
       <ion-item>
         <p>
-          1.Indique en donde se encuentra actualmente actualmente.
+          {{ori.description}}
         </p>
       </ion-item>
      </ion-col>
@@ -23,26 +23,21 @@
           {{error}}
       </ion-col>
     </ion-item>
-    <div>
-      <p>
-        {{ori.id}}
-      </p>
-    </div>
-    <!--<form (ngSubmit)="enviarDatosOrientacion(formOrientacion)" #formOrientacion="ngForm">
+    <form (ngSubmit)="enviarDatosOrientacion(formOrientacion)" #formOrientacion="ngForm">
       <ion-row>
         <ion-col size="12">
-          <ion-item>
-            <ion-label position="floating" color="ligth">1.¿En qué año estamos?</ion-label>
-            <ion-input type="number" name="anio" value="{{orientacionRequest.anio}}" [(ngModel)]="orientacionRequest.anio" required minlength="4" maxlength="50"></ion-input>
+          <ion-item *ngFor="let ori of ori.tasks">
+            <ion-label position="floating" color="ligth">{{ori.id}}&nbsp;{{ori.description}}</ion-label>
+            <ion-input type="text" name="anio" [(ngModel)]="ori.id" required minlength="4" maxlength="50"></ion-input>
           </ion-item>
-          <ion-item color="danger" *ngIf="formOrientacion.submitted && (formOrientacion.controls['anio'].errors)">
+          <!--<ion-item color="danger" *ngIf="formOrientacion.submitted && (formOrientacion.controls['anio'].errors)">
             <ion-label>
                 Año inválido
             </ion-label>
-          </ion-item>
+          </ion-item>-->
         </ion-col>
       </ion-row>
-      <ion-row>
+      <!--<ion-row>
         <ion-col size="12">
           <ion-item>
             <ion-label position="floating" color="ligth">2.¿En qué estación del año?</ion-label>
@@ -158,13 +153,13 @@
             </ion-label>
           </ion-item>
         </ion-col>
-      </ion-row>
+      </ion-row>-->
       <ion-row>
         <ion-col size="12">
           <ion-button shape="round" type="submit" expand="block" color="primary" (click)="validarForm()">Siguiente</ion-button>
         </ion-col>
       </ion-row>
-    </form>-->
+    </form>
   </ion-grid>
 </ion-content>
 

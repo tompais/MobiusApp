@@ -5,7 +5,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoderOptions, NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { OrientacionService } from 'src/app/services/test/orientacion.service';
 import { Answer } from '../../commons/models/commons/Answer';
+import { GameCategoryResponse } from '../../commons/models/commons/GameCategoryResponse';
+import { Inputs } from '../../commons/models/commons/Inputs';
 import { TaskAnswer } from '../../commons/models/commons/TaskAnswer';
+import { Tasks } from '../../commons/models/commons/Tasks';
 import { ErrorServicio } from '../../commons/models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from '../../commons/models/errors/ErrorServicioGrupo';
 import { OrientacionRequest } from '../../commons/models/test/orientacion/orientacionRequest';
@@ -73,8 +76,9 @@ export class TestOrientacionComponent implements OnInit {
   cargando = false;
   errorCode = false;
   erroresServicio: ErrorServicioGrupo = null;
-  orientacion: OrientacionResponse[] = null;
-  ori: OrientacionResponse = null;
+  orientacion: GameCategoryResponse[] = null;
+  ori: GameCategoryResponse = null;
+  tasks: Tasks[] = null;
   /*constructor(
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder) {
@@ -89,8 +93,9 @@ export class TestOrientacionComponent implements OnInit {
     this.task = new TaskAnswer<boolean>();
     this.task.answers = new Array<boolean>();
     this.answer = new Answer<boolean>();
-    this.orientacion = new Array<OrientacionResponse>();
-    this.ori = new OrientacionResponse();
+    this.orientacion = new Array<GameCategoryResponse>();
+    this.ori = new GameCategoryResponse();
+    this.tasks = new Array<Tasks>();
     // this.erroresServicio.errores.push(new ErrorServicio('testOrientacionEnvio', true, '', false, 'Test Orientacion'));
     this.getOrientacion();
     // this.loadMap();
@@ -118,7 +123,6 @@ export class TestOrientacionComponent implements OnInit {
       this.orientacionRequest.gameId = 1;
       this.orientacionRequest.category = 'orientation';
       this.task.taskId = 1;
-      // this.task.answers.push(this.orientacionRequest.respuestasCorrectas);
       this.task.answers.push(true);
       this.orientacionRequest.taskAnswers.push(this.task);
       JSON.stringify(this.orientacionRequest);
@@ -152,10 +156,30 @@ export class TestOrientacionComponent implements OnInit {
           this.ori.name = resp.name;
           this.ori.description = resp.description;
           this.ori.category = resp.category;
-          this.ori.gameId = resp.gameId;
-          this.ori.taskId = resp.taskId;
-          this.ori.answers = resp.answers;
+          this.ori.tasks = resp.tasks;
+          this.ori.resources = resp.resources;
+          this.ori.tasks.forEach((task: Tasks) => {
+            console.log('task param');
+            console.log(task);
+            const tsk: Tasks = new Tasks();
+            tsk.id = task.id;
+            tsk.description = task.description;
+            tsk.inputs = task.inputs;
+            tsk.inputs.forEach((input: Inputs) => {
+              const inp: Inputs = new Inputs();
+              inp.id = input.id;
+              inp.type = input.type;
+              tsk.inputs.push(inp);
+            });
+            if (this.ori.tasks.length > resp.tasks.length) {
+              this.ori.tasks.push(tsk);
+            }
+          });
+          console.log('TASK');
+          console.log(this.ori.tasks[0].id);
           this.orientacion.push(this.ori);
+          console.log(this.ori);
+          // this.orientacion.push(this.ori);
       //  });
      // });
     }, (error: Error) => {
