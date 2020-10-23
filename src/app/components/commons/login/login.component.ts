@@ -66,19 +66,30 @@ export class LoginComponent implements OnInit {
   login(form: NgForm){
     const errorSrv = this.erroresServicio.obtenerErrorServicio('login');
     errorSrv.nuevoRequest();
-    if (form.invalid){
+    if (form.invalid) {
       this.retorno = false;
-    }else{
+    } else {
       this.cargando = true;
       this.commonService.login(this.user).subscribe((resp: any) => {
         // tslint:disable-next-line: no-shadowed-variable
         errorSrv.procesarRespuesta(resp, (resp: any): void => {
-          resp.response.forEach((user: UserResponse) => {
+          /*this.usResponse.id = resp.id;
+          this.storageSession.guardar('id', resp.id);*/
+            this.usResponse.firstName = resp.firstName;
+            this.usResponse.lastName = resp.lastName;
+            this.usResponse.id = resp.id;
+            console.log('VALOR DEL ID');
+            console.log(this.usResponse);
+            this.userResponse.push(this.usResponse);
+            console.log(this.userResponse);
+          /*resp.forEach((user: UserResponse) => {
             this.usResponse.firstName = user.firstName;
             this.usResponse.lastName = user.lastName;
             this.usResponse.id = user.id;
+            console.log('VALOR DEL ID');
+            console.log(this.usResponse);
             this.userResponse.push(this.usResponse);
-          });
+          });*/
         });
         /*const user: UserResponse = new UserResponse();
         user.firstName = resp.firstName;
@@ -87,7 +98,9 @@ export class LoginComponent implements OnInit {
         this.userResponse.push(user);
         console.log(this.userResponse);*/
         // tslint:disable-next-line: radix
-        this.storageSession.guardar('id', this.usResponse.id);
+        this.storageSession.guardar('id', resp.id);
+        console.log('CONSULTAR ID');
+        console.log(this.storageSession.consultar('id'));
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
