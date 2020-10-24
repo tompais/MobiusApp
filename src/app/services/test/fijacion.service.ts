@@ -16,14 +16,14 @@ import { GameCategoryRequest } from 'src/app/components/commons/models/commons/G
 
     public getFijacion() {
       const id = this.sessionStorage.consultar('id');
-      console.log('ID SESSION STORAGE');
-      console.log(id);
+     // console.log('ID SESSION STORAGE');
+     // console.log(id);
       const urlService = `${this.url}/patients/${id}/mental-test/game?next-game-category=fixation`;
       const mensaje = {};
       const respuesta = this.http.get(urlService, mensaje);
-      console.log('REQUEST:');
-      console.log('Respuesta fijacion');
-      console.log(respuesta);
+    //  console.log('REQUEST:');
+    //  console.log('Respuesta fijacion');
+    //  console.log(respuesta);
       return respuesta;
     }
 

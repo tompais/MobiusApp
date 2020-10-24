@@ -15,8 +15,8 @@ export class OrientacionService {
 
   public orientacion(orientacionRequest: OrientacionRequest) {
     const id = this.sessionStorage.consultar('id');
-    console.log('ID SESSION STORAGE');
-    console.log(id);
+  //  console.log('ID SESSION STORAGE');
+  //  console.log(id);
     const urlService = `${this.url}/patients/${id}/mental-test/game/answers`;
     let hash: any;
     const mensaje = {
@@ -29,10 +29,10 @@ export class OrientacionService {
     mensaje.patientTaskAnswersList = orientacionRequest.patientTaskAnswersList;
     hash = 'Bearer: '.concat(btoa('mensaje.email:mensaje.password'));
     const respuesta = this.http.post(urlService, mensaje, hash);
-    console.log('REQUEST:');
-    console.log(mensaje);
-    console.log('Respuesta orientacion');
-    console.log(respuesta);
+  //  console.log('REQUEST:');
+   // console.log(mensaje);
+  //  console.log('Respuesta orientacion');
+  //  console.log(respuesta);
     return respuesta;
   }
 

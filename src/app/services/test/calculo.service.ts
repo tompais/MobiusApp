@@ -40,8 +40,8 @@ export class CalculoService {
   public traerDatos(){
     // CALCULATION
     const id = this.sessionStorage.consultar('id');
-    console.log('ID SESSION STORAGE');
-    console.log(id);
+    // console.log('ID SESSION STORAGE');
+    // console.log(id);
     // poner dentro de la ruta ${id}
     const urlService = `${this.url}/patients/${id}/mental-test/game?next-game-category=calculation`;
     const respuesta = this.http.get(urlService);
