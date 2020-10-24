@@ -8,7 +8,7 @@ import { OrientacionRequest } from 'src/app/components/commons/models/test/orien
 })
 export class OrientacionService {
 
-  url = 'https://stage-blue-mobius-mind-api.herokuapp.com';
+  url = 'https://prod-mobius-mind-api.herokuapp.com';
   sessionStorage: StorageSession = new StorageSession();
 
   constructor(public http: HttpClient) {}
