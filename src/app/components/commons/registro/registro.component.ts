@@ -5,9 +5,7 @@ import { AppComponent } from 'src/app/app.component';
 import { CommonService } from 'src/app/services/common/common.service';
 import { ErrorServicio } from '../models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from '../models/errors/ErrorServicioGrupo';
-import { User } from '../models/User';
 import { UserRequest } from '../models/user/UserRequest';
-import { UserResponse } from '../models/user/UserResponse';
 
 @Component({
   selector: 'app-registro',
@@ -59,8 +57,8 @@ export class RegistroComponent implements OnInit {
      if (form.invalid) {
       this.user.retorno = false;
     } else {
-    console.log('REQUEST USER');
-    console.log(this.user);
+  //  console.log('REQUEST USER');
+  //  console.log(this.user);
     this.parsearFecha(this.user.birthday);
     this.cargando = true;
     this.commonService.registro(this.user).subscribe((resp: any) => {
@@ -97,7 +95,7 @@ export class RegistroComponent implements OnInit {
       this.mostrarIcono = true;
       this.tipoInput = 'text';
     }
-    console.log(resp);
+    // console.log(resp);
     return resp;
   }
 
@@ -112,14 +110,14 @@ export class RegistroComponent implements OnInit {
       this.mostrarIconoRepeat = true;
       this.tipoInput = 'text';
     }
-    console.log(resp);
+    // console.log(resp);
     return resp;
   }
 
   parsearFecha(fecha: string): string {
     const resp = fecha.substring(0, 10);
-    console.log('PARSEAR FECHA');
-    console.log(resp);
+   // console.log('PARSEAR FECHA');
+   // console.log(resp);
     return resp;
   }
 

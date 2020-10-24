@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AngularDelegate } from '@ionic/angular';
 import { CommonService } from 'src/app/services/common/common.service';
 import { CalculoService } from 'src/app/services/test/calculo.service';
 import { AtencionCalculo } from '../models/AtencionCalculo';

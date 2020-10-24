@@ -24,11 +24,11 @@
         <ion-col size="12">
           <ion-item *ngFor="let ori of ori.tasks">
             <ion-label position="floating" color="ligth">{{ori.id}}&nbsp;{{ori.description}}</ion-label>
-            <ion-input type="{{ori.inputs.name}}" name="anio" required minlength="4" maxlength="50"></ion-input>
+            <ion-input *ngFor="let input of ori.inputs" type="{{input.type}}" name="anio" required minlength="4" maxlength="50"></ion-input>
           </ion-item>
           <!--<ion-item color="danger" *ngIf="formOrientacion.submitted && (formOrientacion.controls['anio'].errors)">
             <ion-label>
-                Año inválido
+                Campo Inválido
             </ion-label>
           </ion-item>-->
         </ion-col>
