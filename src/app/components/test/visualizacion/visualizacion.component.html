@@ -12,8 +12,8 @@
 <p>
   {{ descripcion }}
  </p>
-  <ion-row>
-    <img src='{{ imagen }}' alt="imagen" width="400px">
+  <ion-row><!-- '{{ imagen }}' -->
+    <img src="assets/img/tigre.png" alt="imagen" width="400px">
   </ion-row>
   <ion-row>
   <form (ngSubmit)="verificar(formVisualizacion)" #formVisualizacion="ngForm">
