@@ -154,7 +154,7 @@ export class TestOrientacionComponent implements OnInit {
             this.cargando = false;
             this.errorCode = false;
             if (this.errorCode === false) {
-              this.router.navigate(['/test/introduccion']);
+              this.router.navigate(['/test/fijacion']);
             }
       }, (error: Error) => {
         errorSrv.getError(error);
