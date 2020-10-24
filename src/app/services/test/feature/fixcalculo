@@ -13,10 +13,7 @@ export class CalculoService {
 
   public enviarDatos(gId: number, cate: string, tId1: number, tId2: number, respuesta1: number[], respuesta2: number[]){
 
-    // const id = this.sessionStorage.consultar('id');
-
-    // TEMPORAL
-    const id = 1;
+    const id = this.sessionStorage.consultar('id');
     const urlService = `${this.url}/patients/${id}/mental-test/game/answers`;
 
     const mensaje = {
