@@ -152,7 +152,7 @@ export class FijacionComponent implements OnInit {
     JSON.stringify(this.fijacionRquest);
 
     this.algo = JSON.stringify(this.fijacionRquest);
-    console.log(JSON.stringify(this.fijacionRquest))
+    console.log(JSON.stringify(this.fijacionRquest));
     // console.log(JSON.stringify(this.fijacionRquest));
     this.fj.setFijacion(this.fijacionRquest).subscribe((resp: any) => {
       this.errorCode = false;
