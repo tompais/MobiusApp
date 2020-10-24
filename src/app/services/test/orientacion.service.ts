@@ -22,11 +22,11 @@ export class OrientacionService {
     const mensaje = {
       category: null,
       gameId: null,
-      taskAnswers: null
+      patientTaskAnswersList: null
     };
     mensaje.category = orientacionRequest.category;
     mensaje.gameId = orientacionRequest.gameId;
-    mensaje.taskAnswers = orientacionRequest.taskAnswers;
+    mensaje.patientTaskAnswersList = orientacionRequest.patientTaskAnswersList;
     hash = 'Bearer: '.concat(btoa('mensaje.email:mensaje.password'));
     const respuesta = this.http.post(urlService, mensaje, hash);
     console.log('REQUEST:');

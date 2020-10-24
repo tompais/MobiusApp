@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-title>Seguimiento de pasos</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+<h1>
+ Seguimiento de pasos
+</h1>
+<br/>
+<p>
+  <!-- Luego de escuchar el siguiente audio, debera apretar los botones en el orden que se le indicara. -->
+  {{ descripcion }}
+ </p>
+ <ion-row *ngIf="audioStatus">
+   <img (click)="audioStart()" src="/assets/img/reproducir.png" alt="reproductor" width="150px">
+ </ion-row>
+ <ion-row *ngIf="rowsBotonesStatus">
+  <ion-col><img class="botones" *ngIf="cuadradoStatus" (click)="cuadrado()" src="/assets/img/cuadrado.png" alt="Cuadrado"></ion-col>
+  <ion-col><img class="botones" *ngIf="trianguloStatus" (click)="triangulo()" src="/assets/img/triangulo.png" alt="Triangulo"></ion-col>
+</ion-row>
+<ion-row *ngIf="rowsBotonesStatus">
+  <ion-col><img class="botones" *ngIf="circuloStatus" (click)="circulo()" src="/assets/img/circulo.png" alt="Circulo"></ion-col>
+  <ion-col><img class="botones" *ngIf="cruzStatus" (click)="cruz()" src="/assets/img/cruz.png" alt="Cruz"></ion-col>
+</ion-row>
+<ion-item color="danger" *ngIf="errorStatus">
+  <ion-label>
+    Debe presionar los 4 botones para continuar.
+  </ion-label>
+</ion-item>
+<ion-button *ngIf="resetNextStatus" type="button" shape="round" expand="block" color="primary" (click)="reset()">Reset</ion-button>
+
+<ion-button *ngIf="resetNextStatus" type="button" shape="round" expand="block" color="primary" (click)="enviar()">Siguiente</ion-button>
+    
+  </ion-grid>
+</ion-content>

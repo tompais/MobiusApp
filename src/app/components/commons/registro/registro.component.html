@@ -6,19 +6,15 @@
         <ion-title>Regístrese</ion-title>
     </ion-toolbar>
 </ion-header>
+<ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
 <ion-content>
-<ion-grid class="color-fondo-registro centrar">
+    <ion-grid class="color-fondo-registro centrar">
     <ion-row>
         <ion-col size=12>
             <img src="/assets/img/logo.png" alt="MobiusApp">
         </ion-col>
     </ion-row>
-    <ion-item color="danger" *ngIf="errorCode">
-        <ion-label>
-            {{error}}
-            <!--<app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>-->
-        </ion-label>
-    </ion-item>
+    <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
     <form (ngSubmit)="registro(formRegistro)" #formRegistro="ngForm">
         <ion-row>
             <ion-col size="12">
@@ -75,13 +71,13 @@
         <ion-row>
             <ion-col size="12">
                 <ion-item>
-                <ion-label position="floating">Fecha de nacimiento</ion-label>
-                <!--<ion-input type="text" name="birthday" [(ngModel)]="user.birthday" required minlength="3" maxlength="16" (click)="user.esMenorDe18Anios();"></ion-input>-->
-                <ion-datetime [pickerOptions]="customPickerOptions" name="birthday" [(ngModel)]="user.birthday" displayFormat="YYYY/MM/DD"></ion-datetime>
+                    <ion-label position="floating">Fecha de nacimiento</ion-label>
+                    <ion-icon name="calendar-outline" style="margin-left: 90%;"></ion-icon>
+                    <ion-datetime [pickerOptions]="customPickerOptions" name="birthday" [(ngModel)]="user.birthday" displayFormat="DD/MM/YYYY"></ion-datetime>
                 </ion-item>
-                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['birthday'].errors) && user.esMenorDe18Anios()">
+                <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['birthday'].errors)">
                     <ion-label>
-                        Debe ser mayor a 18 años
+                        No ingreso una fecha de nacimiento
                     </ion-label>
                 </ion-item>
             </ion-col>
@@ -90,13 +86,7 @@
             <ion-col size="12">
                 <ion-item>
                     <ion-label position="floating">Contraseña</ion-label>
-                        <button (click)="cambiarIcono(false)" style="background-color: red; margin-left: 50%;"  *ngIf="cambiarIcono(false)">
-                            <!--<ion-icon  name="eye-off"></ion-icon>-->
-                            BOTON 1
-                        </button>
-                        <ion-button (click)="cambiarIcono(true)" style="background-color: blue; margin-left: 80%;" *ngIf="cambiarIcono(true)">
-                            <!--<ion-icon name="eye-off"></ion-icon>-->BOTON 2
-                        </ion-button>
+                    <ion-icon (click)="cambiarIcono()" *ngIf="cambiarIcono()"  name="{{cambiarIcono()}}" style="margin-left: 90%;"></ion-icon>
                     <ion-input type="{{tipoInput}}" name="password" [(ngModel)]="user.password" required minlength="6" maxlength="16"></ion-input>
                 </ion-item>
                 <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['password'].errors) && user.validarCamposVacios()">
@@ -110,8 +100,8 @@
             <ion-col size="12">
                 <ion-item>
                     <ion-label position="floating">Repetir contraseña</ion-label>
-                    <ion-icon style="margin-left: 90%;" name="eye-off"></ion-icon>
-                    <ion-input type="password" name="passwordRepeat" [(ngModel)]="user.passwordRepeat" required minlength="6" maxlength="16"></ion-input>
+                    <ion-icon (click)="cambiarIconoRepeat()" *ngIf="cambiarIconoRepeat()"  name="{{cambiarIconoRepeat()}}" style="margin-left: 90%;"></ion-icon>
+                    <ion-input type="{{tipoInput}}" name="passwordRepeat" [(ngModel)]="user.passwordRepeat" required minlength="6" maxlength="16"></ion-input>
                 </ion-item>
                 <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['passwordRepeat'].errors) && user.validarCamposVacios()">
                     <ion-label>

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { User } from 'src/app/components/commons/models/User';
+import { AtencionCalculo } from 'src/app/components/test/models/AtencionCalculo';
 import { UserRequest } from 'src/app/components/commons/models/user/UserRequest';
 
 @Injectable({
@@ -42,7 +43,7 @@ export class CommonService {
     };
     mensaje.firstName = user.firstName;
     mensaje.lastName = user.lastName;
-    mensaje.birthday = user.birthday;
+    mensaje.birthday = user.parsearFecha(user.birthday);
     mensaje.patientEmail = user.patientEmail;
     mensaje.guardianEmail = user.guardianEmail;
     mensaje.password = user.password;

@@ -5,7 +5,10 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoderOptions, NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { OrientacionService } from 'src/app/services/test/orientacion.service';
 import { Answer } from '../../commons/models/commons/Answer';
-import { TaskAnswer } from '../../commons/models/commons/TaskAnswer';
+import { GameCategoryResponse } from '../../commons/models/commons/GameCategoryResponse';
+import { Inputs } from '../../commons/models/commons/Inputs';
+import { PatientTaskAnswersList } from '../../commons/models/commons/PatientTaskAnswersList';
+import { Tasks } from '../../commons/models/commons/Tasks';
 import { ErrorServicio } from '../../commons/models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from '../../commons/models/errors/ErrorServicioGrupo';
 import { OrientacionRequest } from '../../commons/models/test/orientacion/orientacionRequest';
@@ -68,13 +71,14 @@ export class TestOrientacionComponent implements OnInit {
   latitude: number;
   longitude: number;
   retorno = true;
-  task: TaskAnswer<boolean> = null;
+  patientTaskAnswersList: PatientTaskAnswersList<boolean> = null;
   answer: Answer<boolean> = null;
   cargando = false;
   errorCode = false;
   erroresServicio: ErrorServicioGrupo = null;
-  orientacion: OrientacionResponse[] = null;
-  ori: OrientacionResponse = null;
+  orientacion: GameCategoryResponse[] = null;
+  ori: GameCategoryResponse = null;
+  tasks: Tasks[] = null;
   /*constructor(
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder) {
@@ -86,12 +90,15 @@ export class TestOrientacionComponent implements OnInit {
 
   ngOnInit() {
     this.orientacionRequest = new OrientacionRequest();
-    this.task = new TaskAnswer<boolean>();
-    this.task.answers = new Array<boolean>();
+    this.patientTaskAnswersList = new PatientTaskAnswersList<boolean>();
+    this.patientTaskAnswersList.patientAnswers = new Array<boolean>();
     this.answer = new Answer<boolean>();
-    this.orientacion = new Array<OrientacionResponse>();
-    this.ori = new OrientacionResponse();
-    // this.erroresServicio.errores.push(new ErrorServicio('testOrientacionEnvio', true, '', false, 'Test Orientacion'));
+    this.orientacion = new Array<GameCategoryResponse>();
+    this.ori = new GameCategoryResponse();
+    this.tasks = new Array<Tasks>();
+    this.erroresServicio = new ErrorServicioGrupo();
+    this.erroresServicio.errores.push(new ErrorServicio('testOrientacionEnvio', true, '', false, 'Test Orientacion Envio'));
+    this.erroresServicio.errores.push(new ErrorServicio('testOrientacion', true, '', false, 'Test Orientacion Consulta'));
     this.getOrientacion();
     // this.loadMap();
   }
@@ -103,13 +110,16 @@ export class TestOrientacionComponent implements OnInit {
       case 'testOrientacionEnvio':
          this.enviarDatosOrientacion(form);
          break;
+      case 'testOrientacion':
+        this.getOrientacion();
+        break;
       default:
         break;
     }
   }
 
   enviarDatosOrientacion(form: NgForm) {
-    const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
+    const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacionEnvio');
     errorSrv.nuevoRequest();
     if (form.invalid) {
       this.retorno = false;
@@ -117,23 +127,37 @@ export class TestOrientacionComponent implements OnInit {
       this.cargando = true;
       this.orientacionRequest.gameId = 1;
       this.orientacionRequest.category = 'orientation';
-      this.task.taskId = 1;
-      // this.task.answers.push(this.orientacionRequest.respuestasCorrectas);
-      this.task.answers.push(true);
-      this.orientacionRequest.taskAnswers.push(this.task);
+      for(let tas of this.ori.tasks) {
+        const task: PatientTaskAnswersList<boolean> = new PatientTaskAnswersList<boolean>();
+        task.patientAnswers = new Array<boolean>();
+        task.taskId = tas.id;
+        task.patientAnswers.push(true);
+        // this.task.taskId = tas.id;
+        this.orientacionRequest.patientTaskAnswersList.push(task);
+      }
+
+      /*this.ori.tasks.forEach(element => {
+        this.task.taskId = element.id;
+        this.orientacionRequest.taskAnswers.push(this.task);
+      });*/
+      /*this.ori.tasks.forEach((task: Tasks) => {
+        this.task.taskId = task.id;
+        this.orientacionRequest.taskAnswers.push(this.task);
+      });*/
+      // this.task.answers.push(true);
+      // this.orientacionRequest.taskAnswers.push(this.task);
       JSON.stringify(this.orientacionRequest);
+      console.log('JSON ENVIO DATOS');
+      console.log(JSON.stringify(this.orientacionRequest));
       this.orientacionService.orientacion(this.orientacionRequest).subscribe((resp: any) => {
         // tslint:disable-next-line: no-shadowed-variable
-        errorSrv.procesarRespuesta(resp, (resp: any): void => {
-          resp.response.forEach((or: OrientacionResponse) => {
             this.cargando = false;
             this.errorCode = false;
             if (this.errorCode === false) {
               this.router.navigate(['/test/introduccion']);
             }
-        });
-      });
       }, (error: Error) => {
+        errorSrv.getError(error);
         this.cargando = false;
         this.errorCode = true;
       });
@@ -142,26 +166,82 @@ export class TestOrientacionComponent implements OnInit {
   }
 
   getOrientacion() {
-    /*const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
-    errorSrv.nuevoRequest();*/
+    const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
+    errorSrv.nuevoRequest();
     this.orientacionService.getOrientacion().subscribe((resp: any) => {
-      // errorSrv.procesarRespuesta(resp, (resp: any): void => {
-       // resp.response.forEach((or: OrientacionResponse) => {
-          // const orientacion: OrientacionResponse = new OrientacionResponse();
           this.ori.id = resp.id;
           this.ori.name = resp.name;
           this.ori.description = resp.description;
           this.ori.category = resp.category;
-          this.ori.gameId = resp.gameId;
-          this.ori.taskId = resp.taskId;
-          this.ori.answers = resp.answers;
+          this.ori.tasks = resp.tasks;
+          this.ori.resources = resp.resources;
+          this.ori.tasks.forEach((task: Tasks) => {
+            console.log('task param');
+            console.log(task);
+            const tsk: Tasks = new Tasks();
+            tsk.id = task.id;
+            tsk.description = task.description;
+            tsk.inputs = task.inputs;
+            tsk.inputs.forEach((input: Inputs) => {
+              const inp: Inputs = new Inputs();
+              inp.id = input.id;
+              inp.type = input.type;
+              tsk.inputs.push(inp);
+            });
+            if (this.ori.tasks.length > resp.tasks.length) {
+              this.ori.tasks.push(tsk);
+            }
+          });
+          console.log('TASK');
+          console.log(this.ori.tasks[0].id);
           this.orientacion.push(this.ori);
-      //  });
-     // });
+          console.log(this.ori);
     }, (error: Error) => {
+      errorSrv.getError(error);
       this.cargando = false;
       this.errorCode = true;
     });
+  }
+
+  validarForm() {
+    let resp = false;
+    this.ori.tasks.forEach((task: Tasks) => {
+      switch (task.id) {
+        case 1:
+          resp = true;
+          break;
+        case 2:
+          resp = true;
+          break;
+        case 3:
+          resp = true;
+          break;
+        case 4:
+          resp = true;
+          break;
+        case 5:
+          resp = true;
+          break;
+        case 6:
+          resp = true;
+          break;
+        case 7:
+          resp = true;
+          break;
+        case 8:
+          resp = true;
+          break;
+        case 9:
+          resp = true;
+          break;
+        case 10:
+          resp = true;
+          break;
+      }
+    });
+    console.log('FORM ENVIO');
+    console.log(resp);
+    return resp;
   }
 
   /*loadMap() {

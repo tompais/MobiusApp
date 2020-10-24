@@ -11,6 +11,10 @@ import { AtencionCalculoComponent } from './components/test/atencion-calculo/ate
 import { OlvidoPasswordComponent } from './components/commons/olvido-password/olvido-password.component';
 import { FijacionComponent } from './components/test/fijacion/fijacion.component';
 import { CommonModule } from '@angular/common';
+import { VisualizacionComponent } from './components/test/visualizacion/visualizacion.component';
+import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
+import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
+
 const routes: Routes = [
   {
     path: '', pathMatch: 'full', redirectTo: 'principal' // path: '',
@@ -24,7 +28,10 @@ const routes: Routes = [
   {path: 'test/atencion-calculo', component: AtencionCalculoComponent},
   {path: 'login/olvidoPassword', component: OlvidoPasswordComponent},
   {path: 'test/orientacion', component: TestOrientacionComponent},
-  {path: 'test/fijacion', component: FijacionComponent}
+  {path: 'test/fijacion', component: FijacionComponent},
+  {path: 'test/visualizacion', component: VisualizacionComponent},
+  {path: 'test/ordenes', component: OrdenesComponent},
+  {path: 'test/finalizacion', component: FinalizacionComponent}
 ];
 @NgModule({
   imports: [
