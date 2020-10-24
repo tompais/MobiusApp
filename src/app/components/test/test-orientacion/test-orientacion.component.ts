@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, ɵConsole } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild, ɵConsole } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -79,6 +79,9 @@ export class TestOrientacionComponent implements OnInit {
   orientacion: GameCategoryResponse[] = null;
   ori: GameCategoryResponse = null;
   tasks: Tasks[] = null;
+  task: Tasks = null;
+  input: Inputs = null;
+  enviarDatos = false;
   /*constructor(
     private geolocation: Geolocation,
     private nativeGeocoder: NativeGeocoder) {
@@ -96,6 +99,8 @@ export class TestOrientacionComponent implements OnInit {
     this.orientacion = new Array<GameCategoryResponse>();
     this.ori = new GameCategoryResponse();
     this.tasks = new Array<Tasks>();
+    this.task = new Tasks();
+    // this.input = new Inputs();
     this.erroresServicio = new ErrorServicioGrupo();
     this.erroresServicio.errores.push(new ErrorServicio('testOrientacionEnvio', true, '', false, 'Test Orientacion Envio'));
     this.erroresServicio.errores.push(new ErrorServicio('testOrientacion', true, '', false, 'Test Orientacion Consulta'));
@@ -127,7 +132,7 @@ export class TestOrientacionComponent implements OnInit {
       this.cargando = true;
       this.orientacionRequest.gameId = 1;
       this.orientacionRequest.category = 'orientation';
-      for(let tas of this.ori.tasks) {
+      for (const tas of this.ori.tasks) {
         const task: PatientTaskAnswersList<boolean> = new PatientTaskAnswersList<boolean>();
         task.patientAnswers = new Array<boolean>();
         task.taskId = tas.id;
@@ -183,14 +188,17 @@ export class TestOrientacionComponent implements OnInit {
             tsk.description = task.description;
             tsk.inputs = task.inputs;
             tsk.inputs.forEach((input: Inputs) => {
-              const inp: Inputs = new Inputs();
-              inp.id = input.id;
-              inp.type = input.type;
-              tsk.inputs.push(inp);
+             const inp: Inputs = new Inputs();
+             inp.id = input.id;
+             inp.type = input.type;
+             tsk.inputs.push(inp);
             });
+            console.log('INPUTS');
+            console.log(tsk.inputs);
             if (this.ori.tasks.length > resp.tasks.length) {
               this.ori.tasks.push(tsk);
             }
+            // this.ori.tasks.push(tsk);
           });
           console.log('TASK');
           console.log(this.ori.tasks[0].id);

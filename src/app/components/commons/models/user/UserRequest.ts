@@ -82,7 +82,7 @@ export class UserRequest {
     enviarForm(): boolean {
         let resp = false;
         if (!this.validarCamposVacios() && !this.esMenorDe18Anios() && !this.passwordNoCoinciden()) {
-            console.log('ENVIO FORM');
+          //  console.log('ENVIO FORM');
             resp = true;
         }
         return resp;

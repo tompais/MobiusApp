@@ -49,8 +49,8 @@ export class CommonService {
     mensaje.password = user.password;
     mensaje.passwordRepeat = user.passwordRepeat;
     hash = 'Bearer: '.concat(btoa('mensaje.patientEmail:mensaje.password'));
-    console.log('REQUEST:');
-    console.log(mensaje);
+    // console.log('REQUEST:');
+    // console.log(mensaje);
     const respuesta = this.http.post(urlService, mensaje, hash);
     return respuesta;
   }

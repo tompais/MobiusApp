@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AngularDelegate } from '@ionic/angular';
 import { CommonService } from 'src/app/services/common/common.service';
 import { CalculoService } from 'src/app/services/test/calculo.service';
 import { AtencionCalculo } from '../models/AtencionCalculo';
@@ -35,8 +34,8 @@ export class AtencionCalculoComponent implements OnInit {
     this.gameId = resp.id;
     this.category = resp.category;
     this.taskId = resp.tasks[0].id;
-    console.log(this.descripcion);
-    console.log(resp);
+    // console.log(this.descripcion);
+    // console.log(resp);
     });
     this.puntaje = 0;
     this.numeroInicial = Math.floor(Math.random() * 50) + 50;

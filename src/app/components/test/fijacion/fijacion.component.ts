@@ -67,7 +67,7 @@ export class FijacionComponent implements OnInit {
   }
 
   getFijacion(){
-    console.log('la tenes adentro');
+   // console.log('la tenes adentro');
     const errorSrv = this.erroresServicio.obtenerErrorServicio('getFijacion');
     errorSrv.nuevoRequest();
 
@@ -142,16 +142,18 @@ export class FijacionComponent implements OnInit {
         for (let i = 0; i < textoSeparado.length; i++){
           task.patientAnswers[i] = textoSeparado[i].trim();
         }
-        console.log(textoSeparado);
-        console.log(this.fijacionRquest);
-        console.log(task);
+       // console.log(textoSeparado);
+        // console.log(this.fijacionRquest);
+       // console.log(task);
     }
 
     this.fijacionRquest.patientTaskAnswersList.push(task);
 
     JSON.stringify(this.fijacionRquest);
+
     this.algo = JSON.stringify(this.fijacionRquest);
-    console.log(JSON.stringify(this.fijacionRquest));
+    console.log(JSON.stringify(this.fijacionRquest))
+    // console.log(JSON.stringify(this.fijacionRquest));
     this.fj.setFijacion(this.fijacionRquest).subscribe((resp: any) => {
       this.errorCode = false;
       if (this.errorCode === false) {
