@@ -18,14 +18,14 @@ export class VisualizacionComponent implements OnInit {
   category: string;
   taskId: number;
   descripcion: string;
-  url = 'https://stage-blue-mobius-mind-api.herokuapp.com/';
+  url = 'https://prod-mobius-mind-api.herokuapp.com/';
   imgName: string;
   imagen: string;
 
   constructor(public commonService: CommonService, private router: Router, public visualizacionServ: VisualizacionService) { }
 
   ngOnInit() {
-      this.visualizacionServ.traerDatos().subscribe((resp: any) => {
+      /*this.visualizacionServ.traerDatos().subscribe((resp: any) => {
       this.descripcion = resp.tasks[0].description;
       this.imgName = resp.resources[0].fileName;
       this.gameId = resp.id;
@@ -36,7 +36,7 @@ export class VisualizacionComponent implements OnInit {
       console.log(resp);
       this.imagen = `${this.url}${this.imgName}`;
       console.log(this.imagen);
-      });
+      });*/
   }
 
   verificar(form: NgForm){
@@ -44,17 +44,17 @@ export class VisualizacionComponent implements OnInit {
     if (form.invalid){
       this.retorno = false;
     }else{
-      this.visualizacionServ.enviarDatos(this.gameId, this.category, this.taskId, this.respuesta).subscribe((resp: any) => {
+      this.router.navigate(['/test/ordenes']);
+      /*this.visualizacionServ.enviarDatos(this.gameId, this.category, this.taskId, this.respuesta).subscribe((resp: any) => {
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
           this.router.navigate(['/test/ordenes']);
-        }
-      }, (error: Error) => {
+        }*/
+      }/*, (error: Error) => {
         this.cargando = false;
         this.errorCode = true;
-      });
+      });*/
     }
   }
 
-}

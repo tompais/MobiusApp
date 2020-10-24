@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AngularDelegate } from '@ionic/angular';
 import { CommonService } from 'src/app/services/common/common.service';
 import { CalculoService } from 'src/app/services/test/calculo.service';
 import { AtencionCalculo } from '../models/AtencionCalculo';
@@ -14,7 +13,8 @@ import { AtencionCalculo } from '../models/AtencionCalculo';
 export class AtencionCalculoComponent implements OnInit {
 
   ac: AtencionCalculo = new AtencionCalculo();
-  respuestas: number[] = [];
+  respuesta1: number[] = [];
+  respuesta2: number[] = [];
   respuestasCorrectas: number[] = [];
   puntaje: number;
   retorno = true;
@@ -24,18 +24,24 @@ export class AtencionCalculoComponent implements OnInit {
   errorCode = false;
   gameId: number;
   category: string;
-  taskId: number;
-  descripcion: string;
+  taskId1: number;
+  taskId2: number;
+  descripcion1: string;
+  descripcion2: string;
 
   constructor(public commonService: CommonService, private router: Router, public calculoServ: CalculoService) { }
 
   ngOnInit() {
     this.calculoServ.traerDatos().subscribe((resp: any) => {
-    this.descripcion = resp.tasks[0].description;
+    this.descripcion1 = resp.tasks[0].description;
+    this.descripcion2 = resp.tasks[1].description;
     this.gameId = resp.id;
     this.category = resp.category;
-    this.taskId = resp.tasks[0].id;
-    console.log(this.descripcion);
+    this.taskId1 = resp.tasks[0].id;
+    this.taskId2 = resp.tasks[1].id;
+    console.log(this.taskId1);
+    console.log(this.taskId2);
+    console.log(this.descripcion1);
     console.log(resp);
     });
     this.puntaje = 0;
@@ -48,11 +54,11 @@ export class AtencionCalculoComponent implements OnInit {
     if (form.invalid){
       this.retorno = false;
     }else{
-      this.calculoServ.enviarDatos(this.gameId, this.category, this.taskId, this.respuestas).subscribe((resp: any) => {
+      this.calculoServ.enviarDatos(this.gameId, this.category, this.taskId1, this.taskId2, this.respuesta1, this.respuesta2).subscribe((resp: any) => {
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
-          this.router.navigate(['/test/memoria']);
+          this.router.navigate(['/test/visualizacion']);
         }
       }, (error: Error) => {
         this.cargando = false;

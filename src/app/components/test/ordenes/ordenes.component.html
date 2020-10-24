@@ -5,13 +5,10 @@
 </ion-header>
 <ion-content>
   <ion-grid>
-<h1>
- Seguimiento de pasos
-</h1>
 <br/>
 <p>
-  <!-- Luego de escuchar el siguiente audio, debera apretar los botones en el orden que se le indicara. -->
-  {{ descripcion }}
+  Luego de escuchar el siguiente audio, debera apretar los botones en el orden que se le indicara.
+  <!-- {{ descripcion }} -->
  </p>
  <ion-row *ngIf="audioStatus">
    <img (click)="audioStart()" src="/assets/img/reproducir.png" alt="reproductor" width="150px">

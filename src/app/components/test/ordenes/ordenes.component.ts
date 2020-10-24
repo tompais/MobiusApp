@@ -23,7 +23,7 @@ export class OrdenesComponent implements OnInit {
   category: string;
   taskId: number;
   descripcion: string;
-  url = 'https://stage-blue-mobius-mind-api.herokuapp.com/';
+  url = 'https://prod-mobius-mind-api.herokuapp.com/';
   audioName: string;
   cargando = false;
   errorCode = false;
@@ -41,7 +41,7 @@ export class OrdenesComponent implements OnInit {
     this.rowsBotonesStatus = false;
     this.resetNextStatus = false;
 
-    this.ordenesServ.traerDatos().subscribe((resp: any) => {
+    /*this.ordenesServ.traerDatos().subscribe((resp: any) => {
       this.descripcion = resp.tasks[0].description;
       this.audioName = resp.resources[0].fileName;
       this.gameId = resp.id;
@@ -54,7 +54,7 @@ export class OrdenesComponent implements OnInit {
       console.log(this.descripcion);
       console.log(this.audioName);
       console.log(resp);
-      });
+      });*/
 
   }
 
@@ -92,7 +92,8 @@ export class OrdenesComponent implements OnInit {
   }
 
   audioStart(){
-    const audio = new Audio(this.audio);
+    // const audio = new Audio(this.audio);
+    const audio = new Audio('assets/audio/ordenes2.mp3');
     audio.play();
 
     setTimeout(() => {
@@ -106,8 +107,8 @@ export class OrdenesComponent implements OnInit {
   enviar(){
   if (this.contador === 4){
     this.errorStatus = false;
-
-    this.ordenesServ.enviarDatos(this.gameId, this.category, this.taskId, this.respuesta).subscribe((resp: any) => {
+    this.router.navigate(['/test/finalizacion']);
+    /*this.ordenesServ.enviarDatos(this.gameId, this.category, this.taskId, this.respuesta).subscribe((resp: any) => {
       this.cargando = false;
       this.errorCode = false;
       if (this.errorCode === false) {
@@ -116,7 +117,7 @@ export class OrdenesComponent implements OnInit {
     }, (error: Error) => {
       this.cargando = false;
       this.errorCode = true;
-    });
+    });*/
 
   }
   else{

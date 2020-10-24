@@ -6,7 +6,7 @@ import { StorageSession } from 'src/app/components/commons/models/commons/Storag
   providedIn: 'root'
 })
 export class VisualizacionService {
-  url = 'https://stage-blue-mobius-mind-api.herokuapp.com';
+  url = 'https://prod-mobius-mind-api.herokuapp.com';
   sessionStorage: StorageSession = new StorageSession();
 
   constructor(public http: HttpClient) { }
@@ -40,8 +40,8 @@ export class VisualizacionService {
   public traerDatos(){
     // VISUALIZATION
     const id = this.sessionStorage.consultar('id');
-    console.log('ID SESSION STORAGE');
-    console.log(id);
+   // console.log('ID SESSION STORAGE');
+   // console.log(id);
     // poner dentro de la ruta ${id} !!!!
     const urlService = `${this.url}/patients/${id}/mental-test/game?next-game-category=visualization`;
     const respuesta = this.http.get(urlService);

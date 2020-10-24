@@ -9,7 +9,7 @@ import { UserRequest } from 'src/app/components/commons/models/user/UserRequest'
 })
 export class CommonService {
 
-   url = 'https://stage-blue-mobius-mind-api.herokuapp.com';
+   url = 'https://prod-mobius-mind-api.herokuapp.com';
 
   constructor(public http: HttpClient, public httpHandler: HttpHandler) {
     this.http = new HttpClient(httpHandler);
@@ -49,8 +49,8 @@ export class CommonService {
     mensaje.password = user.password;
     mensaje.passwordRepeat = user.passwordRepeat;
     hash = 'Bearer: '.concat(btoa('mensaje.patientEmail:mensaje.password'));
-    console.log('REQUEST:');
-    console.log(mensaje);
+    // console.log('REQUEST:');
+    // console.log(mensaje);
     const respuesta = this.http.post(urlService, mensaje, hash);
     return respuesta;
   }
