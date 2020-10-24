@@ -37,7 +37,7 @@ export class FijacionComponent implements OnInit {
   input: Inputs = null;
   resource: Resources = null;
   fijacionRquest: GameCategoryRequest = null;
-
+  algo = '';
   constructor(public app: AppComponent, private sr: SpeechRecognition, private fj: FijacionService, public router: Router) {
     this.primaryApp = app;
   }
@@ -137,7 +137,7 @@ export class FijacionComponent implements OnInit {
     task.patientAnswers = new Array<string>();
 
     if (this.texto.length > 0){
-        const textoSeparado: string[] = this.texto.split(',');
+        const textoSeparado: string[] = this.texto.split(' ');
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < textoSeparado.length; i++){
           task.patientAnswers[i] = textoSeparado[i].trim();
@@ -150,7 +150,7 @@ export class FijacionComponent implements OnInit {
     this.fijacionRquest.patientTaskAnswersList.push(task);
 
     JSON.stringify(this.fijacionRquest);
-
+    this.algo = JSON.stringify(this.fijacionRquest);
     console.log(JSON.stringify(this.fijacionRquest));
     this.fj.setFijacion(this.fijacionRquest).subscribe((resp: any) => {
       this.errorCode = false;
