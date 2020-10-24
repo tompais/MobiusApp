@@ -78,24 +78,24 @@ export class FijacionComponent implements OnInit {
       this.repuesta.description = resp.description;
       this.repuesta.category = resp.category;
 
-      this.repuesta.taskId = new Array<Tasks>();
+      this.repuesta.tasks = new Array<Tasks>();
       this.task.id = resp.tasks[0].id;
       this.task.description = resp.tasks[0].description;
-      this.repuesta.taskId.push(this.task);
+      this.repuesta.tasks.push(this.task);
 
       this.input.id = resp.tasks[0].inputs[0].id;
       this.input.type = resp.tasks[0].inputs[0].type;
-      this.repuesta.taskId[0].inputs = new Array<Inputs>();
-      this.repuesta.taskId[0].inputs.push(this.input);
+      this.repuesta.tasks[0].inputs = new Array<Inputs>();
+      this.repuesta.tasks[0].inputs.push(this.input);
 
       this.resource.id = resp.resources[0].id;
       this.resource.type = resp.resources[0].type;
       this.resource.fileName = resp.resources[0].fileName;
-      this.repuesta.answers = new Array<Resources>();
-      this.repuesta.answers.push(this.resource);
+      this.repuesta.resources = new Array<Resources>();
+      this.repuesta.resources.push(this.resource);
 
       // agregamos la url del audio
-      this.audio = new Audio('https://stage-blue-mobius-mind-api.herokuapp.com/' + this.repuesta.answers[0].fileName);
+      this.audio = new Audio('https://stage-blue-mobius-mind-api.herokuapp.com/' + this.repuesta.resources[0].fileName);
 
        // tslint:disable-next-line: no-shadowed-variable
       /*errorSrv.procesarRespuesta(resp, (resp: any): void => {
@@ -133,7 +133,7 @@ export class FijacionComponent implements OnInit {
     this.fijacionRquest.category = this.repuesta.category;
     // this.fijacionRquest.patientTaskAnswersList.taskId = this.repuesta.taskId[0].id;
     const task: PatientTaskAnswersList<string> = new PatientTaskAnswersList<string>();
-    task.taskId = this.repuesta.taskId[0].id;
+    task.taskId = this.repuesta.tasks[0].id;
     task.patientAnswers = new Array<string>();
     this.texto = 'agua, pez, croqueta';
     if (this.texto.length > 0){
