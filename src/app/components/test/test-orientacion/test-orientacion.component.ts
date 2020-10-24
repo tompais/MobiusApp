@@ -127,7 +127,7 @@ export class TestOrientacionComponent implements OnInit {
       this.cargando = true;
       this.orientacionRequest.gameId = 1;
       this.orientacionRequest.category = 'orientation';
-      for(let tas of this.ori.tasks) {
+      for (let tas of this.ori.tasks) {
         const task: PatientTaskAnswersList<boolean> = new PatientTaskAnswersList<boolean>();
         task.patientAnswers = new Array<boolean>();
         task.taskId = tas.id;

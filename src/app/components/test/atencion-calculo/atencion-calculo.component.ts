@@ -27,20 +27,22 @@ export class AtencionCalculoComponent implements OnInit {
   category: string;
   taskId1: number;
   taskId2: number;
-  descripcion: string;
+  descripcion1: string;
+  descripcion2: string;
 
   constructor(public commonService: CommonService, private router: Router, public calculoServ: CalculoService) { }
 
   ngOnInit() {
     this.calculoServ.traerDatos().subscribe((resp: any) => {
-    this.descripcion = resp.tasks[0].description;
+    this.descripcion1 = resp.tasks[0].description;
+    this.descripcion2 = resp.tasks[1].description;
     this.gameId = resp.id;
     this.category = resp.category;
     this.taskId1 = resp.tasks[0].id;
     this.taskId2 = resp.tasks[1].id;
     console.log(this.taskId1);
     console.log(this.taskId2);
-    console.log(this.descripcion);
+    console.log(this.descripcion1);
     console.log(resp);
     });
     this.puntaje = 0;
