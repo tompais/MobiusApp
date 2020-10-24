@@ -135,7 +135,7 @@ export class FijacionComponent implements OnInit {
     const task: PatientTaskAnswersList<string> = new PatientTaskAnswersList<string>();
     task.taskId = this.repuesta.tasks[0].id;
     task.patientAnswers = new Array<string>();
-    this.texto = 'agua, pez, croqueta';
+
     if (this.texto.length > 0){
         const textoSeparado: string[] = this.texto.split(',');
         // tslint:disable-next-line: prefer-for-of
