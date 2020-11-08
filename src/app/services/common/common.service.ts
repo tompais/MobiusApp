@@ -1,37 +1,34 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Servicio } from 'src/app/components/commons/models/Servicio';
 import { User } from 'src/app/components/commons/models/User';
-import { AtencionCalculo } from 'src/app/components/test/models/AtencionCalculo';
 import { UserRequest } from 'src/app/components/commons/models/user/UserRequest';
+import { environmentProd } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CommonService {
-
-   url = 'https://prod-mobius-mind-api.herokuapp.com';
+export class CommonService extends Servicio {
 
   constructor(public http: HttpClient, public httpHandler: HttpHandler) {
+    super();
     this.http = new HttpClient(httpHandler);
    }
 
   public login(user: User) {
-    const urlService = this.url + '/security/signin';
-    let hash: any;
+    const urlService = `${environmentProd.url}/security/signin`;
     const mensaje = {
       email: null,
       password: null
     };
     mensaje.email = user.email;
     mensaje.password = user.password;
-    hash = 'Bearer: '.concat(btoa('mensaje.email:mensaje.password'));
-    const respuesta = this.http.post(urlService, mensaje, hash);
+    const respuesta = this.http.post(urlService, mensaje, this.generarHash(mensaje.email, mensaje.password));
     return respuesta;
   }
 
   public registro(user: UserRequest) {
-    const urlService = this.url + '/security/signup';
-    let hash: any;
+    const urlService = `${environmentProd.url}/security/signup`;
     const mensaje = {
       firstName: null,
       lastName: null,
@@ -48,10 +45,7 @@ export class CommonService {
     mensaje.guardianEmail = user.guardianEmail;
     mensaje.password = user.password;
     mensaje.passwordRepeat = user.passwordRepeat;
-    hash = 'Bearer: '.concat(btoa('mensaje.patientEmail:mensaje.password'));
-    // console.log('REQUEST:');
-    // console.log(mensaje);
-    const respuesta = this.http.post(urlService, mensaje, hash);
+    const respuesta = this.http.post(urlService, mensaje, this.generarHash(mensaje.patientEmail, mensaje.password));
     return respuesta;
   }
 }
