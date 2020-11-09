@@ -15,8 +15,7 @@ export class CalculoService {
 
     // const id = this.sessionStorage.consultar('id');
 
-    // TEMPORAL
-    const id = 1;
+    const id = this.sessionStorage.consultar('id');
     const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
 
     const mensaje = {
