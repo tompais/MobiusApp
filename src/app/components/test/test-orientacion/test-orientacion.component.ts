@@ -1,8 +1,6 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, ɵConsole } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoderOptions, NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { OrientacionService } from 'src/app/services/test/orientacion.service';
 import { Answer } from '../../commons/models/commons/Answer';
 import { GameCategoryResponse } from '../../commons/models/commons/GameCategoryResponse';
@@ -12,7 +10,6 @@ import { Tasks } from '../../commons/models/commons/Tasks';
 import { ErrorServicio } from '../../commons/models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from '../../commons/models/errors/ErrorServicioGrupo';
 import { OrientacionRequest } from '../../commons/models/test/orientacion/orientacionRequest';
-import { OrientacionResponse } from '../../commons/models/test/orientacion/OrientacionResponse';
 
 declare var google;
 
