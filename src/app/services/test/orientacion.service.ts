@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
 import { Servicio } from 'src/app/components/commons/models/Servicio';
-import { OrientacionRequest } from 'src/app/components/commons/models/test/orientacion/orientacionRequest';
+import { OrientacionRequest } from 'src/app/components/commons/models/test/orientacion/OrientacionRequest';
 import { environmentProd } from 'src/environments/environment.prod';
 
 @Injectable({
