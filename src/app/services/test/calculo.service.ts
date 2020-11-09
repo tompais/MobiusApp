@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
+import { environmentProd } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CalculoService {
-  url = 'https://prod-mobius-mind-api.herokuapp.com';
   sessionStorage: StorageSession = new StorageSession();
 
   constructor(public http: HttpClient) {}
@@ -17,7 +17,7 @@ export class CalculoService {
 
     // TEMPORAL
     const id = 1;
-    const urlService = `${this.url}/patients/${id}/mental-test/game/answers`;
+    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
 
     const mensaje = {
       gameId: null,
@@ -50,7 +50,7 @@ export class CalculoService {
     // console.log('ID SESSION STORAGE');
     // console.log(id);
     // poner dentro de la ruta ${id}
-    const urlService = `${this.url}/patients/${id}/mental-test/game?next-game-category=calculation`;
+    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=calculation`;
     const respuesta = this.http.get(urlService);
     return respuesta;
   }

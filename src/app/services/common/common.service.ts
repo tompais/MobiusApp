@@ -23,7 +23,7 @@ export class CommonService extends Servicio {
     };
     mensaje.email = user.email;
     mensaje.password = user.password;
-    const respuesta = this.http.post(urlService, mensaje, this.generarHash(mensaje.email, mensaje.password));
+    const respuesta = this.http.post(urlService, mensaje, this.generarToken(mensaje.email, mensaje.password));
     return respuesta;
   }
 
@@ -45,7 +45,7 @@ export class CommonService extends Servicio {
     mensaje.guardianEmail = user.guardianEmail;
     mensaje.password = user.password;
     mensaje.passwordRepeat = user.passwordRepeat;
-    const respuesta = this.http.post(urlService, mensaje, this.generarHash(mensaje.patientEmail, mensaje.password));
+    const respuesta = this.http.post(urlService, mensaje, this.generarToken(mensaje.patientEmail, mensaje.password));
     return respuesta;
   }
 }
