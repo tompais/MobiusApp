@@ -1,3 +1,6 @@
+IF EXIST "android" (
+    call RD /S android
+)
 call ionic cap sync
 call ionic build
 call npx cap sync

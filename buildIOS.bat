@@ -1,3 +1,6 @@
+IF EXIST "ios" (
+    call RD /S ios
+)
 call ionic cap sync
 call ionic build
 call npx cap sync

@@ -9,7 +9,7 @@ import { PatientTaskAnswersList } from '../../commons/models/commons/PatientTask
 import { Tasks } from '../../commons/models/commons/Tasks';
 import { ErrorServicio } from '../../commons/models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from '../../commons/models/errors/ErrorServicioGrupo';
-import { OrientacionRequest } from '../../commons/models/test/orientacion/orientacionRequest';
+import { OrientacionRequest } from '../../commons/models/test/orientacion/OrientacionRequest';
 
 declare var google;
 
