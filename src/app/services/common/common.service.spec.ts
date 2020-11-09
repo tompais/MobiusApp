@@ -33,10 +33,6 @@ describe('CommonService', () => {
     expect(service.login(user));
   });
 
-  it('Probando 2', () => {
-    expect(service.url); // .toEqual('http://localhost:8080');
-  });
-
   it('should be created', () => {
     // tslint:disable-next-line: prefer-const
     let service1: CommonService;

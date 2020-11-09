@@ -5,6 +5,7 @@ import { HttpClient, HttpHandler } from '@angular/common/http';
 import { User } from '../models/User';
 import { AppComponent } from 'src/app/app.component';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -15,10 +16,12 @@ describe('LoginComponent', () => {
   // tslint:disable-next-line: prefer-const
   let httpHandler: HttpHandler;
   let app: AppComponent;
+  // tslint:disable-next-line: prefer-const
+  let router: Router;
 
   beforeEach(() => {
     service = new CommonService(http, httpHandler);
-    component = new LoginComponent(service, app);
+    component = new LoginComponent(service, app, router);
     app = component.primaryApp;
     user = new User();
     user.email = 'pepe@gmail.com';
