@@ -81,4 +81,38 @@ export class ErrorServicio {
         }
         return resp;
     }
+
+    traduccionErrores(): string {
+        const regex = /(\d+)/g;
+        const msj = this.mensaje;
+        const resp = msj.match(regex);
+        let respuesta = '';
+        switch (resp.toString()) {
+            case '400':
+                respuesta = 'No posee un formato válido.';
+                break;
+            case '401':
+                respuesta = 'Acceso denegado.';
+                break;
+            case '403':
+                respuesta = 'Acceso denegado.';
+                break;
+            case '404':
+                respuesta = 'Usuario no autorizado.';
+                break;
+            case '406':
+                respuesta = 'Código no interpretado.';
+                break;
+            case '500':
+                respuesta = 'Error de servidor.';
+                break;
+            case '504':
+                respuesta = 'Tiempo agotado.';
+                break;
+            case '509':
+                respuesta = 'Límite de ancho de banda.';
+                break;
+        }
+        return respuesta;
+    }
 }
