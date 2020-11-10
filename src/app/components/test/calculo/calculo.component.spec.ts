@@ -5,11 +5,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
 import { CommonService } from 'src/app/services/common/common.service';
 import { CalculoService } from 'src/app/services/test/calculo.service';
-import { AtencionCalculoComponent } from './atencion-calculo.component';
+import { CalculoComponent } from './calculo.component';
 
-describe('AtencionCalculoComponent', () => {
-  let component: AtencionCalculoComponent;
-  let fixture: ComponentFixture<AtencionCalculoComponent>;
+describe('CalculoComponent', () => {
+  let component: CalculoComponent;
+  let fixture: ComponentFixture<CalculoComponent>;
   // tslint:disable-next-line: prefer-const
   let commonService: CommonService;
   // tslint:disable-next-line: prefer-const
@@ -19,14 +19,14 @@ describe('AtencionCalculoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AtencionCalculoComponent, NgForm],
+      declarations: [ CalculoComponent, NgForm],
       imports: [IonicModule.forRoot(), RouterTestingModule, FormsModule]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AtencionCalculoComponent);
+    fixture = TestBed.createComponent(CalculoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    component = new AtencionCalculoComponent(commonService, router, calculoService);
+    component = new CalculoComponent(commonService, router, calculoService);
     component.ngOnInit();
   }));
 

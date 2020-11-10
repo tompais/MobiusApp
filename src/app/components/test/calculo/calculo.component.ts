@@ -3,16 +3,16 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
 import { CalculoService } from 'src/app/services/test/calculo.service';
-import { AtencionCalculo } from '../models/AtencionCalculo';
+import { Calculo } from '../models/Calculo';
 
 @Component({
-  selector: 'app-atencion-calculo',
-  templateUrl: './atencion-calculo.component.html',
-  styleUrls: ['./atencion-calculo.component.scss'],
+  selector: 'app-calculo',
+  templateUrl: './calculo.component.html',
+  styleUrls: ['./calculo.component.scss'],
 })
-export class AtencionCalculoComponent implements OnInit {
+export class CalculoComponent implements OnInit {
 
-  ac: AtencionCalculo = new AtencionCalculo();
+  ac: Calculo = new Calculo();
   respuesta1: number[] = [];
   respuesta2: number[] = [];
   respuestasCorrectas: number[] = [];
@@ -58,7 +58,7 @@ export class AtencionCalculoComponent implements OnInit {
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
-          this.router.navigate(['/test/visualizacion']);
+          this.router.navigate(['/test/atencion']);
         }
       }, (error: Error) => {
         this.cargando = false;

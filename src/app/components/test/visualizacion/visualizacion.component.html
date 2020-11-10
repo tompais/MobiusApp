@@ -8,10 +8,10 @@
 
      <br/>
 <p>
-  Escriba en el campo de abajo que ve en la imagen.
+ {{ descripcion }}
  </p>
-  <ion-row><!-- '{{ imagen }}' -->
-    <img src="assets/img/tigre.png" alt="imagen" width="400px">
+  <ion-row><!-- "assets/img/tigre.png" -->
+    <img src='{{ imagen }}' alt="imagen" width="400px">
   </ion-row>
   <ion-row>
   <form (ngSubmit)="verificar(formVisualizacion)" #formVisualizacion="ngForm">
@@ -22,7 +22,7 @@
     </ion-item>
     <ion-item>
       <ion-label>Respuesta: </ion-label>
-      <ion-input type="text" [(ngModel)]="respuesta" name="res1" #res1="ngModel" required></ion-input>
+      <ion-input type="text" [(ngModel)]="respuesta[0]" name="res1" #res1="ngModel" required></ion-input>
     </ion-item>
     <br/>
     <ion-button type="submit" shape="round" expand="block" color="primary">Siguiente</ion-button>
