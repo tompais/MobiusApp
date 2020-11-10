@@ -157,7 +157,7 @@ export class FijacionComponent implements OnInit {
     this.fj.setFijacion(this.fijacionRquest).subscribe((resp: any) => {
       this.errorCode = false;
       if (this.errorCode === false) {
-            this.router.navigate(['/test/atencion-calculo']);
+            this.router.navigate(['/test/calculo']);
       }
     },
     (error: Error) => {

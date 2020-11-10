@@ -7,13 +7,14 @@ import { RegistroComponent} from './components/commons/registro/registro.compone
 import { EmailConfirmationComponent } from './components/commons/email-confirmation/email-confirmation.component';
 import { TestOrientacionComponent } from './components/test/test-orientacion/test-orientacion.component';
 import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
-import { AtencionCalculoComponent } from './components/test/atencion-calculo/atencion-calculo.component';
+import { CalculoComponent } from './components/test/calculo/calculo.component';
 import { OlvidoPasswordComponent } from './components/commons/olvido-password/olvido-password.component';
 import { FijacionComponent } from './components/test/fijacion/fijacion.component';
 import { CommonModule } from '@angular/common';
 import { VisualizacionComponent } from './components/test/visualizacion/visualizacion.component';
 import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
 import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
+import { AtencionComponent } from './components/test/atencion/atencion.component';
 
 const routes: Routes = [
   {
@@ -25,13 +26,14 @@ const routes: Routes = [
   {path: 'registrar', component: RegistroComponent},
   {path: 'email-confirmation', component: EmailConfirmationComponent},
   {path: 'test/introduccion', component: IntroduccionComponent},
-  {path: 'test/atencion-calculo', component: AtencionCalculoComponent},
+  {path: 'test/calculo', component: CalculoComponent},
   {path: 'login/olvidoPassword', component: OlvidoPasswordComponent},
   {path: 'test/orientacion', component: TestOrientacionComponent},
   {path: 'test/fijacion', component: FijacionComponent},
   {path: 'test/visualizacion', component: VisualizacionComponent},
   {path: 'test/ordenes', component: OrdenesComponent},
-  {path: 'test/finalizacion', component: FinalizacionComponent}
+  {path: 'test/finalizacion', component: FinalizacionComponent},
+  {path: 'test/atencion', component: AtencionComponent}
 ];
 @NgModule({
   imports: [
