@@ -15,6 +15,7 @@ import { VisualizacionComponent } from './components/test/visualizacion/visualiz
 import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
 import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
 import { AtencionComponent } from './components/test/atencion/atencion.component';
+import { EscrituraComponent } from './components/test/escritura/escritura.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,8 @@ const routes: Routes = [
   {path: 'test/visualizacion', component: VisualizacionComponent},
   {path: 'test/ordenes', component: OrdenesComponent},
   {path: 'test/finalizacion', component: FinalizacionComponent},
-  {path: 'test/atencion', component: AtencionComponent}
+  {path: 'test/atencion', component: AtencionComponent},
+  {path: 'test/escritura', component: EscrituraComponent}
 ];
 @NgModule({
   imports: [

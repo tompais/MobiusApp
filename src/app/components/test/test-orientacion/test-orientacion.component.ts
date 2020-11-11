@@ -308,5 +308,8 @@ export class TestOrientacionComponent implements OnInit {
 
   }*/
 
+  skipForm(){
+    this.router.navigate(['/test/fijacion']);
+  }
 
 }

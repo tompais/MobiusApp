@@ -19,22 +19,22 @@ export class CalculoService {
     const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
 
     const mensaje = {
+      category: null,
       gameId: null,
-      patientTaskAnswersList: [{
-        patientAnswers: null,
-        taskId: null
+      patientTaskAnswersRequestList: [{
+        taskId: null,
+        patientAnswersRequest: null
       }, {
-        patientAnswers: null,
-        taskId: null
-      }],
-      category: null
+        taskId: null,
+        patientAnswersRequest: null
+      }]
     };
 
     mensaje.gameId = gId;
-    mensaje.patientTaskAnswersList[0].patientAnswers = respuesta1;
-    mensaje.patientTaskAnswersList[0].taskId = tId1;
-    mensaje.patientTaskAnswersList[1].patientAnswers = respuesta2;
-    mensaje.patientTaskAnswersList[1].taskId = tId2;
+    mensaje.patientTaskAnswersRequestList[0].patientAnswersRequest = respuesta1;
+    mensaje.patientTaskAnswersRequestList[0].taskId = tId1;
+    mensaje.patientTaskAnswersRequestList[1].patientAnswersRequest = respuesta2;
+    mensaje.patientTaskAnswersRequestList[1].taskId = tId2;
     mensaje.category = cate;
     console.log(JSON.stringify(mensaje));
 

@@ -19,6 +19,7 @@ export class VisualizacionComponent implements OnInit {
   taskId: number;
   descripcion: string;
   url = 'https://prod-mobius-mind-api.herokuapp.com/';
+  img = 'images/';
   imgName: string;
   imagen: string;
 
@@ -34,7 +35,7 @@ export class VisualizacionComponent implements OnInit {
       console.log(this.descripcion);
       console.log(this.imgName);
       console.log(resp);
-      this.imagen = `${this.url}${this.imgName}`;
+      this.imagen = `${this.url}${this.img}${this.imgName}`;
       console.log(this.imagen);
       });
   }

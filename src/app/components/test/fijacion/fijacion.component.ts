@@ -169,4 +169,8 @@ export class FijacionComponent implements OnInit {
     this.fijacionRquest.patientTaskAnswersList = new Array<PatientTaskAnswersList<string>>();
   }
 
+  skipForm(){
+    this.router.navigate(['/test/calculo']);
+  }
+
 }

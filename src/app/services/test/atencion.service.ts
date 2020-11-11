@@ -18,7 +18,7 @@ export class AtencionService {
    // console.log('ID SESSION STORAGE');
    // console.log(id);
     // poner dentro de la ruta ${id} !!!!
-    const urlService = `${environmentProd.url}/patients/1/mental-test/game?next-game-category=attention`;
+    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=attention`;
     const respuesta = this.http.get(urlService);
     return respuesta;
   }
@@ -27,20 +27,20 @@ export class AtencionService {
 
     const id = this.sessionStorage.consultar('id');
 
-    const urlService = `${environmentProd.url}/patients/1/mental-test/game/answers`;
+    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
 
     const mensaje = {
+      category: null,
       gameId: null,
-      patientTaskAnswersList: [{
-        patientAnswers: null,
-        taskId: null
-      }],
-      category: null
+      patientTaskAnswersRequestList: [{
+        taskId: null,
+        patientAnswersRequest: null
+      }]
     };
 
     mensaje.gameId = gId;
-    mensaje.patientTaskAnswersList[0].patientAnswers = respuestas;
-    mensaje.patientTaskAnswersList[0].taskId = tId;
+    mensaje.patientTaskAnswersRequestList[0].patientAnswersRequest = respuestas;
+    mensaje.patientTaskAnswersRequestList[0].taskId = tId;
     mensaje.category = cate;
     console.log(JSON.stringify(mensaje));
     const respuesta = this.http.post(urlService, mensaje);
