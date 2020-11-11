@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
 import { AtencionService } from 'src/app/services/test/atencion.service';
+import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
+import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { IntroduccionComponent } from '../introduccion/introduccion.component';
 
 @Component({
@@ -20,19 +22,12 @@ export class AtencionComponent implements OnInit {
   retorno = true;
   cargando = false;
   errorCode = false;
+  atencionRequest: GameCategoryRequest = null;
 
   constructor(public commonService: CommonService, private router: Router, public atencionServ: AtencionService) { }
 
   ngOnInit() {
-      this.atencionServ.traerDatos().subscribe((resp: any) => {
-      this.descripcion = resp.tasks[0].description;
-      this.gameId = resp.id;
-      this.category = resp.category;
-      this.taskId = resp.tasks[0].id;
-      console.log(this.taskId);
-      console.log(this.descripcion);
-      console.log(resp);
-      });
+    this.obtenerDatos();
   }
 
   verificar(form: NgForm){
@@ -40,7 +35,13 @@ export class AtencionComponent implements OnInit {
     if (form.invalid){
       this.retorno = false;
     }else{
-      this.atencionServ.enviarDatos(this.gameId, this.category, this.taskId, this.respuesta).subscribe((resp: any) => {
+      const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
+      task.taskId = this.taskId;
+      task.patientAnswersRequest = this.respuesta;
+      this.atencionRequest.patientTaskAnswersRequestList.push(task);
+      console.log(this.atencionRequest);
+
+      this.atencionServ.enviarDatos(this.atencionRequest).subscribe((resp: any) => {
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
@@ -52,5 +53,26 @@ export class AtencionComponent implements OnInit {
       });
     }
   }
+
+  obtenerDatos(){
+
+    this.atencionRequest = new GameCategoryRequest();
+    this.atencionRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
+
+    this.atencionServ.traerDatos().subscribe((resp: any) => {
+      this.descripcion = resp.tasks[0].description;
+      console.log(this.descripcion);
+      this.atencionRequest.gameId = resp.id;
+      this.atencionRequest.category = resp.category;
+      console.log(this.atencionRequest.gameId);
+      console.log(this.atencionRequest.category);
+      this.taskId = resp.tasks[0].id;
+      console.log(this.taskId);
+      console.log(resp);
+      console.log(this.atencionRequest);
+      });
+}
+
+
 
 }

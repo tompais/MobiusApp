@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
 import { CalculoService } from 'src/app/services/test/calculo.service';
+import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
+import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { Calculo } from '../models/Calculo';
 
 @Component({
@@ -13,8 +15,8 @@ import { Calculo } from '../models/Calculo';
 export class CalculoComponent implements OnInit {
 
   ac: Calculo = new Calculo();
-  respuesta1: number[] = [];
-  respuesta2: number[] = [];
+  respuesta1: string[] = [];
+  respuesta2: string[] = [];
   respuestasCorrectas: number[] = [];
   puntaje: number;
   retorno = true;
@@ -28,25 +30,12 @@ export class CalculoComponent implements OnInit {
   taskId2: number;
   descripcion1: string;
   descripcion2: string;
+  calculoRequest: GameCategoryRequest = null;
 
   constructor(public commonService: CommonService, private router: Router, public calculoServ: CalculoService) { }
 
   ngOnInit() {
-    this.calculoServ.traerDatos().subscribe((resp: any) => {
-    this.descripcion1 = resp.tasks[0].description;
-    this.descripcion2 = resp.tasks[1].description;
-    this.gameId = resp.id;
-    this.category = resp.category;
-    this.taskId1 = resp.tasks[0].id;
-    this.taskId2 = resp.tasks[1].id;
-    console.log(this.taskId1);
-    console.log(this.taskId2);
-    console.log(this.descripcion1);
-    console.log(resp);
-    });
-    this.puntaje = 0;
-    this.numeroInicial = Math.floor(Math.random() * 50) + 50;
-    this.numeroResta = Math.floor(Math.random() * 4) + 6;
+    this.obtenerDatos();
   }
 
   verificar(form: NgForm){
@@ -54,7 +43,17 @@ export class CalculoComponent implements OnInit {
     if (form.invalid){
       this.retorno = false;
     }else{
-      this.calculoServ.enviarDatos(this.gameId, this.category, this.taskId1, this.taskId2, this.respuesta1, this.respuesta2).subscribe((resp: any) => {
+      const task1: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
+      task1.taskId = this.taskId1;
+      task1.patientAnswersRequest = this.respuesta1;
+      this.calculoRequest.patientTaskAnswersRequestList.push(task1);
+      const task2: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
+      task2.taskId = this.taskId2;
+      task2.patientAnswersRequest = this.respuesta2;
+      this.calculoRequest.patientTaskAnswersRequestList.push(task2);
+      console.log(this.calculoRequest);
+
+      this.calculoServ.enviarDatos(this.calculoRequest).subscribe((resp: any) => {
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
@@ -64,35 +63,29 @@ export class CalculoComponent implements OnInit {
         this.cargando = false;
         this.errorCode = true;
       });
-      /*this.respuestasCorrectas[0] = this.numeroInicial - this.numeroResta;
-      for (let i = 0; i < 5; i++) {
-        this.respuestasCorrectas[i + 1] = this.respuestasCorrectas[i] - this.numeroResta;
-      }
-
-      for (let i = 0; i < 5; i++) {
-        if (this.respuestas[i] === this.respuestasCorrectas[i]){
-        this.puntaje = this.puntaje + 1; }
-      }
-      this.ac.puntaje = this.puntaje;
-      this.ac.numeroInicial = this.numeroInicial;
-      this.ac.numeroResta = this.numeroResta;
-      this.ac.respuesta1 = this.respuestas[0];
-      this.ac.respuesta2 = this.respuestas[1];
-      this.ac.respuesta3 = this.respuestas[2];
-      this.ac.respuesta4 = this.respuestas[3];
-      this.ac.respuesta5 = this.respuestas[4];
-// ACA DEBE IR EL SERVICIO QUE MANDA LOS DATOS AL BACK
-      this.commonService.enviarCalculo(this.ac)
-      .subscribe(
-        data => this.retorno = true,
-        error => this.retorno = false
-      );
     }
-    if (this.retorno) {
-     this.router.navigate(['/test/memoria']);
-     }
-     else{
-      this.router.navigate(['/error']);
-     */}
   }
+
+  obtenerDatos(){
+
+    this.calculoRequest = new GameCategoryRequest();
+    this.calculoRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
+
+    this.calculoServ.traerDatos().subscribe((resp: any) => {
+      this.descripcion1 = resp.tasks[0].description;
+      this.descripcion2 = resp.tasks[1].description;
+      this.calculoRequest.gameId = resp.id;
+      this.calculoRequest.category = resp.category;
+      console.log(this.calculoRequest.gameId);
+      console.log(this.calculoRequest.category);
+      this.taskId1 = resp.tasks[0].id;
+      this.taskId2 = resp.tasks[1].id;
+      console.log(this.taskId1);
+      console.log(this.taskId2);
+      console.log(this.descripcion1);
+      console.log(resp);
+      console.log(this.calculoRequest);
+      });
+
+}
 }

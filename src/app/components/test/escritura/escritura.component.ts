@@ -18,15 +18,7 @@ taskId: number;
   constructor(public commonService: CommonService, private router: Router, public escrituraServ: EscrituraService) { }
 
   ngOnInit() {
-      this.escrituraServ.traerDatos().subscribe((resp: any) => {
-      this.descripcion = resp.tasks[0].description;
-      this.gameId = resp.id;
-      this.category = resp.category;
-      this.taskId = resp.tasks[0].id;
-      console.log(this.taskId);
-      console.log(this.descripcion);
-      console.log(resp);
-      });
+      this.obtenerDatos();
   }
 
   reorderItems(event)
@@ -43,5 +35,16 @@ taskId: number;
     this.router.navigate(['/test/finalizacion']);
   }
 
+  obtenerDatos(){
+      this.escrituraServ.traerDatos().subscribe((resp: any) => {
+      this.descripcion = resp.tasks[0].description;
+      this.gameId = resp.id;
+      this.category = resp.category;
+      this.taskId = resp.tasks[0].id;
+      console.log(this.taskId);
+      console.log(this.descripcion);
+      console.log(resp);
+      });
+  }
 
 }

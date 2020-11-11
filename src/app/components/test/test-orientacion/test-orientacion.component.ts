@@ -5,7 +5,7 @@ import { OrientacionService } from 'src/app/services/test/orientacion.service';
 import { Answer } from '../../commons/models/commons/Answer';
 import { GameCategoryResponse } from '../../commons/models/commons/GameCategoryResponse';
 import { Inputs } from '../../commons/models/commons/Inputs';
-import { PatientTaskAnswersList } from '../../commons/models/commons/PatientTaskAnswersList';
+import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { Tasks } from '../../commons/models/commons/Tasks';
 import { ErrorServicio } from '../../commons/models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from '../../commons/models/errors/ErrorServicioGrupo';
@@ -68,7 +68,7 @@ export class TestOrientacionComponent implements OnInit {
   latitude: number;
   longitude: number;
   retorno = true;
-  patientTaskAnswersList: PatientTaskAnswersList<boolean> = null;
+  patientTaskAnswersList: PatientTaskAnswersRequestList<boolean> = null;
   answer: Answer<boolean> = null;
   cargando = false;
   errorCode = false;
@@ -90,8 +90,8 @@ export class TestOrientacionComponent implements OnInit {
 
   ngOnInit() {
     this.orientacionRequest = new OrientacionRequest();
-    this.patientTaskAnswersList = new PatientTaskAnswersList<boolean>();
-    this.patientTaskAnswersList.patientAnswers = new Array<boolean>();
+    this.patientTaskAnswersList = new PatientTaskAnswersRequestList<boolean>();
+    this.patientTaskAnswersList.patientAnswersRequest = new Array<boolean>();
     this.answer = new Answer<boolean>();
     this.orientacion = new Array<GameCategoryResponse>();
     this.ori = new GameCategoryResponse();
@@ -130,12 +130,12 @@ export class TestOrientacionComponent implements OnInit {
       this.orientacionRequest.gameId = 1;
       this.orientacionRequest.category = 'orientation';
       for (const tas of this.ori.tasks) {
-        const task: PatientTaskAnswersList<boolean> = new PatientTaskAnswersList<boolean>();
-        task.patientAnswers = new Array<boolean>();
+        const task: PatientTaskAnswersRequestList<boolean> = new PatientTaskAnswersRequestList<boolean>();
+        task.patientAnswersRequest = new Array<boolean>();
         task.taskId = tas.id;
-        task.patientAnswers.push(true);
+        task.patientAnswersRequest.push(true);
         // this.task.taskId = tas.id;
-        this.orientacionRequest.patientTaskAnswersList.push(task);
+        this.orientacionRequest.patientTaskAnswersRequestList.push(task);
       }
 
       /*this.ori.tasks.forEach(element => {
