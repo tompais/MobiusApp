@@ -13,6 +13,7 @@ import { Inputs } from '../../commons/models/commons/Inputs';
 import { Answer } from '../../commons/models/commons/Answer';
 import { PatientTaskAnswersList } from '../../commons/models/commons/PatientTaskAnswersList';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-fijacion',
@@ -101,7 +102,7 @@ export class FijacionComponent implements OnInit {
       /*errorSrv.procesarRespuesta(resp, (resp: any): void => {
       });*/
     },
-      (error: Error) => {
+      (error: HttpErrorResponse) => {
         errorSrv.getError(error);
         this.cargando = false;
         this.errorCode = true;
@@ -160,7 +161,7 @@ export class FijacionComponent implements OnInit {
             this.router.navigate(['/test/atencion-calculo']);
       }
     },
-    (error: Error) => {
+    (error: HttpErrorResponse) => {
       errorSrv.getError(error);
       this.cargando = false;
       this.errorCode = true;

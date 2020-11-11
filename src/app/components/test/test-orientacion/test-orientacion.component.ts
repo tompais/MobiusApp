@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -158,7 +159,7 @@ export class TestOrientacionComponent implements OnInit {
             if (this.errorCode === false) {
               this.router.navigate(['/test/fijacion']);
             }
-      }, (error: Error) => {
+      }, (error: HttpErrorResponse) => {
         errorSrv.getError(error);
         this.cargando = false;
         this.errorCode = true;
@@ -201,7 +202,7 @@ export class TestOrientacionComponent implements OnInit {
           console.log(this.ori.tasks[0].id);
           this.orientacion.push(this.ori);
           console.log(this.ori);
-    }, (error: Error) => {
+    }, (error: HttpErrorResponse) => {
       errorSrv.getError(error);
       this.cargando = false;
       this.errorCode = true;
