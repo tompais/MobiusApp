@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { GameCategoryRequest } from 'src/app/components/commons/models/commons/GameCategoryRequest';
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
 import { environmentProd } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AtencionService {
+export class EscrituraService {
 
   sessionStorage: StorageSession = new StorageSession();
 
@@ -19,19 +18,32 @@ export class AtencionService {
    // console.log('ID SESSION STORAGE');
    // console.log(id);
     // poner dentro de la ruta ${id} !!!!
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=attention`;
+    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=writing`;
     const respuesta = this.http.get(urlService);
     return respuesta;
   }
 
-  public enviarDatos(gcr: GameCategoryRequest){
+  public enviarDatos(gId: number, cate: string, tId: number, respuestas: string[]){
 
     const id = this.sessionStorage.consultar('id');
 
     const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
 
-    console.log(JSON.stringify(gcr));
-    const respuesta = this.http.post(urlService, gcr);
+    const mensaje = {
+      category: null,
+      gameId: null,
+      patientTaskAnswersRequestList: [{
+        taskId: null,
+        patientAnswersRequest: null
+      }]
+    };
+
+    mensaje.gameId = gId;
+    mensaje.patientTaskAnswersRequestList[0].patientAnswersRequest = respuestas;
+    mensaje.patientTaskAnswersRequestList[0].taskId = tId;
+    mensaje.category = cate;
+    console.log(JSON.stringify(mensaje));
+    const respuesta = this.http.post(urlService, mensaje);
     return respuesta;
   }
 }
