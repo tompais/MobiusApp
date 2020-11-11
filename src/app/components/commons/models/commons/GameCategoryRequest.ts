@@ -1,13 +1,13 @@
-import { PatientTaskAnswersList } from './PatientTaskAnswersList';
+import { PatientTaskAnswersRequestList } from './PatientTaskAnswersRequestList';
 
 export class GameCategoryRequest {
     gameId: number;
     category: string;
     // tslint:disable-next-line: ban-types
-    patientTaskAnswersList: PatientTaskAnswersList<String>[];
+    patientTaskAnswersRequestList: PatientTaskAnswersRequestList<String>[];
 
     contructor() {
         // tslint:disable-next-line: ban-types
-        this.patientTaskAnswersList = new Array<PatientTaskAnswersList<String>>();
+        this.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<String>>();
     }
 }

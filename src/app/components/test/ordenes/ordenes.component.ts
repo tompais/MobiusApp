@@ -107,7 +107,7 @@ export class OrdenesComponent implements OnInit {
   enviar(){
   if (this.contador === 4){
     this.errorStatus = false;
-    this.router.navigate(['/test/finalizacion']);
+    this.router.navigate(['/test/escritura']);
     /*this.ordenesServ.enviarDatos(this.gameId, this.category, this.taskId, this.respuesta).subscribe((resp: any) => {
       this.cargando = false;
       this.errorCode = false;

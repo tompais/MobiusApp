@@ -20,7 +20,7 @@ import { TextValidationComponent } from './components/commons/text-validation/te
 import { IntroduccionComponent } from './components/test/introduccion/introduccion.component';
 import { OlvidoPasswordComponent } from './components/commons/olvido-password/olvido-password.component';
 import { EmailConfirmationComponent } from './components/commons/email-confirmation/email-confirmation.component';
-import { AtencionCalculoComponent } from './components/test/atencion-calculo/atencion-calculo.component';
+import { CalculoComponent } from './components/test/calculo/calculo.component';
 import { InfoConsultaServiceComponent } from './components/commons/info-consulta-service/info-consulta-service.component';
 import { InfoConsultaServiceGrupoComponent } from './components/commons/info-consulta-service-grupo/info-consulta-service-grupo.component';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -36,11 +36,14 @@ import { ErrorComponent } from './components/commons/error/error.component';
 import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
 import { VisualizacionComponent } from './components/test/visualizacion/visualizacion.component';
 import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
+import { AtencionComponent } from './components/test/atencion/atencion.component';
+import { EscrituraComponent } from './components/test/escritura/escritura.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
-    EmailConfirmationComponent, AtencionCalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
-    TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent, FinalizacionComponent],
+    EmailConfirmationComponent, CalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
+    TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent,
+    FinalizacionComponent, AtencionComponent, EscrituraComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule],
   providers: [
