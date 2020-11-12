@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
 import { LecturaService } from 'src/app/services/test/lectura.service';
+import { environmentProd } from 'src/environments/environment.prod';
 import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 
@@ -20,7 +22,7 @@ export class LecturaComponent implements OnInit {
   category: string;
   taskId: number;
   descripcion: string;
-  url = 'https://prod-mobius-mind-api.herokuapp.com/';
+  url = environmentProd.url;
   img = 'images/';
   imgName: string;
   imagen: string;
@@ -36,7 +38,7 @@ export class LecturaComponent implements OnInit {
 
     this.lecturaRequest = new GameCategoryRequest();
     this.lecturaRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
-
+    console.log(this.url);
     this.lecturaServ.traerDatos().subscribe((resp: any) => {
       this.descripcion = resp.tasks[0].description;
       this.imgName = resp.resources[0].fileName;
@@ -49,13 +51,12 @@ export class LecturaComponent implements OnInit {
       console.log(this.taskId);
       console.log(resp);
       console.log(this.lecturaRequest);
-      this.imagen = `${this.url}${this.img}${this.imgName}`;
+      this.imagen = `${this.url}/${this.img}${this.imgName}`;
       console.log(this.imagen);
       });
 }
 
 verificar(form: NgForm){
-
   if (form.invalid){
     this.retorno = false;
   }else{
@@ -71,7 +72,7 @@ verificar(form: NgForm){
       if (this.errorCode === false) {
         this.router.navigate(['/test/escritura']);
       }
-    }, (error: Error) => {
+    }, (error: HttpErrorResponse) => {
       this.cargando = false;
       this.errorCode = true;
     });
