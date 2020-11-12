@@ -15,6 +15,7 @@ export class TextValidationComponent implements OnInit {
   @Input() propiedadDescripcion = '';
   @Input() tipo: TipoInput = TipoInput.textBox;
   @Input() tipoDatos: TipoEntradaDato = TipoEntradaDato.alfaNumerico;
+  // tslint:disable-next-line: ban-types
   @Input() objeto: Object;
   @Input() tipoPassword = false;
 

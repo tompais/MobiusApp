@@ -1,18 +1,16 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, ɵConsole } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoderOptions, NativeGeocoder, NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { OrientacionService } from 'src/app/services/test/orientacion.service';
 import { Answer } from '../../commons/models/commons/Answer';
 import { GameCategoryResponse } from '../../commons/models/commons/GameCategoryResponse';
 import { Inputs } from '../../commons/models/commons/Inputs';
-import { PatientTaskAnswersList } from '../../commons/models/commons/PatientTaskAnswersList';
+import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { Tasks } from '../../commons/models/commons/Tasks';
 import { ErrorServicio } from '../../commons/models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from '../../commons/models/errors/ErrorServicioGrupo';
-import { OrientacionRequest } from '../../commons/models/test/orientacion/orientacionRequest';
-import { OrientacionResponse } from '../../commons/models/test/orientacion/OrientacionResponse';
+import { OrientacionRequest } from '../../commons/models/test/orientacion/OrientacionRequest';
 
 declare var google;
 
@@ -24,6 +22,7 @@ declare var google;
 export class TestOrientacionComponent implements OnInit {
 
   orientacionRequest: OrientacionRequest;
+  respuesta: any[];
 
  /* locationWatchStarted: boolean;
   locationSubscription: any;
@@ -71,7 +70,7 @@ export class TestOrientacionComponent implements OnInit {
   latitude: number;
   longitude: number;
   retorno = true;
-  patientTaskAnswersList: PatientTaskAnswersList<boolean> = null;
+  patientTaskAnswersList: PatientTaskAnswersRequestList<boolean> = null;
   answer: Answer<boolean> = null;
   cargando = false;
   errorCode = false;
@@ -93,8 +92,9 @@ export class TestOrientacionComponent implements OnInit {
 
   ngOnInit() {
     this.orientacionRequest = new OrientacionRequest();
-    this.patientTaskAnswersList = new PatientTaskAnswersList<boolean>();
-    this.patientTaskAnswersList.patientAnswers = new Array<boolean>();
+    this.respuesta = new Array<any>();
+    this.patientTaskAnswersList = new PatientTaskAnswersRequestList<boolean>();
+    this.patientTaskAnswersList.patientAnswersRequest = new Array<boolean>();
     this.answer = new Answer<boolean>();
     this.orientacion = new Array<GameCategoryResponse>();
     this.ori = new GameCategoryResponse();
@@ -133,12 +133,12 @@ export class TestOrientacionComponent implements OnInit {
       this.orientacionRequest.gameId = 1;
       this.orientacionRequest.category = 'orientation';
       for (const tas of this.ori.tasks) {
-        const task: PatientTaskAnswersList<boolean> = new PatientTaskAnswersList<boolean>();
-        task.patientAnswers = new Array<boolean>();
+        const task: PatientTaskAnswersRequestList<boolean> = new PatientTaskAnswersRequestList<boolean>();
+        task.patientAnswersRequest = new Array<boolean>();
         task.taskId = tas.id;
-        task.patientAnswers.push(true);
+        task.patientAnswersRequest.push(true);
         // this.task.taskId = tas.id;
-        this.orientacionRequest.patientTaskAnswersList.push(task);
+        this.orientacionRequest.patientTaskAnswersRequestList.push(task);
       }
 
       /*this.ori.tasks.forEach(element => {
@@ -161,7 +161,7 @@ export class TestOrientacionComponent implements OnInit {
             if (this.errorCode === false) {
               this.router.navigate(['/test/fijacion']);
             }
-      }, (error: Error) => {
+      }, (error: HttpErrorResponse) => {
         errorSrv.getError(error);
         this.cargando = false;
         this.errorCode = true;
@@ -170,7 +170,7 @@ export class TestOrientacionComponent implements OnInit {
     }
   }
 
-  getOrientacion() {
+  /*getOrientacion() {
     const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
     errorSrv.nuevoRequest();
     this.orientacionService.getOrientacion().subscribe((resp: any) => {
@@ -204,7 +204,25 @@ export class TestOrientacionComponent implements OnInit {
           console.log(this.ori.tasks[0].id);
           this.orientacion.push(this.ori);
           console.log(this.ori);
-    }, (error: Error) => {
+    }, (error: HttpErrorResponse) => {
+      errorSrv.getError(error);
+      this.cargando = false;
+      this.errorCode = true;
+    });
+  }*/
+
+  getOrientacion() {
+    const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
+    errorSrv.nuevoRequest();
+    this.orientacionService.getOrientacion().subscribe((resp: any) => {
+      this.ori.id = resp.id;
+      this.ori.name = resp.name;
+      this.ori.description = resp.description;
+      this.ori.category = resp.category;
+      this.ori.tasks = resp.tasks;
+      this.ori.resources = resp.resources;
+      this.orientacion.push(this.ori);
+    }, (error: HttpErrorResponse) => {
       errorSrv.getError(error);
       this.cargando = false;
       this.errorCode = true;
@@ -311,5 +329,8 @@ export class TestOrientacionComponent implements OnInit {
 
   }*/
 
+  skipForm(){
+    this.router.navigate(['/test/fijacion']);
+  }
 
 }

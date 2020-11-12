@@ -1,4 +1,4 @@
-import { PatientTaskAnswersList } from '../../commons/PatientTaskAnswersList';
+import { PatientTaskAnswersRequestList } from '../../commons/PatientTaskAnswersRequestList';
 import { UserResponse } from '../../user/UserResponse';
 
 export class OrientacionRequest extends UserResponse {
@@ -16,11 +16,11 @@ export class OrientacionRequest extends UserResponse {
 
     category: string;
     gameId: number;
-    patientTaskAnswersList: PatientTaskAnswersList<boolean>[];
+    patientTaskAnswersRequestList: PatientTaskAnswersRequestList<boolean>[];
 
     constructor() {
         super();
-        this.patientTaskAnswersList = new Array<PatientTaskAnswersList<boolean>>();
+        this.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<boolean>>();
     }
 
    /* validarForm(): boolean {
@@ -32,4 +32,6 @@ export class OrientacionRequest extends UserResponse {
         }
         return resp;
     }*/
+
+    
 }

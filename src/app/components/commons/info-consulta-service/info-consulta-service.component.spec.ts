@@ -23,9 +23,9 @@ describe('InfoConsultaServiceComponent', () => {
     fixture.detectChanges();
   }));
 
-  it('Info Consulta Service NgOnInit', () => {
+  /*it('Info Consulta Service NgOnInit', () => {
     expect(component.ngOnInit());
-  });
+  });*/
 
   /*it('Error Servicio cargando True', () => {
     expect(component.cargando()).toBe('Ok');

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, ErrorHandler, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
@@ -64,24 +65,28 @@ export class LoginComponent implements OnInit {
   }
 
   login(form: NgForm){
+    console.log('ENTRO EL LOGIN');
     const errorSrv = this.erroresServicio.obtenerErrorServicio('login');
     errorSrv.nuevoRequest();
     if (form.invalid) {
+      console.log('SOY INVALID');
       this.retorno = false;
     } else {
       this.cargando = true;
       this.commonService.login(this.user).subscribe((resp: any) => {
+        console.log('LOGIN:');
+        console.log(resp);
         // tslint:disable-next-line: no-shadowed-variable
         // errorSrv.procesarRespuesta(resp, (resp: any): void => {
           // console.log('PROCESAR RESPUESTA');
           /*this.usResponse.id = resp.id;
           this.storageSession.guardar('id', resp.id);*/
-          this.usResponse.firstName = resp.firstName;
-          this.usResponse.lastName = resp.lastName;
-          this.usResponse.id = resp.id;
+        this.usResponse.firstName = resp.firstName;
+        this.usResponse.lastName = resp.lastName;
+        this.usResponse.id = resp.id;
           // console.log('VALOR DEL ID');
           // console.log(this.usResponse);
-          this.userResponse.push(this.usResponse);
+        this.userResponse.push(this.usResponse);
           // console.log(this.userResponse);
           /*resp.forEach((user: UserResponse) => {
             this.usResponse.firstName = user.firstName;
@@ -99,15 +104,15 @@ export class LoginComponent implements OnInit {
         this.userResponse.push(user);
         console.log(this.userResponse);*/
         // tslint:disable-next-line: radix
-          this.storageSession.guardar('id', resp.id);
+        this.storageSession.guardar('id', resp.id);
          // console.log('CONSULTAR ID');
          // console.log(this.storageSession.consultar('id'));
-          this.cargando = false;
-          this.errorCode = false;
-          if (this.errorCode === false) {
+        this.cargando = false;
+        this.errorCode = false;
+        if (this.errorCode === false) {
           this.router.navigate(['/test/introduccion']);
         }
-      }, (error: Error) => {
+      }, (error: HttpErrorResponse) => {
         errorSrv.getError(error);
         this.cargando = false;
         this.errorCode = true;

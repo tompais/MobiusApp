@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -74,7 +75,7 @@ export class RegistroComponent implements OnInit {
         if (this.errorCode === false) {
           this.router.navigate(['/login']);
         }
-      }, (error: Error) => {
+      }, (error: HttpErrorResponse) => {
         errorSrv.getError(error);
         this.cargando = false;
         this.errorCode = true;

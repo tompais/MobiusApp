@@ -11,8 +11,9 @@ import { AppComponent } from 'src/app/app.component';
 import { Tasks } from '../../commons/models/commons/Tasks';
 import { Inputs } from '../../commons/models/commons/Inputs';
 import { Answer } from '../../commons/models/commons/Answer';
-import { PatientTaskAnswersList } from '../../commons/models/commons/PatientTaskAnswersList';
+import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-fijacion',
@@ -52,7 +53,7 @@ export class FijacionComponent implements OnInit {
     this.input = new Inputs();
     this.resource = new Resources();
     this.fijacionRquest = new GameCategoryRequest();
-    this.fijacionRquest.patientTaskAnswersList = new Array<PatientTaskAnswersList<string>>();
+    this.fijacionRquest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
     this.getFijacion();
     this.sr.hasPermission()
     .then((hasPermission: boolean) => {
@@ -101,7 +102,7 @@ export class FijacionComponent implements OnInit {
       /*errorSrv.procesarRespuesta(resp, (resp: any): void => {
       });*/
     },
-      (error: Error) => {
+      (error: HttpErrorResponse) => {
         errorSrv.getError(error);
         this.cargando = false;
         this.errorCode = true;
@@ -132,22 +133,22 @@ export class FijacionComponent implements OnInit {
     this.fijacionRquest.gameId = this.repuesta.id;
     this.fijacionRquest.category = this.repuesta.category;
     // this.fijacionRquest.patientTaskAnswersList.taskId = this.repuesta.taskId[0].id;
-    const task: PatientTaskAnswersList<string> = new PatientTaskAnswersList<string>();
+    const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
     task.taskId = this.repuesta.tasks[0].id;
-    task.patientAnswers = new Array<string>();
+    task.patientAnswersRequest = new Array<string>();
 
     if (this.texto.length > 0){
         const textoSeparado: string[] = this.texto.split(' ');
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < textoSeparado.length; i++){
-          task.patientAnswers[i] = textoSeparado[i].trim();
+          task.patientAnswersRequest[i] = textoSeparado[i].trim();
         }
        // console.log(textoSeparado);
         // console.log(this.fijacionRquest);
        // console.log(task);
     }
 
-    this.fijacionRquest.patientTaskAnswersList.push(task);
+    this.fijacionRquest.patientTaskAnswersRequestList.push(task);
 
     JSON.stringify(this.fijacionRquest);
 
@@ -157,16 +158,20 @@ export class FijacionComponent implements OnInit {
     this.fj.setFijacion(this.fijacionRquest).subscribe((resp: any) => {
       this.errorCode = false;
       if (this.errorCode === false) {
-            this.router.navigate(['/test/atencion-calculo']);
+            this.router.navigate(['/test/calculo']);
       }
     },
-    (error: Error) => {
+    (error: HttpErrorResponse) => {
       errorSrv.getError(error);
       this.cargando = false;
       this.errorCode = true;
       this.error = error.message;
     });
-    this.fijacionRquest.patientTaskAnswersList = new Array<PatientTaskAnswersList<string>>();
+    this.fijacionRquest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
+  }
+
+  skipForm(){
+    this.router.navigate(['/test/calculo']);
   }
 
 }

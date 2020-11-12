@@ -1,4 +1,4 @@
-export class AtencionCalculo{
+export class Calculo{
 
     numeroInicial: number;
     numeroResta: number;

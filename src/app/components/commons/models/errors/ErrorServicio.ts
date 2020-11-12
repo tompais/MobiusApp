@@ -1,9 +1,12 @@
+import { HttpErrorResponse } from '@angular/common/http';
+
 export class ErrorServicio {
     id: string;
     requerido: boolean;
     consultado: boolean;
     respuestaRecibida: boolean;
     mensaje: string;
+    codigoEstado: number;
     estado: boolean;
     titulo = '';
     mensajeErrorUsuario: string;
@@ -25,9 +28,16 @@ export class ErrorServicio {
         this.consultado = false;
     }
 
-    getError(error: Error) {
+    /*getError(error: Error) {
         this.estado = false;
         this.mensaje = error.message;
+        this.falloRequest = true;
+    }*/
+
+    getError(error: HttpErrorResponse) {
+        this.estado = false;
+        this.mensaje = error.message;
+        this.codigoEstado = error.status;
         this.falloRequest = true;
     }
 
@@ -80,5 +90,74 @@ export class ErrorServicio {
             resp = true;
         }
         return resp;
+    }
+
+    /*traduccionErrores(): string {
+        const regex = /(\d+)/g;
+        const msj = this.mensaje;
+        console.log('MENSAJE RESP');
+        console.log(msj);
+        const resp = msj.match(regex);
+        console.log('RESP');
+        let respuesta = '';
+        console.log(resp);
+        switch (resp.toString()) {
+            case '400':
+                respuesta = 'No posee un formato válido.';
+                break;
+            case '401':
+                respuesta = 'Acceso denegado.';
+                break;
+            case '403':
+                respuesta = 'Acceso denegado.';
+                break;
+            case '404':
+                respuesta = 'Usuario no autorizado.';
+                break;
+            case '406':
+                respuesta = 'Código no interpretado.';
+                break;
+            case '500':
+                respuesta = 'Error de servidor.';
+                break;
+            case '504':
+                respuesta = 'Tiempo agotado.';
+                break;
+            case '509':
+                respuesta = 'Límite de ancho de banda.';
+                break;
+        }
+        return respuesta;
+    }*/
+
+    traduccionErrores(): string {
+        let respuesta = '';
+        switch (this.codigoEstado) {
+            case 400:
+                respuesta = 'No posee un formato válido.';
+                break;
+            case 401:
+                respuesta = 'Acceso denegado.';
+                break;
+            case 403:
+                respuesta = 'Acceso denegado.';
+                break;
+            case 404:
+                respuesta = 'Usuario no autorizado.';
+                break;
+            case 406:
+                respuesta = 'Código no interpretado.';
+                break;
+            case 500:
+                respuesta = 'Error de servidor.';
+                break;
+            case 504:
+                respuesta = 'Tiempo agotado.';
+                break;
+            case 509:
+                respuesta = 'Límite de ancho de banda.';
+                break;
+        }
+        return respuesta;
     }
 }
