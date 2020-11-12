@@ -38,12 +38,13 @@ import { VisualizacionComponent } from './components/test/visualizacion/visualiz
 import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
 import { AtencionComponent } from './components/test/atencion/atencion.component';
 import { EscrituraComponent } from './components/test/escritura/escritura.component';
+import { LecturaComponent } from './components/test/lectura/lectura.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
     EmailConfirmationComponent, CalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
     TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent,
-    FinalizacionComponent, AtencionComponent, EscrituraComponent],
+    FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule],
   providers: [
