@@ -9,6 +9,7 @@ export class GameCategoryResponse {
     gameId: number;
     tasks: Tasks[];
     resources: Resources[];
+    isTest: boolean;
 
     constructor() {
         this.tasks = new Array<Tasks>();
