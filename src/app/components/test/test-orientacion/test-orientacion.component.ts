@@ -22,6 +22,7 @@ declare var google;
 export class TestOrientacionComponent implements OnInit {
 
   orientacionRequest: OrientacionRequest;
+  respuesta: any[];
 
  /* locationWatchStarted: boolean;
   locationSubscription: any;
@@ -91,6 +92,7 @@ export class TestOrientacionComponent implements OnInit {
 
   ngOnInit() {
     this.orientacionRequest = new OrientacionRequest();
+    this.respuesta = new Array<any>();
     this.patientTaskAnswersList = new PatientTaskAnswersRequestList<boolean>();
     this.patientTaskAnswersList.patientAnswersRequest = new Array<boolean>();
     this.answer = new Answer<boolean>();
@@ -168,7 +170,7 @@ export class TestOrientacionComponent implements OnInit {
     }
   }
 
-  getOrientacion() {
+  /*getOrientacion() {
     const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
     errorSrv.nuevoRequest();
     this.orientacionService.getOrientacion().subscribe((resp: any) => {
@@ -202,6 +204,24 @@ export class TestOrientacionComponent implements OnInit {
           console.log(this.ori.tasks[0].id);
           this.orientacion.push(this.ori);
           console.log(this.ori);
+    }, (error: HttpErrorResponse) => {
+      errorSrv.getError(error);
+      this.cargando = false;
+      this.errorCode = true;
+    });
+  }*/
+
+  getOrientacion() {
+    const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
+    errorSrv.nuevoRequest();
+    this.orientacionService.getOrientacion().subscribe((resp: any) => {
+      this.ori.id = resp.id;
+      this.ori.name = resp.name;
+      this.ori.description = resp.description;
+      this.ori.category = resp.category;
+      this.ori.tasks = resp.tasks;
+      this.ori.resources = resp.resources;
+      this.orientacion.push(this.ori);
     }, (error: HttpErrorResponse) => {
       errorSrv.getError(error);
       this.cargando = false;

@@ -26,7 +26,7 @@ export class OrientacionService extends Servicio {
     };
     mensaje.category = orientacionRequest.category;
     mensaje.gameId = orientacionRequest.gameId;
-    mensaje.patientTaskAnswersList = orientacionRequest.patientTaskAnswersList;
+    mensaje.patientTaskAnswersList = orientacionRequest.patientTaskAnswersRequestList;
     const respuesta = this.http.post(urlService, mensaje, this.obtenerToken());
     return respuesta;
   }
