@@ -36,11 +36,13 @@ import { ErrorComponent } from './components/commons/error/error.component';
 import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
 import { VisualizacionComponent } from './components/test/visualizacion/visualizacion.component';
 import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
+import { InputGenericComponent } from './components/commons/input-generic/input-generic.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
     EmailConfirmationComponent, AtencionCalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
-    TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent, FinalizacionComponent],
+    TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent, FinalizacionComponent,
+    InputGenericComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule],
   providers: [
