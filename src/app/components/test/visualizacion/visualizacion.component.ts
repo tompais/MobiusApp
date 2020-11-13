@@ -47,7 +47,7 @@ export class VisualizacionComponent implements OnInit {
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
-          this.router.navigate(['/test/ordenes']);
+          this.router.navigate(['/test/repeticion']);
         }
       }, (error: Error) => {
         this.cargando = false;
