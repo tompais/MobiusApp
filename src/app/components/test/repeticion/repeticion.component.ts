@@ -16,13 +16,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from '../../../services/common/localstorage.service';
 import { environmentDevStageBlue } from '../../../../environments/environment.dev.stage.blue';
 import { environmentProd } from '../../../../environments/environment.prod';
+import { RepeticionService } from 'src/app/services/test/repeticion.service';
 
 @Component({
-  selector: 'app-fijacion',
-  templateUrl: './fijacion.component.html',
-  styleUrls: ['./fijacion.component.scss'],
+  selector: 'app-repeticion',
+  templateUrl: './repeticion.component.html',
+  styleUrls: ['./repeticion.component.scss'],
 })
-export class FijacionComponent implements OnInit {
+export class RepeticionComponent implements OnInit {
 
   texto = '';
   audio: any;
@@ -38,12 +39,12 @@ export class FijacionComponent implements OnInit {
   task: Tasks = null;
   input: Inputs = null;
   resource: Resources = null;
-  fijacionRquest: GameCategoryRequest = null;
+  repeticionRquest: GameCategoryRequest = null;
   algo = '';
   storage: LocalStorageService;
   idUsuario: any;
 
-  constructor(public app: AppComponent, private sr: SpeechRecognition, private fj: FijacionService, public router: Router) {
+  constructor(public app: AppComponent, private sr: SpeechRecognition, private rj: RepeticionService, public router: Router) {
     this.primaryApp = app;
     this.storage = new LocalStorageService();
   }
@@ -57,8 +58,8 @@ export class FijacionComponent implements OnInit {
     this.task = new Tasks();
     this.input = new Inputs();
     this.resource = new Resources();
-    this.fijacionRquest = new GameCategoryRequest();
-    this.fijacionRquest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
+    this.repeticionRquest = new GameCategoryRequest();
+    this.repeticionRquest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
     this.getFijacion();
     this.sr.hasPermission()
     .then((hasPermission: boolean) => {
@@ -77,7 +78,7 @@ export class FijacionComponent implements OnInit {
     const errorSrv = this.erroresServicio.obtenerErrorServicio('getFijacion');
     errorSrv.nuevoRequest();
 
-    this.fj.getFijacion().subscribe((resp: any) => {
+    this.rj.getFijacion().subscribe((resp: any) => {
 
       this.repuesta.id = resp.id;
       this.repuesta.name = resp.name;
@@ -139,8 +140,8 @@ export class FijacionComponent implements OnInit {
   setFijacion(){
     const errorSrv = this.errorresServicioSet.obtenerErrorServicio('setFijacion');
     errorSrv.nuevoRequest();
-    this.fijacionRquest.gameId = this.repuesta.id;
-    this.fijacionRquest.category = this.repuesta.category;
+    this.repeticionRquest.gameId = this.repuesta.id;
+    this.repeticionRquest.category = this.repuesta.category;
     // this.fijacionRquest.patientTaskAnswersList.taskId = this.repuesta.taskId[0].id;
     const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
     task.taskId = this.repuesta.tasks[0].id;
@@ -157,17 +158,17 @@ export class FijacionComponent implements OnInit {
        // console.log(task);
     }
 
-    this.fijacionRquest.patientTaskAnswersRequestList.push(task);
+    this.repeticionRquest.patientTaskAnswersRequestList.push(task);
 
-    JSON.stringify(this.fijacionRquest);
+    JSON.stringify(this.repeticionRquest);
 
-    this.algo = JSON.stringify(this.fijacionRquest);
-    console.log(JSON.stringify(this.fijacionRquest));
+    this.algo = JSON.stringify(this.repeticionRquest);
+    console.log(JSON.stringify(this.repeticionRquest));
     // console.log(JSON.stringify(this.fijacionRquest));
-    this.fj.setFijacion(this.fijacionRquest).subscribe((resp: any) => {
+    this.rj.setFijacion(this.repeticionRquest).subscribe((resp: any) => {
       this.errorCode = false;
       if (this.errorCode === false) {
-            this.router.navigate(['/test/calculo']);
+            this.router.navigate(['/test/ordenes']);
       }
     },
     (error: HttpErrorResponse) => {
@@ -176,7 +177,7 @@ export class FijacionComponent implements OnInit {
       this.errorCode = true;
       this.error = error.message;
     });
-    this.fijacionRquest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
+    this.repeticionRquest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
   }
 
   skipForm(){

@@ -1,7 +1,11 @@
 export enum TipoInput {
-    textBox = 0,
-    combo = 1,
-    textArea = 2,
-    radioGroup = 3,
-    checkbox = 4
+    textBox = 'text',
+    combo = 'select',
+    textArea = 'textarea',
+    radioGroup = 'radio',
+    checkbox = 'checkbox',
+    button = 'button',
+    image = 'image',
+    password = 'password',
+    number = 'number'
 }
