@@ -6,9 +6,11 @@
 <ion-content>
   <ion-grid>
      <br/>
+     <p>
+      {{ descripcionTest }} 
+     </p>
 <p>
  {{ descripcion }} 
-Responda que persona coincide con la siguiente descripción: La persona que buscamos tiene barba de color castaño oscuro, viste unos pantalones de tono rojizo, la parte superior de su traje es de color negro y tanto su corbata como sus zapatos son de color azul.
 </p>
   <ion-row>
     <!-- '{{ imagen }}' -->
@@ -28,6 +30,8 @@ Responda que persona coincide con la siguiente descripción: La persona que busc
     </ion-item>
     <br/>
     <ion-button type="submit" shape="round" expand="block" color="primary">Siguiente</ion-button>
+    <ion-button routerLink="/test/escritura" shape="round" expand="block" color="primary">SKIP</ion-button>
+
   </form>
 </ion-row>
 </ion-grid>
