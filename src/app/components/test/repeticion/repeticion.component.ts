@@ -25,7 +25,8 @@ import { RepeticionService } from 'src/app/services/test/repeticion.service';
 })
 export class RepeticionComponent implements OnInit {
 
-  texto = '';
+  // texto = '';
+  texto: string[] = [];
   audio: any;
   puedeEnviar = false;
   reproduirAudio = false;
@@ -125,7 +126,7 @@ export class RepeticionComponent implements OnInit {
       this.sr.startListening()
     .subscribe(
       (matches: string[]) => {
-        this.texto = matches[0];
+        this.texto[0] = matches[0];
         this.puedeEnviar = true;
       },
       (onerror) => console.log('error:', onerror)
@@ -145,9 +146,10 @@ export class RepeticionComponent implements OnInit {
     // this.fijacionRquest.patientTaskAnswersList.taskId = this.repuesta.taskId[0].id;
     const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
     task.taskId = this.repuesta.tasks[0].id;
-    task.patientAnswersRequest = new Array<string>();
+    task.patientAnswersRequest = this.texto;
+    // task.patientAnswersRequest = new Array<string>();
 
-    if (this.texto.length > 0){
+    /*if (this.texto.length > 0){
         const textoSeparado: string[] = this.texto.split(' ');
         // tslint:disable-next-line: prefer-for-of
         for (let i = 0; i < textoSeparado.length; i++){
@@ -156,7 +158,7 @@ export class RepeticionComponent implements OnInit {
        // console.log(textoSeparado);
         // console.log(this.fijacionRquest);
        // console.log(task);
-    }
+    }*/
 
     this.repeticionRquest.patientTaskAnswersRequestList.push(task);
 
