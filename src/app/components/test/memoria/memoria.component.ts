@@ -112,7 +112,7 @@ export class MemoriaComponent implements OnInit {
 
    setMemoria(){
     const errorSrv = this.errorresServicioSet.obtenerErrorServicio('setMemoria');
-    errorSrv.nuevoRequest();
+    // errorSrv.nuevoRequest();
     this.MemoriaRquest.gameId = this.repuesta.id;
     this.MemoriaRquest.category = this.repuesta.category;
     const task: PatientTaskAnswersRequestListConResult<string> = new PatientTaskAnswersRequestListConResult<string>();
