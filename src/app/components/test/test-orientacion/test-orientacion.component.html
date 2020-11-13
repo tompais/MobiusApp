@@ -9,6 +9,7 @@
 <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
 <ion-content>
   <ion-grid class="color-fondo-test-orientacion">
+    <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
     <ion-row>
      <ion-col size="12">
       <ion-item>
@@ -18,31 +19,22 @@
       </ion-item>
      </ion-col>
     </ion-row>
-    <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
     <form (ngSubmit)="enviarDatosOrientacion(formOrientacion)" #formOrientacion="ngForm">
       <ion-row>
         <ion-col size="12">
-          <!--<ion-item *ngFor="let ori of ori.tasks">
-            <ion-label position="floating" color="ligth">{{ori.id}}&nbsp;{{ori.description}}</ion-label>
-            <ion-input *ngFor="let input of ori.inputs" type="{{input.type}}" name="ori.id" [(ngModel)]="ori.id" required minlength="4" maxlength="50"></ion-input>
-          </ion-item>-->
           <ion-item *ngFor="let task of ori.tasks">
              <ion-label position="floating" color="ligth">{{task.id}}&nbsp;{{task.description}}</ion-label>
-             <ion-input *ngFor="let input of task.inputs; let i=index" type="{{input.type}}" name="{{task.id}}" [(ngModel)]="respuesta[i]" required minlength="4" maxlength="50"></ion-input>
+             <ion-input *ngFor="let input of task.inputs; let i=index" type="{{input.type}}" name="{{task.id}}" [(ngModel)]="respuesta[task.id]" required minlength="1" maxlength="50" (keyup)="obtenerRespuestas()"></ion-input>
           </ion-item>
-         <!--<ion-item color="danger" *ngIf="formOrientacion.submitted && (formOrientacion.controls['caca'].errors)">
-            <ion-label>
-                Campo Inválido
-            </ion-label>
-          </ion-item>-->
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col size="12">
-          <ion-button shape="round" type="submit" expand="block" color="primary" (click)="validarForm()">Siguiente</ion-button>
-          <!--<ion-button shape="round" type="submit" expand="block" color="primary" (click)="skipForm()">Skip</ion-button>-->
+          <ion-button shape="round" type="submit" expand="block" color="primary" (click)="validarRespuestas()">Siguiente</ion-button>
         </ion-col>
       </ion-row>
     </form>
   </ion-grid>
 </ion-content>
+<!--<div id="map_canvas">
+</div>-->

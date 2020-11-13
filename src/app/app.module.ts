@@ -38,6 +38,7 @@ import { VisualizacionComponent } from './components/test/visualizacion/visualiz
 import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
 import { AtencionComponent } from './components/test/atencion/atencion.component';
 import { EscrituraComponent } from './components/test/escritura/escritura.component';
+import { LocationService } from './services/location.service';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
@@ -57,6 +58,7 @@ import { EscrituraComponent } from './components/test/escritura/escritura.compon
     AuthService,
     SpeechRecognition,
     FijacionService,
+    LocationService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
