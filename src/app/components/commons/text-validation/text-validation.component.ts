@@ -44,11 +44,11 @@ export class TextValidationComponent implements OnInit {
     }
   }
 
-  visibilidadText(): boolean {
+  /*visibilidadText(): boolean {
     let resp = false;
     if (this.tipo === 0 || this.tipo === 5 && this.objeto != null) {
       resp = true;
     }
     return resp;
-  }
+  }*/
 }
