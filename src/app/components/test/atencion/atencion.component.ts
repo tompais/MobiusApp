@@ -45,7 +45,7 @@ export class AtencionComponent implements OnInit {
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
-          this.router.navigate(['/test/visualizacion']);
+          this.router.navigate(['/test/memoria']);
         }
       }, (error: Error) => {
         this.cargando = false;
