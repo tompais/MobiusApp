@@ -39,6 +39,7 @@ import { FinalizacionComponent } from './components/test/finalizacion/finalizaci
 import { InputGenericComponent } from './components/commons/input-generic/input-generic.component';
 import { AtencionComponent } from './components/test/atencion/atencion.component';
 import { EscrituraComponent } from './components/test/escritura/escritura.component';
+import { LocationService } from './services/location.service';
 import { LecturaComponent } from './components/test/lectura/lectura.component';
 import { MemoriaComponent } from './components/test/memoria/memoria.component';
 import { RepeticionComponent } from './components/test/repeticion/repeticion.component';
@@ -61,6 +62,7 @@ import { RepeticionComponent } from './components/test/repeticion/repeticion.com
     AuthService,
     SpeechRecognition,
     FijacionService,
+    LocationService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

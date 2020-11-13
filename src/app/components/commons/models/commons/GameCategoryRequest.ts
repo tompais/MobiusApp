@@ -4,10 +4,10 @@ export class GameCategoryRequest {
     gameId: number;
     category: string;
     // tslint:disable-next-line: ban-types
-    patientTaskAnswersRequestList: PatientTaskAnswersRequestList<String>[];
+    patientTaskAnswersRequestList: PatientTaskAnswersRequestList<any>[];
 
     contructor() {
         // tslint:disable-next-line: ban-types
-        this.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<String>>();
+        // this.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<any>>();
     }
 }

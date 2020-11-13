@@ -1,11 +1,16 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GoogleMap, GoogleMaps, Marker } from '@ionic-native/google-maps';
+import { Platform } from '@ionic/angular';
+import { LocationService } from 'src/app/services/location.service';
 import { OrientacionService } from 'src/app/services/test/orientacion.service';
 import { Answer } from '../../commons/models/commons/Answer';
+import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
 import { GameCategoryResponse } from '../../commons/models/commons/GameCategoryResponse';
-import { Inputs } from '../../commons/models/commons/Inputs';
+import { PatientAnswersRequest } from '../../commons/models/commons/PatientAnswersRequest';
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { Tasks } from '../../commons/models/commons/Tasks';
 import { ErrorServicio } from '../../commons/models/errors/ErrorServicio';
@@ -23,52 +28,6 @@ export class TestOrientacionComponent implements OnInit {
 
   orientacionRequest: OrientacionRequest;
   respuesta: any[];
-
- /* locationWatchStarted: boolean;
-  locationSubscription: any;
-
-  locationTraces = [];
-
-  constructor(private geolocation: Geolocation) { }
-
-  ngOnInit() {
-   this.getCoordinates();
-  }
-
-  getCoordinates() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-
-      this.locationTraces.push({
-        latitude: resp.coords.latitude,
-        longitude: resp.coords.latitude,
-        accuracy: resp.coords.accuracy,
-        timestamp: resp.timestamp
-      });
-
-    }).catch((error) => {
-      console.log('Error getting location', error);
-    });
-
-    this.locationSubscription = this.geolocation.watchPosition();
-    this.locationSubscription.subscribe((resp) => {
-
-      this.locationWatchStarted = true;
-      this.locationTraces.push({
-        latitude: resp.coords.latitude,
-        longitude: resp.coords.latitude,
-        accuracy: resp.coords.accuracy,
-        timestamp: resp.timestamp
-      });
-
-    });
-  }*/
-
-  @ViewChild('map', { static: false }) mapElement: ElementRef;
-  map: any;
-  address: string;
-
-  latitude: number;
-  longitude: number;
   retorno = true;
   patientTaskAnswersList: PatientTaskAnswersRequestList<boolean> = null;
   answer: Answer<boolean> = null;
@@ -79,33 +38,36 @@ export class TestOrientacionComponent implements OnInit {
   ori: GameCategoryResponse = null;
   tasks: Tasks[] = null;
   task: Tasks = null;
-  input: Inputs = null;
   enviarDatos = false;
-  /*constructor(
-    private geolocation: Geolocation,
-    private nativeGeocoder: NativeGeocoder) {
-  }*/
+  listaRespuestas: any[] = null;
+  rsp: PatientAnswersRequest<any>[] = null;
+  gameCategoryRequest: GameCategoryRequest;
+  sinRespuestas = false;
+  latitud: any;
+  longitud: any;
+  map: GoogleMap;
 
-  constructor(public orientacionService: OrientacionService, public router: Router) {
+  constructor(public orientacionService: OrientacionService, public router: Router, public locationService: LocationService,
+              private platform: Platform) {
   }
 
-
   ngOnInit() {
+    // this.platform.ready();
+    // this.getLocation();
+    // this.loadMap();
     this.orientacionRequest = new OrientacionRequest();
+    this.gameCategoryRequest = new GameCategoryRequest();
     this.respuesta = new Array<any>();
     this.patientTaskAnswersList = new PatientTaskAnswersRequestList<boolean>();
-    this.patientTaskAnswersList.patientAnswersRequest = new Array<boolean>();
     this.answer = new Answer<boolean>();
     this.orientacion = new Array<GameCategoryResponse>();
     this.ori = new GameCategoryResponse();
     this.tasks = new Array<Tasks>();
     this.task = new Tasks();
-    // this.input = new Inputs();
     this.erroresServicio = new ErrorServicioGrupo();
     this.erroresServicio.errores.push(new ErrorServicio('testOrientacionEnvio', true, '', false, 'Test Orientacion Envio'));
     this.erroresServicio.errores.push(new ErrorServicio('testOrientacion', true, '', false, 'Test Orientacion Consulta'));
     this.getOrientacion();
-    // this.loadMap();
   }
 
   eventoError(error: ErrorServicio) {
@@ -130,37 +92,26 @@ export class TestOrientacionComponent implements OnInit {
       this.retorno = false;
     } else {
       this.cargando = true;
-      this.orientacionRequest.gameId = 1;
-      this.orientacionRequest.category = 'orientation';
-      for (const tas of this.ori.tasks) {
-        const task: PatientTaskAnswersRequestList<boolean> = new PatientTaskAnswersRequestList<boolean>();
-        task.patientAnswersRequest = new Array<boolean>();
-        task.taskId = tas.id;
-        task.patientAnswersRequest.push(true);
-        // this.task.taskId = tas.id;
-        this.orientacionRequest.patientTaskAnswersRequestList.push(task);
-      }
-
-      /*this.ori.tasks.forEach(element => {
-        this.task.taskId = element.id;
-        this.orientacionRequest.taskAnswers.push(this.task);
-      });*/
-      /*this.ori.tasks.forEach((task: Tasks) => {
-        this.task.taskId = task.id;
-        this.orientacionRequest.taskAnswers.push(this.task);
-      });*/
-      // this.task.answers.push(true);
-      // this.orientacionRequest.taskAnswers.push(this.task);
-      JSON.stringify(this.orientacionRequest);
-      console.log('JSON ENVIO DATOS');
-      console.log(JSON.stringify(this.orientacionRequest));
-      this.orientacionService.orientacion(this.orientacionRequest).subscribe((resp: any) => {
-        // tslint:disable-next-line: no-shadowed-variable
-            this.cargando = false;
-            this.errorCode = false;
-            if (this.errorCode === false) {
-              this.router.navigate(['/test/fijacion']);
-            }
+      this.gameCategoryRequest = new GameCategoryRequest();
+      this.gameCategoryRequest.gameId = 1;
+      this.gameCategoryRequest.category = 'orientation';
+      this.gameCategoryRequest.patientTaskAnswersRequestList = new Array<any>();
+      this.validarRespuestas().forEach((obj: PatientAnswersRequest<any>) => {
+        const task: PatientTaskAnswersRequestList<PatientAnswersRequest<any>> = new PatientTaskAnswersRequestList<PatientAnswersRequest<any>>();
+        task.taskId = obj.id;
+        task.patientAnswersRequest = new Array<any>();
+        const pt: PatientAnswersRequest<any> = new PatientAnswersRequest<any>();
+        pt.answer = obj.answer;
+        pt.isCorrect = obj.isCorrect;
+        task.patientAnswersRequest.push(pt);
+        this.gameCategoryRequest.patientTaskAnswersRequestList.push(task);
+      });
+      this.orientacionService.putOrientacion(this.gameCategoryRequest).subscribe((resp: any) => {
+        this.cargando = false;
+        this.errorCode = false;
+        if (this.errorCode === false) {
+          this.router.navigate(['/test/fijacion']);
+        }
       }, (error: HttpErrorResponse) => {
         errorSrv.getError(error);
         this.cargando = false;
@@ -169,47 +120,6 @@ export class TestOrientacionComponent implements OnInit {
       this.retorno = true;
     }
   }
-
-  /*getOrientacion() {
-    const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
-    errorSrv.nuevoRequest();
-    this.orientacionService.getOrientacion().subscribe((resp: any) => {
-          this.ori.id = resp.id;
-          this.ori.name = resp.name;
-          this.ori.description = resp.description;
-          this.ori.category = resp.category;
-          this.ori.tasks = resp.tasks;
-          this.ori.resources = resp.resources;
-          this.ori.tasks.forEach((task: Tasks) => {
-            console.log('task param');
-            console.log(task);
-            const tsk: Tasks = new Tasks();
-            tsk.id = task.id;
-            tsk.description = task.description;
-            tsk.inputs = task.inputs;
-            tsk.inputs.forEach((input: Inputs) => {
-             const inp: Inputs = new Inputs();
-             inp.id = input.id;
-             inp.type = input.type;
-             tsk.inputs.push(inp);
-            });
-            console.log('INPUTS');
-            console.log(tsk.inputs);
-            if (this.ori.tasks.length > resp.tasks.length) {
-              this.ori.tasks.push(tsk);
-            }
-            // this.ori.tasks.push(tsk);
-          });
-          console.log('TASK');
-          console.log(this.ori.tasks[0].id);
-          this.orientacion.push(this.ori);
-          console.log(this.ori);
-    }, (error: HttpErrorResponse) => {
-      errorSrv.getError(error);
-      this.cargando = false;
-      this.errorCode = true;
-    });
-  }*/
 
   getOrientacion() {
     const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
@@ -229,108 +139,121 @@ export class TestOrientacionComponent implements OnInit {
     });
   }
 
-  validarForm() {
-    let resp = false;
-    this.ori.tasks.forEach((task: Tasks) => {
-      switch (task.id) {
+  obtenerRespuestas(): any[] {
+    this.listaRespuestas = new Array<any>();
+    this.respuesta.forEach((obj: any) => {
+      this.listaRespuestas.push(obj);
+    });
+    return this.listaRespuestas;
+  }
+
+  validarRespuestas(): any[] {
+    this.rsp = new Array<PatientAnswersRequest<any>>();
+    let i = 0;
+    for (const respuesta of this.obtenerRespuestas()) {
+      const orientacion: OrientacionRequest = new OrientacionRequest();
+      const patient: PatientAnswersRequest<any> = new PatientAnswersRequest<any>();
+      i++;
+      switch (i) {
         case 1:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = orientacion.validarAnio(respuesta);
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
         case 2:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = orientacion.validarEstacionAnio(respuesta);
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
         case 3:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = orientacion.validarDiaMes(respuesta);
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
         case 4:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = orientacion.validarDiaSemana(respuesta);
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
         case 5:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = orientacion.validarMesAnio(respuesta);
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
         case 6:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = orientacion.validarPais(respuesta);
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
         case 7:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = orientacion.validarProvincia(respuesta);
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
         case 8:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = false;
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
         case 9:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = false;
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
         case 10:
-          resp = true;
+          patient.id = i;
+          patient.isCorrect = false;
+          patient.answer = respuesta;
+          this.rsp.push(patient);
           break;
       }
-    });
-    console.log('FORM ENVIO');
-    console.log(resp);
-    return resp;
+    }
+    return this.rsp;
   }
 
-  /*loadMap() {
-    this.geolocation.getCurrentPosition().then((resp) => {
-
-      this.latitude = resp.coords.latitude;
-      this.longitude = resp.coords.longitude;
-
-      const latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-      const mapOptions = {
-        center: latLng,
-        zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-
-      this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
-
-      this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-      this.map.addListener('dragend', () => {
-
-        this.latitude = this.map.center.lat();
-        this.longitude = this.map.center.lng();
-
-        this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng());
-      });
-
-    }).catch((error) => {
-      console.log('Error getting location', error);
+  getLocation() {
+    this.locationService.getPosition().then(pos => {
+        this.latitud = pos.lat;
+        this.longitud = pos.lng;
+        console.log('LATITUD');
+        console.log(this.latitud);
+        console.log('LONGITUD');
+        console.log(this.longitud);
+        this.obtenerPosicion(this.latitud, this.longitud);
+        // this.obtenerPais(this.latitud, this.longitud);
     });
   }
 
-  getAddressFromCoords(lattitude, longitude) {
-    console.log('getAddressFromCoords ' + lattitude + ' '  + longitude);
-    const options: NativeGeocoderOptions = {
-      useLocale: true,
-      maxResults: 5
-    };
-
-    this.nativeGeocoder.reverseGeocode(lattitude, longitude, options)
-      .then((result: NativeGeocoderResult[]) => {
-        this.address = '';
-        const responseAddress = [];
-        for (const [key, value] of Object.entries(result[0])) {
-          if (value.length > 0) {
-            responseAddress.push(value);
-          }
-
-        }
-        responseAddress.reverse();
-        for (const value of responseAddress) {
-          this.address += value + ', ';
-        }
-        this.address = this.address.slice(0, -2);
-      })
-      .catch((error: any) => {
-        this.address = 'Address Not Available!';
-      });
-
+  /*obtenerPais(latitud: any, longitud: any) {
+    const GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitud + '%2C' + longitud + '&language=en';
+    console.log(GEOCODING);
   }*/
 
-  skipForm(){
-    this.router.navigate(['/test/fijacion']);
+  loadMap() {
+    this.map = GoogleMaps.create('map_canvas');
+  }
+
+  obtenerPosicion(latitud: any, longitud: any) {
+    this.map.addMarker({
+      title: '@ionic-native/google-maps',
+      icon: 'blue',
+      animation: 'DROP',
+      position: {
+        lat: latitud,
+        lng: longitud
+      }
+    }).then((marker: Marker) => {
+      marker.showInfoWindow();
+    });
   }
 
 }
