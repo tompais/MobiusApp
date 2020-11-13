@@ -14,15 +14,12 @@
     <img src='{{ imagen }}' alt="imagen" width="400px">
   </ion-row>
   <ion-row>
-    <ion-col size=3>
   <form (ngSubmit)="verificar(formVisualizacion)" #formVisualizacion="ngForm">
     <ion-item color="danger" *ngIf="formVisualizacion.submitted && (formVisualizacion.controls['res1'].errors)">
       <ion-label>
         Debe Completar todos los campos.
       </ion-label>
     </ion-item>
-  </ion-col>
-  <ion-col size=3>
     <ion-item>
       <ion-label>Respuesta: </ion-label>
       <ion-input type="text" [(ngModel)]="respuesta[0]" name="res1" #res1="ngModel" required></ion-input>
@@ -30,7 +27,6 @@
     <br/>
     <ion-button type="submit" shape="round" expand="block" color="primary">Siguiente</ion-button>
     <ion-button routerLink="/test/repeticion" shape="round" expand="block" color="primary">SKIP</ion-button>
-  </ion-col>
   </form>
 </ion-row>
 </ion-grid>
