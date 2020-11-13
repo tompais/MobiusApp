@@ -1,5 +1,5 @@
-export class PatientAnswersRequest {
+export class PatientAnswersRequest<T> {
     id: number;
     isCorrect: boolean;
-    answer: any;
+    answer: T;
 }

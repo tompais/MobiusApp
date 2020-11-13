@@ -40,7 +40,7 @@ export class TestOrientacionComponent implements OnInit {
   task: Tasks = null;
   enviarDatos = false;
   listaRespuestas: any[] = null;
-  rsp: PatientAnswersRequest[] = null;
+  rsp: PatientAnswersRequest<any>[] = null;
   gameCategoryRequest: GameCategoryRequest;
   sinRespuestas = false;
   latitud: any;
@@ -96,11 +96,11 @@ export class TestOrientacionComponent implements OnInit {
       this.gameCategoryRequest.gameId = 1;
       this.gameCategoryRequest.category = 'orientation';
       this.gameCategoryRequest.patientTaskAnswersRequestList = new Array<any>();
-      this.validarRespuestas().forEach((obj: PatientAnswersRequest) => {
-        const task: PatientTaskAnswersRequestList<PatientAnswersRequest> = new PatientTaskAnswersRequestList<PatientAnswersRequest>();
+      this.validarRespuestas().forEach((obj: PatientAnswersRequest<any>) => {
+        const task: PatientTaskAnswersRequestList<PatientAnswersRequest<any>> = new PatientTaskAnswersRequestList<PatientAnswersRequest<any>>();
         task.taskId = obj.id;
         task.patientAnswersRequest = new Array<any>();
-        const pt: PatientAnswersRequest = new PatientAnswersRequest();
+        const pt: PatientAnswersRequest<any> = new PatientAnswersRequest<any>();
         pt.answer = obj.answer;
         pt.isCorrect = obj.isCorrect;
         task.patientAnswersRequest.push(pt);
@@ -148,11 +148,11 @@ export class TestOrientacionComponent implements OnInit {
   }
 
   validarRespuestas(): any[] {
-    this.rsp = new Array<PatientAnswersRequest>();
+    this.rsp = new Array<PatientAnswersRequest<any>>();
     let i = 0;
     for (const respuesta of this.obtenerRespuestas()) {
       const orientacion: OrientacionRequest = new OrientacionRequest();
-      const patient: PatientAnswersRequest = new PatientAnswersRequest();
+      const patient: PatientAnswersRequest<any> = new PatientAnswersRequest<any>();
       i++;
       switch (i) {
         case 1:
