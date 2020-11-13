@@ -1,7 +1,11 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
 import { OrdenesService } from 'src/app/services/test/ordenes.service';
+import { environmentProd } from 'src/environments/environment.prod';
+import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
+import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 
 @Component({
   selector: 'app-ordenes',
@@ -23,11 +27,12 @@ export class OrdenesComponent implements OnInit {
   category: string;
   taskId: number;
   descripcion: string;
-  url = 'https://prod-mobius-mind-api.herokuapp.com/';
+  url = environmentProd.url;
   audioName: string;
   cargando = false;
   errorCode = false;
   audio: string;
+  ordenesRequest: GameCategoryRequest = null;
 
   constructor(public commonService: CommonService, private router: Router, public ordenesServ: OrdenesService) { }
 
@@ -40,22 +45,7 @@ export class OrdenesComponent implements OnInit {
     this.audioStatus = true;
     this.rowsBotonesStatus = false;
     this.resetNextStatus = false;
-
-    /*this.ordenesServ.traerDatos().subscribe((resp: any) => {
-      this.descripcion = resp.tasks[0].description;
-      this.audioName = resp.resources[0].fileName;
-      this.gameId = resp.id;
-      this.category = resp.category;
-      this.taskId = resp.tasks[0].id;
-      this.audio = `${this.url}${this.audioName}`;
-      console.log(this.gameId);
-      console.log(this.category);
-      console.log(this.taskId);
-      console.log(this.descripcion);
-      console.log(this.audioName);
-      console.log(resp);
-      });*/
-
+    this.obtenerDatos();
   }
 
   cuadrado(){
@@ -93,7 +83,7 @@ export class OrdenesComponent implements OnInit {
 
   audioStart(){
     // const audio = new Audio(this.audio);
-    const audio = new Audio('assets/audio/ordenes2.mp3');
+    const audio = new Audio(this.audio);
     audio.play();
 
     setTimeout(() => {
@@ -105,23 +95,51 @@ export class OrdenesComponent implements OnInit {
   }
 
   enviar(){
-  if (this.contador === 4){
+  if (this.contador === 3){
     this.errorStatus = false;
-    this.router.navigate(['/test/escritura']);
-    /*this.ordenesServ.enviarDatos(this.gameId, this.category, this.taskId, this.respuesta).subscribe((resp: any) => {
+
+    const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
+    task.taskId = this.taskId;
+    task.patientAnswersRequest = this.respuesta;
+    this.ordenesRequest.patientTaskAnswersRequestList.push(task);
+    console.log(this.ordenesRequest);
+
+    this.ordenesServ.enviarDatos(this.ordenesRequest).subscribe((resp: any) => {
       this.cargando = false;
       this.errorCode = false;
       if (this.errorCode === false) {
-        this.router.navigate(['/test/finalizacion']);
+        this.router.navigate(['/test/lectura']);
       }
-    }, (error: Error) => {
+    }, (error: HttpErrorResponse) => {
       this.cargando = false;
       this.errorCode = true;
-    });*/
+    });
 
   }
   else{
     this.errorStatus = true;
   }
   }
+
+  obtenerDatos(){
+
+    this.ordenesRequest = new GameCategoryRequest();
+    this.ordenesRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
+
+    this.ordenesServ.traerDatos().subscribe((resp: any) => {
+      this.descripcion = resp.tasks[0].description;
+      this.audioName = resp.resources[0].fileName;
+      console.log(this.descripcion);
+      this.ordenesRequest.gameId = resp.id;
+      this.ordenesRequest.category = resp.category;
+      console.log(this.ordenesRequest.gameId);
+      console.log(this.ordenesRequest.category);
+      this.taskId = resp.tasks[0].id;
+      console.log(this.taskId);
+      console.log(resp);
+      console.log(this.ordenesRequest);
+      this.audio = `${this.url}/audios/${this.audioName}`;
+      console.log(this.audio);
+      });
+}
 }

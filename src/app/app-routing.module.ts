@@ -16,6 +16,9 @@ import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
 import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
 import { AtencionComponent } from './components/test/atencion/atencion.component';
 import { EscrituraComponent } from './components/test/escritura/escritura.component';
+import { LecturaComponent } from './components/test/lectura/lectura.component';
+import { MemoriaComponent } from './components/test/memoria/memoria.component';
+import { RepeticionComponent } from './components/test/repeticion/repeticion.component';
 
 const routes: Routes = [
   {
@@ -35,8 +38,12 @@ const routes: Routes = [
   {path: 'test/ordenes', component: OrdenesComponent},
   {path: 'test/finalizacion', component: FinalizacionComponent},
   {path: 'test/atencion', component: AtencionComponent},
-  {path: 'test/escritura', component: EscrituraComponent}
+  {path: 'test/escritura', component: EscrituraComponent},
+  {path: 'test/lectura', component: LecturaComponent},
+  {path: 'test/memoria', component: MemoriaComponent},
+  {path: 'test/repeticion', component: RepeticionComponent}
 ];
+
 @NgModule({
   imports: [
     CommonModule,

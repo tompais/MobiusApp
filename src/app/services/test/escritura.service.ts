@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GameCategoryRequest } from 'src/app/components/commons/models/commons/GameCategoryRequest';
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
 import { environmentProd } from 'src/environments/environment.prod';
 
@@ -23,27 +24,15 @@ export class EscrituraService {
     return respuesta;
   }
 
-  public enviarDatos(gId: number, cate: string, tId: number, respuestas: string[]){
+  public enviarDatos(gcr: GameCategoryRequest){
 
     const id = this.sessionStorage.consultar('id');
 
     const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
 
-    const mensaje = {
-      category: null,
-      gameId: null,
-      patientTaskAnswersRequestList: [{
-        taskId: null,
-        patientAnswersRequest: null
-      }]
-    };
-
-    mensaje.gameId = gId;
-    mensaje.patientTaskAnswersRequestList[0].patientAnswersRequest = respuestas;
-    mensaje.patientTaskAnswersRequestList[0].taskId = tId;
-    mensaje.category = cate;
-    console.log(JSON.stringify(mensaje));
-    const respuesta = this.http.post(urlService, mensaje);
+    console.log(JSON.stringify(gcr));
+    const respuesta = this.http.post(urlService, gcr);
     return respuesta;
   }
+
 }
