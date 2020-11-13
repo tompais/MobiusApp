@@ -23,12 +23,15 @@
 </ion-row>
 <ion-item color="danger" *ngIf="errorStatus">
   <ion-label>
-    Debe presionar los 4 botones para continuar.
+    <p>Debe presionar 3 botones para continuar.</p> 
+    <p>Si presiono mas de 3 o si se confundió en el orden</p>
+    <p>haga click en el botón RESET.</p>
   </ion-label>
 </ion-item>
 <ion-button *ngIf="resetNextStatus" type="button" shape="round" expand="block" color="primary" (click)="reset()">Reset</ion-button>
 
 <ion-button *ngIf="resetNextStatus" type="button" shape="round" expand="block" color="primary" (click)="enviar()">Siguiente</ion-button>
-    
+<ion-button routerLink="/test/lectura" shape="round" expand="block" color="primary">SKIP</ion-button>
+
   </ion-grid>
 </ion-content>

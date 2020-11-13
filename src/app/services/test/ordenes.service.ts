@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GameCategoryRequest } from 'src/app/components/commons/models/commons/GameCategoryRequest';
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
 import { environmentProd } from 'src/environments/environment.prod';
 
@@ -12,39 +13,25 @@ export class OrdenesService {
 
   constructor(public http: HttpClient) { }
 
-  public enviarDatos(gId: number, cate: string, tId: number, respuestas: string[]){
+  public enviarDatos(gcr: GameCategoryRequest){
 
     const id = this.sessionStorage.consultar('id');
 
-    // TEMPORAL
-    // const id = 1;
     const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
 
-    const mensaje = {
-      gameId: null,
-      patientTaskAnswersList: {
-        patientAnswers: null,
-        taskId: null
-      },
-      category: null
-    };
-
-    mensaje.gameId = gId;
-    mensaje.patientTaskAnswersList.patientAnswers = respuestas;
-    mensaje.patientTaskAnswersList.taskId = tId;
-    mensaje.category = cate;
-    console.log(mensaje);
-    const respuesta = this.http.post(urlService, mensaje);
-   // console.log(respuesta);
+    console.log(JSON.stringify(gcr));
+    const respuesta = this.http.post(urlService, gcr);
     return respuesta;
   }
 
   public traerDatos(){
-    // CALCULATION
+    // VISUALIZATION
     const id = this.sessionStorage.consultar('id');
-
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=simonsays`;
+   // console.log('ID SESSION STORAGE');
+   // console.log(id);
+    // poner dentro de la ruta ${id} !!!!
+    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=comprehension`;
     const respuesta = this.http.get(urlService);
     return respuesta;
-}
+  }
 }
