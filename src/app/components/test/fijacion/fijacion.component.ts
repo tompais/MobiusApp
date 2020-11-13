@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { SpeechRecognition } from '@ionic-native/speech-recognition/ngx';
-import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
 import { ErrorServicio } from 'src/app/components/commons/models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from 'src/app/components/commons/models/errors/ErrorServicioGrupo';
 import { GameCategoryResponse } from 'src/app/components/commons/models/commons/GameCategoryResponse';
@@ -10,10 +9,13 @@ import { Resources } from '../../commons/models/commons/Resources';
 import { AppComponent } from 'src/app/app.component';
 import { Tasks } from '../../commons/models/commons/Tasks';
 import { Inputs } from '../../commons/models/commons/Inputs';
-import { Answer } from '../../commons/models/commons/Answer';
+
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
+import { LocalStorageService } from '../../../services/common/localstorage.service';
+import { environmentDevStageBlue } from '../../../../environments/environment.dev.stage.blue';
+import { environmentProd } from '../../../../environments/environment.prod';
 
 @Component({
   selector: 'app-fijacion',
@@ -26,7 +28,6 @@ export class FijacionComponent implements OnInit {
   audio: any;
   puedeEnviar = false;
   reproduirAudio = false;
-  storageSession: StorageSession = null;
   erroresServicio: ErrorServicioGrupo = null;
   errorresServicioSet: ErrorServicioGrupo = null;
   repuesta: GameCategoryResponse = null;
@@ -39,8 +40,12 @@ export class FijacionComponent implements OnInit {
   resource: Resources = null;
   fijacionRquest: GameCategoryRequest = null;
   algo = '';
+  storage: LocalStorageService;
+  idUsuario: any;
+
   constructor(public app: AppComponent, private sr: SpeechRecognition, private fj: FijacionService, public router: Router) {
     this.primaryApp = app;
+    this.storage = new LocalStorageService();
   }
 
   ngOnInit(){
@@ -96,7 +101,11 @@ export class FijacionComponent implements OnInit {
       this.repuesta.resources.push(this.resource);
 
       // agregamos la url del audio
-      this.audio = new Audio('https://stage-blue-mobius-mind-api.herokuapp.com/' + this.repuesta.resources[0].fileName);
+      this.audio = new Audio(environmentProd.url + '/audios/' + this.repuesta.resources[0].fileName);
+
+      // guardamos en local storage el texto del file que es la repuesta correcta para luego utilizarlo en memoria
+      this.idUsuario =  this.storage.get('id');
+      this.storage.set(this.idUsuario + 'palabrasCorrectas', this.repuesta.resources[0].fileName.split('.')[0]);
 
        // tslint:disable-next-line: no-shadowed-variable
       /*errorSrv.procesarRespuesta(resp, (resp: any): void => {
