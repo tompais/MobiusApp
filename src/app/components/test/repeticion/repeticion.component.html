@@ -33,7 +33,8 @@
       <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
       <ion-row>
           <ion-col size=3>
-              <ion-fab-button name='btn-escuchar' id="btn-escuchar" (click)="escuchar()" [disabled]="reproduirAudio">
+              <!--  [disabled]="reproduirAudio" -->
+              <ion-fab-button name='btn-escuchar' id="btn-escuchar" (click)="escuchar()">
                   <ion-icon name="play-outline"></ion-icon>
               </ion-fab-button>
           </ion-col>
@@ -47,6 +48,5 @@
   <ion-button expand="block" shape="round" (click)="setFijacion()">
       SIGUIENTE
   </ion-button>
-  <ion-button routerLink="/test/ordenes" shape="round" expand="block" color="primary">SKIP</ion-button>
 
 </ion-content>
