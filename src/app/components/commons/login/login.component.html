@@ -24,7 +24,7 @@
             <ion-row>
                 <ion-col size="12">
                     <ion-item>
-                        <ion-label position="floating" color="ligth">Email</ion-label>
+                        <ion-label position="floating">Email</ion-label>
                         <ion-input type="email" name="email" value="{{user.email}}" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" [(ngModel)]="user.email" required minlength="5" maxlength="50"></ion-input>
                     </ion-item>
                     <ion-item color="danger" *ngIf="formLogin.submitted && (formLogin.controls['email'].errors)">
