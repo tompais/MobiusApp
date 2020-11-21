@@ -1,0 +1,43 @@
+#paleta{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+#row-paleta{
+    border-style: solid;
+    border-width: 5px;
+    border-color: #510f7a;
+    width: 90%;
+    height: 500px;
+    padding-top: 10px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    }
+
+#bin{
+    margin-top: 1%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+    
+    }
+
+#boton{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+        
+}
+
+ion-content{
+    width: 90%;
+    display: flex;
+    justify-content: center;
+
+}

@@ -19,6 +19,7 @@ import { EscrituraComponent } from './components/test/escritura/escritura.compon
 import { LecturaComponent } from './components/test/lectura/lectura.component';
 import { MemoriaComponent } from './components/test/memoria/memoria.component';
 import { RepeticionComponent } from './components/test/repeticion/repeticion.component';
+import { DibujoComponent } from './components/test/dibujo/dibujo.component';
 
 const routes: Routes = [
   {
@@ -41,7 +42,8 @@ const routes: Routes = [
   {path: 'test/escritura', component: EscrituraComponent},
   {path: 'test/lectura', component: LecturaComponent},
   {path: 'test/memoria', component: MemoriaComponent},
-  {path: 'test/repeticion', component: RepeticionComponent}
+  {path: 'test/repeticion', component: RepeticionComponent},
+  {path: 'test/dibujo', component: DibujoComponent}
 ];
 
 @NgModule({
