@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-title>Lectura</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-grid>
+<ion-row>
+  <p>
+    En este test debera dibujar el contorno de una estrella de cinco puntas.
+  </p>
+</ion-row>
+<ion-row id="row-paleta">
+<signature-pad id="paleta" [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
+</signature-pad>
+</ion-row>
+<ion-row>
+  <img id="bin" src="assets/img/bin.png" (click)="reset()" width="50px">
+</ion-row>
+<ion-row id="boton">
+  <ion-button type="button" shape="round" expand="block" color="primary" (click)="enviar()" routerLink="/test/finalizacion">Siguiente</ion-button>
+</ion-row>
+
+</ion-grid>
+</ion-content>
