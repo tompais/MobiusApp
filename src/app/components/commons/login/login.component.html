@@ -1,11 +1,4 @@
-<ion-header>
-    <ion-toolbar color="primary">
-        <ion-buttons slot="start">
-            <ion-back-button defaultHref="/"></ion-back-button>
-        </ion-buttons>
-        <ion-title>Ingrese a su cuenta</ion-title>
-    </ion-toolbar>
-</ion-header>
+<mobi-header [titulo]="'Ingrese a su cuenta'" [urlAVolver]="'/principal'"></mobi-header>
 <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
 <ion-content color="secondary">
     <ion-grid class="centrar">

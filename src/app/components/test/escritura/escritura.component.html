@@ -1,26 +1,21 @@
-<ion-header>
-  <ion-toolbar color="primary">
-      <ion-title>Escritura</ion-title>
-  </ion-toolbar>
-</ion-header>
+<mobi-header [titulo]="nameTest"></mobi-header>
 <ion-content>
-  <ion-grid>
-    <br/>
-    {{ descripcion }}
-    <br/>
-    <br/>
-  <ion-list>
-    <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
-      
-      <ion-reorder *ngFor="let partesFrases of frases">
-      <ion-item>
-        <ion-label>
-        {{ partesFrases }}
-        </ion-label>
-      </ion-item>
-    </ion-reorder>
-    </ion-reorder-group>
-  </ion-list>
-  <ion-button type="button" shape="round" expand="block" color="primary" (click)="enviarRespuesta()">Siguiente</ion-button>
-</ion-grid>
+    <ion-grid>
+        <br/> {{ descripcion }}
+        <br/>
+        <br/>
+        <ion-list>
+            <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
+
+                <ion-reorder *ngFor="let partesFrases of frases">
+                    <ion-item>
+                        <ion-label>
+                            {{ partesFrases }}
+                        </ion-label>
+                    </ion-item>
+                </ion-reorder>
+            </ion-reorder-group>
+        </ion-list>
+        <ion-button type="button" shape="round" expand="block" color="primary" (click)="enviarRespuesta()">Siguiente</ion-button>
+    </ion-grid>
 </ion-content>

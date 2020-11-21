@@ -23,6 +23,7 @@ export class AtencionComponent implements OnInit {
   cargando = false;
   errorCode = false;
   atencionRequest: GameCategoryRequest = null;
+  nameTest = '';
 
   constructor(public commonService: CommonService, private router: Router, public atencionServ: AtencionService) { }
 
@@ -60,6 +61,7 @@ export class AtencionComponent implements OnInit {
     this.atencionRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
     this.atencionServ.traerDatos().subscribe((resp: any) => {
+      this.nameTest = resp.name;
       this.descripcion = resp.tasks[0].description;
       console.log(this.descripcion);
       this.atencionRequest.gameId = resp.id;

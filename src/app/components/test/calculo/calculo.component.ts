@@ -31,6 +31,7 @@ export class CalculoComponent implements OnInit {
   descripcion1: string;
   descripcion2: string;
   calculoRequest: GameCategoryRequest = null;
+  nameTest = '';
 
   constructor(public commonService: CommonService, private router: Router, public calculoServ: CalculoService) { }
 
@@ -72,6 +73,7 @@ export class CalculoComponent implements OnInit {
     this.calculoRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
     this.calculoServ.traerDatos().subscribe((resp: any) => {
+      this. nameTest = resp.name;
       this.descripcion1 = resp.tasks[0].description;
       this.descripcion2 = resp.tasks[1].description;
       this.calculoRequest.gameId = resp.id;
