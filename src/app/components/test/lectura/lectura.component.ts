@@ -28,6 +28,7 @@ export class LecturaComponent implements OnInit {
   imagen: string;
   lecturaRequest: GameCategoryRequest = null;
   descripcionTest: string;
+  nameTest = '';
 
   constructor(public commonService: CommonService, private router: Router, public lecturaServ: LecturaService) { }
 
@@ -42,6 +43,7 @@ export class LecturaComponent implements OnInit {
     console.log(this.url);
     this.lecturaServ.traerDatos().subscribe((resp: any) => {
       this.descripcion = resp.tasks[0].description;
+      this.nameTest = resp.name;
       this.imgName = resp.resources[0].fileName;
       console.log(this.descripcion);
       this.descripcionTest = resp.description;

@@ -4,12 +4,10 @@ import { ErrorServicio } from 'src/app/components/commons/models/errors/ErrorSer
 import { ErrorServicioGrupo } from 'src/app/components/commons/models/errors/ErrorServicioGrupo';
 import { GameCategoryResponse } from 'src/app/components/commons/models/commons/GameCategoryResponse';
 import { GameCategoryRequest } from 'src/app/components/commons/models/commons/GameCategoryRequest';
-import { FijacionService } from 'src/app/services/test/fijacion.service';
 import { Resources } from '../../commons/models/commons/Resources';
 import { AppComponent } from 'src/app/app.component';
 import { Tasks } from '../../commons/models/commons/Tasks';
 import { Inputs } from '../../commons/models/commons/Inputs';
-
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
