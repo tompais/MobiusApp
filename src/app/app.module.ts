@@ -46,12 +46,16 @@ import { RepeticionComponent } from './components/test/repeticion/repeticion.com
 import { DibujoComponent } from './components/test/dibujo/dibujo.component';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { DemoImage } from './components/test/dibujo/DemoImage';
+import { HeaderComponent } from './components/commons/generico/header/header.component';
+import { DibujoComponent } from './components/test/dibujo/dibujo.component';
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
     EmailConfirmationComponent, CalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
     TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent,
-    FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, InputGenericComponent, MemoriaComponent, RepeticionComponent, DibujoComponent],
+    FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, InputGenericComponent, MemoriaComponent, RepeticionComponent,
+    DibujoComponent, HeaderComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule],
   providers: [

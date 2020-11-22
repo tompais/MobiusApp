@@ -3,6 +3,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SignaturePad } from 'angular2-signaturepad';
 import { Observable, Observer } from 'rxjs';
 import { DemoImage } from './DemoImage';
+import { SignaturePad } from 'angular2-signaturepad';
 
 @Component({
   selector: 'app-dibujo',
@@ -195,10 +196,6 @@ export class DibujoComponent implements OnInit {
     return new Blob([u8arr], {type: mime});
 }
 
-  reset(){
-    this.signaturePad.clear();
-  }
-
   /* Method to create base64Data Url from fetched image */
   getBase64Image(img: HTMLImageElement): string {
     // We create a HTML canvas object that will create a 2d image
@@ -241,5 +238,14 @@ export class DibujoComponent implements OnInit {
     }
     const blob = new Blob([ab], {type: 'image/png'}); // or mimeString if you want
     return blob;
-    }*/
+    }
+
+    console.log('DRAW COMPLETE');
+    this.imgbase64 = this.signaturePad.toDataURL();
+    console.log(this.imgbase64);
+  }*/
+
+  reset(){
+    this.signaturePad.clear();
+  }
 }

@@ -29,6 +29,7 @@ cargando = false;
 errorCode = false;
 i: number;
 prueba = 'assets/img/prueba.txt';
+nameTest = '';
 
   constructor(public commonService: CommonService, private router: Router, public escrituraServ: EscrituraService, public http: HttpClient) { }
 
@@ -77,6 +78,7 @@ prueba = 'assets/img/prueba.txt';
       this.escrituraRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
       this.escrituraServ.traerDatos().subscribe((resp: any) => {
+      this.nameTest = resp.name;
       this.descripcion = resp.tasks[0].description;
       this.archivoTxt = resp.resources[0].fileName;
       console.log(this.descripcion);

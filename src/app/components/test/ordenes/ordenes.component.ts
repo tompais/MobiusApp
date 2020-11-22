@@ -33,6 +33,7 @@ export class OrdenesComponent implements OnInit {
   errorCode = false;
   audio: string;
   ordenesRequest: GameCategoryRequest = null;
+  nameTest = '';
 
   constructor(public commonService: CommonService, private router: Router, public ordenesServ: OrdenesService) { }
 
@@ -128,6 +129,7 @@ export class OrdenesComponent implements OnInit {
 
     this.ordenesServ.traerDatos().subscribe((resp: any) => {
       this.descripcion = resp.tasks[0].description;
+      this.nameTest = resp.name;
       this.audioName = resp.resources[0].fileName;
       console.log(this.descripcion);
       this.ordenesRequest.gameId = resp.id;
