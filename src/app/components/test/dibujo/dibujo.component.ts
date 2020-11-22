@@ -3,7 +3,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { SignaturePad } from 'angular2-signaturepad';
 import { Observable, Observer } from 'rxjs';
 import { DemoImage } from './DemoImage';
-import { SignaturePad } from 'angular2-signaturepad';
 
 @Component({
   selector: 'app-dibujo',
