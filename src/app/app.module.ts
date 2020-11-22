@@ -43,14 +43,17 @@ import { LocationService } from './services/location.service';
 import { LecturaComponent } from './components/test/lectura/lectura.component';
 import { MemoriaComponent } from './components/test/memoria/memoria.component';
 import { RepeticionComponent } from './components/test/repeticion/repeticion.component';
+import { DibujoComponent } from './components/test/dibujo/dibujo.component';
+import { SignaturePadModule } from 'angular2-signaturepad';
+import { DemoImage } from './components/test/dibujo/DemoImage';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
     EmailConfirmationComponent, CalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
     TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent,
-    FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, InputGenericComponent, MemoriaComponent, RepeticionComponent],
+    FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, InputGenericComponent, MemoriaComponent, RepeticionComponent, DibujoComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -63,6 +66,7 @@ import { RepeticionComponent } from './components/test/repeticion/repeticion.com
     SpeechRecognition,
     FijacionService,
     LocationService,
+    DemoImage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
