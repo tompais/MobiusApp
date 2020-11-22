@@ -47,8 +47,6 @@ import { DibujoComponent } from './components/test/dibujo/dibujo.component';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { DemoImage } from './components/test/dibujo/DemoImage';
 import { HeaderComponent } from './components/commons/generico/header/header.component';
-import { DibujoComponent } from './components/test/dibujo/dibujo.component';
-import { SignaturePadModule } from 'angular2-signaturepad';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
