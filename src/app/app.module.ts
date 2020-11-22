@@ -43,6 +43,9 @@ import { LocationService } from './services/location.service';
 import { LecturaComponent } from './components/test/lectura/lectura.component';
 import { MemoriaComponent } from './components/test/memoria/memoria.component';
 import { RepeticionComponent } from './components/test/repeticion/repeticion.component';
+import { DibujoComponent } from './components/test/dibujo/dibujo.component';
+import { SignaturePadModule } from 'angular2-signaturepad';
+import { DemoImage } from './components/test/dibujo/DemoImage';
 import { HeaderComponent } from './components/commons/generico/header/header.component';
 import { DibujoComponent } from './components/test/dibujo/dibujo.component';
 import { SignaturePadModule } from 'angular2-signaturepad';
@@ -67,6 +70,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     SpeechRecognition,
     FijacionService,
     LocationService,
+    DemoImage,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
