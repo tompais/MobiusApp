@@ -15,7 +15,14 @@
         <ion-row id="boton">
             <ion-button *ngIf="imagenStatus2" type="button" shape="round" expand="block" color="primary" (click)="mostrarImg()">Ver Imagen</ion-button>
         </ion-row>
+        <ion-row id="imagen-row">
             <img id="imagenMostrar" *ngIf="imagenStatus" src='{{ imagenUrl }}' width="400px">
+        </ion-row>
+            <ion-row>
+                <p>
+                    Dibuje aqui:
+                </p>
+            </ion-row>
             <signature-pad id="paleta" [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
             </signature-pad>
         <ion-row>
