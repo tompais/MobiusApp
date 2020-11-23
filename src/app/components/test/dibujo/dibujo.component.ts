@@ -1,7 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import { Observable, Observer } from 'rxjs';
+import { DibujoService } from 'src/app/services/test/dibujo.service';
+import { environmentProd } from 'src/environments/environment.prod';
+import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
+import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { DemoImage } from './DemoImage';
 
 @Component({
@@ -18,17 +24,32 @@ export class DibujoComponent implements OnInit {
   base64DefaultURL: string;
   generatedImage: string;
   windowOPen: boolean;
+  imagen: File;
+  nombreArchivo: string[] = [];
+  cargando = false;
+  errorCode = false;
+  dibujoRequest: GameCategoryRequest = null;
+  gameId: number;
+  category: string;
+  taskId: number;
+  descripcionTask: string;
+  url = environmentProd.url;
+  img = 'images/';
+  imgName: string;
+  nameTest: string;
+  descripcionTest: string;
+  imagenUrl: string;
 
   // tslint:disable-next-line: ban-types
   private signaturePadOptions: Object = {
-    maxWidth: 2,
-    minWidth: 2,
-    canvasWidth: 350,
-    canvasHeight: 350,
+    maxWidth: 5,
+    minWidth: 5,
+    canvasWidth: 400,
+    canvasHeight: 400,
     // backgroundColor: 'rgb(255, 255, 255)',
   };
 
-  constructor(private domSanitizer: DomSanitizer, private demoImage: DemoImage) {
+  constructor(private router: Router, private domSanitizer: DomSanitizer, private demoImage: DemoImage, private dibujoServ: DibujoService) {
     this.windowOPen = false;
    }
 
@@ -94,8 +115,8 @@ export class DibujoComponent implements OnInit {
       const img = new Image();
       img.crossOrigin = 'Anonymous';
       img.src = url;
-      img.width = 350;
-      img.height = 350;
+      img.width = 400;
+      img.height = 400;
       img.className = 'color:red';
       if (!img.complete) {
         // This will call another method that will create image from url
@@ -141,12 +162,18 @@ export class DibujoComponent implements OnInit {
       const imageFile: File = new File([imageBlob], imageName, {
         type: 'image/png'
       });
+      console.log(imageFile);
       this.generatedImage = window.URL.createObjectURL(imageFile);
+      console.log(this.generatedImage);
+      this.imagen = imageFile;
+      // ENVIAR imageFile
       // on demo image not open window
-      if (this.windowOPen) {
+      /*if (this.windowOPen) {
         window.open(this.generatedImage);
-      }
+      }*/
+      this.enviarImg();
     });
+
   }
 
   /** Method to Generate a Name for the Image */
@@ -247,4 +274,56 @@ export class DibujoComponent implements OnInit {
   reset(){
     this.signaturePad.clear();
   }
+
+  enviarDatos(){
+    const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
+    task.taskId = this.taskId;
+    task.patientAnswersRequest = this.nombreArchivo;
+    this.dibujoRequest.patientTaskAnswersRequestList.push(task);
+    console.log(this.dibujoRequest);
+
+    this.dibujoServ.enviarDatos(this.dibujoRequest).subscribe((resp: any) => {
+      this.cargando = false;
+      this.errorCode = false;
+      if (this.errorCode === false) {
+        this.router.navigate(['/test/finalizacion']);
+      }
+    }, (error: HttpErrorResponse) => {
+      this.cargando = false;
+      this.errorCode = true;
+    });
+  }
+
+  obtenerDatos(){
+
+    this.dibujoRequest = new GameCategoryRequest();
+    this.dibujoRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
+    console.log(this.url);
+    this.dibujoServ.traerDatos().subscribe((resp: any) => {
+
+      this.descripcionTask = resp.tasks[0].description;
+      this.nameTest = resp.name;
+      this.imgName = resp.resources[0].fileName;
+
+      this.descripcionTest = resp.description;
+      this.dibujoRequest.gameId = resp.id;
+      this.dibujoRequest.category = resp.category;
+
+      this.taskId = resp.tasks[0].id;
+
+      this.imagenUrl = `${this.url}/${this.img}${this.imgName}`;
+      console.log(this.imagen);
+      });
+}
+
+enviarImg(){
+  this.dibujoServ.enviarImagen(this.imagen).subscribe((resp: any) => {
+    this.nombreArchivo[0] = resp.fileName;
+    console.log(resp);
+    console.log(this.nombreArchivo);
+
+    this.enviarDatos();
+  });
+}
+
 }
