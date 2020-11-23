@@ -1,0 +1,13 @@
+<ion-button *ngIf="tipoBoton !== 'fab' && tipoBoton !== 'submit' && link !== '' && posForm === false" shape="{{forma}}" type="{{tipoBoton}}" expand="{{expansion}}" color="{{color}}" routerLink="{{link}}" [disabled]="deshabilitado">{{textoAMostrar}}</ion-button>
+<ion-button *ngIf="tipoBoton !== 'fab' && tipoBoton !== 'submit' && link === '' && posForm === false" shape="{{forma}}" type="{{tipoBoton}}" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">{{textoAMostrar}}</ion-button>
+<ion-button *ngIf="tipoBoton === 'submit' && posForm === false" class="margin-botones" shape="{{forma}}" type="{{tipoBoton}}" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">{{textoAMostrar}}</ion-button>
+
+<div class="centrar" *ngIf="posForm === true">
+    <div class="position-bottom">
+        <ion-button *ngIf="tipoBoton === 'submit'" class="margin-botones" shape="{{forma}}" type="{{tipoBoton}}" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">{{textoAMostrar}}</ion-button>
+    </div>
+</div>
+<!-- Boton redondo usamos boton comun porque fab button no funciona bien para centrar -->
+<ion-button *ngIf="tipoBoton === 'fab'" size="large" class="btn-round" shape="{{forma}}" type="button" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">
+    <ion-icon name="{{icono}}"></ion-icon>
+</ion-button>
