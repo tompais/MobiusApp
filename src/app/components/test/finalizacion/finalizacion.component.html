@@ -5,11 +5,25 @@
 </ion-header>
 <ion-content>
   <ion-grid>
-    <div>Haz realizado todos los ejercicios del Test</div>
-    <ul>
-      <li>{{finalizacionResponse.score}}</li>
-      <li>{{finalizacionResponse.result}}</li>
-    </ul>
+    <ion-row>
+      <ion-col col="12">
+        <p>Haz realizado todos los ejercicios del Test</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col="12">
+        <ion-list>
+          <ion-item>
+            <ion-label>Puntaje:</ion-label>
+            <ion-text>{{finalizacionResponse.score}}</ion-text>
+          </ion-item>
+          <ion-item>
+            <ion-label>Nivel de demencia:</ion-label>
+            <ion-text>{{finalizacionResponse.obtenerDescDementiaLevel(finalizacionResponse.dementiaLevel)}}</ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
     <ion-button shape="round" expand="block" class="btn_color">Ir a Juegos</ion-button>
   </ion-grid>
 </ion-content>
