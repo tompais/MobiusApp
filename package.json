@@ -33,6 +33,7 @@
     "@ionic/angular": "^5.4.1",
     "angular-signature-pad": "0.0.14",
     "angular2-signaturepad": "^2.11.0",
+    "base-64": "^1.0.0",
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-speechrecognition": "^1.2.0",
     "crypto-js": "^4.0.0",

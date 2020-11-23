@@ -43,10 +43,12 @@ import { LocationService } from './services/location.service';
 import { LecturaComponent } from './components/test/lectura/lectura.component';
 import { MemoriaComponent } from './components/test/memoria/memoria.component';
 import { RepeticionComponent } from './components/test/repeticion/repeticion.component';
-import { HeaderComponent } from './components/commons/generico/header/header.component';
 import { DibujoComponent } from './components/test/dibujo/dibujo.component';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { BotonComponent } from './components/commons/generico/boton/boton.component';
+import { DemoImage } from './components/test/dibujo/DemoImage';
+import { HeaderComponent } from './components/commons/generico/header/header.component';
+import { FinalizacionService } from './services/test/finalizacion.service';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
@@ -68,6 +70,8 @@ import { BotonComponent } from './components/commons/generico/boton/boton.compon
     SpeechRecognition,
     FijacionService,
     LocationService,
+    DemoImage,
+    FinalizacionService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

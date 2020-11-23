@@ -52,7 +52,7 @@ export class CalculoComponent implements OnInit {
       // task2.taskId = this.taskId2;
       // task2.patientAnswersRequest = this.respuesta2;
       // this.calculoRequest.patientTaskAnswersRequestList.push(task2);
-      console.log(this.calculoRequest);
+
 
       this.calculoServ.enviarDatos(this.calculoRequest).subscribe((resp: any) => {
         this.cargando = false;
@@ -76,6 +76,7 @@ export class CalculoComponent implements OnInit {
       this.nameTest = resp.name;
       this.descripcion1 = resp.tasks[0].description;
       // this.descripcion2 = resp.tasks[1].description;
+
       this.calculoRequest.gameId = resp.id;
       this.calculoRequest.category = resp.category;
       console.log(this.calculoRequest.gameId);
