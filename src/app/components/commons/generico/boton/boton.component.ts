@@ -17,8 +17,6 @@ export class BotonComponent implements OnInit {
   @Input() icono = '';
   @Input() name = '';
   @Input() deshabilitado = false;
-  @Input() vertical = 'start';
-  @Input() horizontal = 'start';
   @Input() posForm = false;
 
   constructor() { }
