@@ -6,8 +6,6 @@
 
 signature-pad{
     margin: 0px;
-    padding-left: 5px;
-    padding-right: 5px;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -45,8 +43,12 @@ signature-pad{
 }
 
 ion-content{
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: center;
+}
 
+#imagen-row{
+    justify-content: center;
+    text-align: center;
 }
