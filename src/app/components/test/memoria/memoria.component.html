@@ -17,18 +17,13 @@
             </ion-col>
         </ion-row>
         <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
-        <ion-row>
-            <ion-col size=3>
-                <ion-fab-button name="btn-hablar" id="btn-hablar" (click)="hablar()">
-                    <ion-icon name="mic-outline"></ion-icon>
-                </ion-fab-button>
+        <ion-row class="centrar">
+            <ion-col>
+                <mobi-boton [name]="'btn-hablar'" [icono]="'mic-outline'" [tipoBoton]="'fab'" (click)="hablar()" [forma]="'round'"></mobi-boton>
             </ion-col>
         </ion-row>
-
-
     </ion-grid>
-    <ion-button expand="block" shape="round" (click)="setMemoria()">
-        SIGUIENTE
-    </ion-button>
-
 </ion-content>
+<div class="centrar margin-botones">
+    <mobi-boton [textoAMostrar]="'Siguiente'" [forma]="'round'" (click)="setMemoria()"></mobi-boton>
+</div>

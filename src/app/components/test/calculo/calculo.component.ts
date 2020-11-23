@@ -48,10 +48,10 @@ export class CalculoComponent implements OnInit {
       task1.taskId = this.taskId1;
       task1.patientAnswersRequest = this.respuesta1;
       this.calculoRequest.patientTaskAnswersRequestList.push(task1);
-      const task2: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
-      task2.taskId = this.taskId2;
-      task2.patientAnswersRequest = this.respuesta2;
-      this.calculoRequest.patientTaskAnswersRequestList.push(task2);
+      // const task2: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
+      // task2.taskId = this.taskId2;
+      // task2.patientAnswersRequest = this.respuesta2;
+      // this.calculoRequest.patientTaskAnswersRequestList.push(task2);
       console.log(this.calculoRequest);
 
       this.calculoServ.enviarDatos(this.calculoRequest).subscribe((resp: any) => {
@@ -73,17 +73,17 @@ export class CalculoComponent implements OnInit {
     this.calculoRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
     this.calculoServ.traerDatos().subscribe((resp: any) => {
-      this. nameTest = resp.name;
+      this.nameTest = resp.name;
       this.descripcion1 = resp.tasks[0].description;
-      this.descripcion2 = resp.tasks[1].description;
+      // this.descripcion2 = resp.tasks[1].description;
       this.calculoRequest.gameId = resp.id;
       this.calculoRequest.category = resp.category;
       console.log(this.calculoRequest.gameId);
       console.log(this.calculoRequest.category);
       this.taskId1 = resp.tasks[0].id;
-      this.taskId2 = resp.tasks[1].id;
+      // this.taskId2 = resp.tasks[1].id;
       console.log(this.taskId1);
-      console.log(this.taskId2);
+     // console.log(this.taskId2);
       console.log(this.descripcion1);
       console.log(resp);
       console.log(this.calculoRequest);

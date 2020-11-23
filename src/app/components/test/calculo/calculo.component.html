@@ -1,13 +1,9 @@
 <mobi-header [titulo]="nameTest"></mobi-header>
-<ion-content>
+<ion-content class="ion-padding">
     <ion-grid>
-        <br/>
-        <!-- <p id="numeroInicial">{{numeroInicial}}</p>-->
-        <p>
-            <!-- Al Numero de arriba debera restarle {{numeroResta}} unidades y tendra que escribirlo en los siguientes campos, haga esto 5 veces. -->
-            {{ descripcion1 }}
-            <!-- , Número a restar: {{numeroResta}} -->
-        </p>
+        <ion-text>
+            <h4>{{ descripcion1 }}</h4>
+        </ion-text>
         <form (ngSubmit)="verificar(formCalculo)" #formCalculo="ngForm">
             <ion-item color="danger" *ngIf="formCalculo.submitted && (formCalculo.controls['res1'].errors || formCalculo.controls['res2'].errors || formCalculo.controls['res3'].errors || formCalculo.controls['res4'].errors || formCalculo.controls['res5'].errors)">
                 <ion-label>
@@ -18,27 +14,26 @@
                 <ion-label>Respuesta 1: </ion-label>
                 <ion-input type="number" [(ngModel)]="respuesta1[0]" name="res1" #res1="ngModel" required></ion-input>
             </ion-item>
-            <br/> {{ descripcion2 }}
-            <br/><br/>
+
             <ion-item>
                 <ion-label>Respuesta 2: </ion-label>
-                <ion-input type="number" [(ngModel)]="respuesta2[0]" name="res2" #res2="ngModel" required></ion-input>
+                <ion-input type="number" [(ngModel)]="respuesta1[0]" name="res2" #res2="ngModel" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>Respuesta 3: </ion-label>
-                <ion-input type="number" [(ngModel)]="respuesta2[1]" name="res3" #res3="ngModel" required></ion-input>
+                <ion-input type="number" [(ngModel)]="respuesta1[1]" name="res3" #res3="ngModel" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>Respuesta 4: </ion-label>
-                <ion-input type="number" [(ngModel)]="respuesta2[2]" name="res4" #res4="ngModel" required></ion-input>
+                <ion-input type="number" [(ngModel)]="respuesta1[2]" name="res4" #res4="ngModel" required></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>Respuesta 5: </ion-label><br/>
-                <ion-input type="number" [(ngModel)]="respuesta2[3]" name="res5" #res5="ngModel" required></ion-input>
+                <ion-input type="number" [(ngModel)]="respuesta1[3]" name="res5" #res5="ngModel" required></ion-input>
             </ion-item>
-            <br/>
-            <ion-button type="submit" shape="round" expand="block" color="primary">Siguiente</ion-button>
 
+            <mobi-boton [textoAMostrar]="'Siguiente'" [forma]="'round'" [tipoBoton]="'submit'" [posForm]="true"></mobi-boton>
         </form>
     </ion-grid>
+
 </ion-content>

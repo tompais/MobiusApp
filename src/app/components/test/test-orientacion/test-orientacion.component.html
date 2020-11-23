@@ -1,4 +1,4 @@
-<mobi-header [titulo]="ori.name"></mobi-header>
+<mobi-header [titulo]=ori.name></mobi-header>
 <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
 <ion-content>
     <ion-grid class="color-fondo-test-orientacion">
@@ -22,9 +22,9 @@
                     </ion-item>
                 </ion-col>
             </ion-row>
-            <ion-row>
+            <ion-row class="centrar">
                 <ion-col size="12">
-                    <ion-button shape="round" type="submit" expand="block" color="primary" (click)="validarRespuestas()">Siguiente</ion-button>
+                    <mobi-boton [textoAMostrar]="'Siguiente'" [forma]="'round'" [tipoBoton]="'submit'" (click)="validarRespuestas()"></mobi-boton>
                 </ion-col>
             </ion-row>
         </form>
