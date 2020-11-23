@@ -1,7 +1,7 @@
 <mobi-header [titulo]="'Regístrese'" [urlAVolver]="'/principal'"></mobi-header>
 <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
-<ion-content>
-    <ion-grid class="color-fondo-registro centrar">
+<ion-content class="ion-padding" color="secondary">
+    <ion-grid class="centrar">
         <ion-row>
             <ion-col size=12>
                 <img src="/assets/img/logo.png" alt="MobiusApp">
@@ -11,7 +11,7 @@
         <form (ngSubmit)="registro(formRegistro)" #formRegistro="ngForm">
             <ion-row>
                 <ion-col size="12">
-                    <ion-item>
+                    <ion-item class="closed">
                         <ion-label position="floating" color="ligth">Nombre</ion-label>
                         <ion-input type="text" name="firstName" value="{{user.firstName}}" [(ngModel)]="user.firstName" required minlength="3" maxlength="50"></ion-input>
                     </ion-item>
@@ -24,7 +24,7 @@
             </ion-row>
             <ion-row>
                 <ion-col size="12">
-                    <ion-item>
+                    <ion-item class="closed">
                         <ion-label position="floating">Apellido</ion-label>
                         <ion-input type="text" name="lastName" [(ngModel)]="user.lastName" required minlength="3" maxlength="50"></ion-input>
                     </ion-item>
@@ -37,7 +37,7 @@
             </ion-row>
             <ion-row>
                 <ion-col size="12">
-                    <ion-item>
+                    <ion-item class="closed">
                         <ion-label position="floating">Correo electrónico</ion-label>
                         <ion-input type="email" name="patientEmail" [(ngModel)]="user.patientEmail" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required minlength="5" maxlength="50"></ion-input>
                     </ion-item>
@@ -50,7 +50,7 @@
             </ion-row>
             <ion-row>
                 <ion-col size="12">
-                    <ion-item>
+                    <ion-item class="closed">
                         <ion-label position="floating">Correo electrónico Guardián</ion-label>
                         <ion-input type="email" name="guardianEmail" [(ngModel)]="user.guardianEmail" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required minlength="5" maxlength="50"></ion-input>
                     </ion-item>
@@ -63,10 +63,10 @@
             </ion-row>
             <ion-row>
                 <ion-col size="12">
-                    <ion-item>
+                    <ion-item class="closed">
                         <ion-label position="floating">Fecha de nacimiento</ion-label>
-                        <ion-icon name="calendar-outline" style="margin-left: 90%;"></ion-icon>
                         <ion-datetime [pickerOptions]="customPickerOptions" name="birthday" [(ngModel)]="user.birthday" displayFormat="DD/MM/YYYY"></ion-datetime>
+                        <ion-icon name="calendar-outline" slot="end"></ion-icon>
                     </ion-item>
                     <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['birthday'].errors)">
                         <ion-label>
@@ -77,10 +77,10 @@
             </ion-row>
             <ion-row>
                 <ion-col size="12">
-                    <ion-item>
+                    <ion-item class="closed">
                         <ion-label position="floating">Contraseña</ion-label>
-                        <ion-icon (click)="cambiarIcono()" *ngIf="cambiarIcono()" name="{{cambiarIcono()}}" style="margin-left: 90%;"></ion-icon>
                         <ion-input type="{{tipoInput}}" name="password" [(ngModel)]="user.password" required minlength="6" maxlength="16"></ion-input>
+                        <ion-icon (click)="cambiarIcono()" *ngIf="cambiarIcono()" name="{{cambiarIcono()}}" slot="end"></ion-icon>
                     </ion-item>
                     <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['password'].errors) && user.validarCamposVacios()">
                         <ion-label>
@@ -91,10 +91,10 @@
             </ion-row>
             <ion-row>
                 <ion-col size="12">
-                    <ion-item>
+                    <ion-item class="closed">
                         <ion-label position="floating">Repetir contraseña</ion-label>
-                        <ion-icon (click)="cambiarIconoRepeat()" *ngIf="cambiarIconoRepeat()" name="{{cambiarIconoRepeat()}}" style="margin-left: 90%;"></ion-icon>
                         <ion-input type="{{tipoInput}}" name="passwordRepeat" [(ngModel)]="user.passwordRepeat" required minlength="6" maxlength="16"></ion-input>
+                        <ion-icon (click)="cambiarIconoRepeat()" *ngIf="cambiarIconoRepeat()" name="{{cambiarIconoRepeat()}}" slot="end"></ion-icon>
                     </ion-item>
                     <ion-item color="danger" *ngIf="formRegistro.submitted && (formRegistro.controls['passwordRepeat'].errors) && user.validarCamposVacios()">
                         <ion-label>
