@@ -64,7 +64,7 @@ nameTest = '';
       this.cargando = false;
       this.errorCode = false;
       if (this.errorCode === false) {
-        this.router.navigate(['/test/finalizacion']);
+        this.router.navigate(['/test/dibujo']);
       }
     }, (error: HttpErrorResponse) => {
       this.cargando = false;
