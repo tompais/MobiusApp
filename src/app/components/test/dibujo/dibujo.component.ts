@@ -58,6 +58,7 @@ export class DibujoComponent implements OnInit {
     // Dummy Sample image of how it will work
     this.imagenStatus = true;
     this.imagenStatus2 = false;
+    this.obtenerDatos();
     this.getImageWithoutWindowOpen(this.demoImage.imageBase64Url);
   }
 
@@ -279,6 +280,7 @@ export class DibujoComponent implements OnInit {
   }
 
   enviarDatos(){
+    console.log(this.dibujoRequest);
     const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
     task.taskId = this.taskId;
     task.patientAnswersRequest = this.nombreArchivo;
