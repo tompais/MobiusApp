@@ -13,6 +13,19 @@ ion-item.item-has-focus>ion-input {
     color: #fff !important;
 }
 
+:host(.ion-focused) .item-native::after {
+    background: transparent !important;
+}
+
+ion-item {
+    --background-focused: transparent;
+    --border-color: #fff;
+}
+
+ion-item>ion-input {
+    color: #fff !important;
+}
+
 a,
 ion-label {
     color: #fff !important;
@@ -20,4 +33,8 @@ ion-label {
 
 ion-item.item-has-focus>ion-label {
     color: #fff !important;
+}
+
+a {
+    text-decoration: none;
 }
