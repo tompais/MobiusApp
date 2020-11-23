@@ -42,6 +42,7 @@ export class FijacionComponent implements OnInit {
   algo = '';
   storage: LocalStorageService;
   idUsuario: any;
+  descripcion: string = '';
 
   constructor(public app: AppComponent, private sr: SpeechRecognition, private fj: FijacionService, public router: Router) {
     this.primaryApp = app;
@@ -78,7 +79,6 @@ export class FijacionComponent implements OnInit {
     errorSrv.nuevoRequest();
 
     this.fj.getFijacion().subscribe((resp: any) => {
-
       this.repuesta.id = resp.id;
       this.repuesta.name = resp.name;
       this.repuesta.description = resp.description;

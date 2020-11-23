@@ -8,11 +8,13 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() titulo = '';
+  @Input() titulo: string;
   @Input() color = 'primary';
   @Input() urlAVolver = '';
   iconoBack = false;
-  constructor() { }
+  constructor() {
+    this.titulo = 'titulo';
+  }
 
   ngOnInit() {
     if (this.urlAVolver !== ''){

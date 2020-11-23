@@ -28,6 +28,14 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@font-face {
+    font-family: 'arciform';
+    src: url('/assets/font/arciform-webfont.eot');
+    src: url('/assets/font/arciform-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/font/arciform-webfont.woff2') format('woff2'), url('/assets/font/arciform-webfont.woff') format('woff'), url('/assets/font/arciform-webfont.ttf') format('truetype'), url('/assets/font/arciform-webfont.svg#arciform_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: #fff;
 }
@@ -43,4 +51,30 @@ body {
 
 .bold {
     font-weight: 550;
+}
+
+ion-button,
+ion-header,
+ion-title {
+    font-family: 'arciform';
+}
+
+.margin-botones {
+    margin-bottom: 20px;
+}
+
+.marginTop-30 {
+    margin-top: 30px;
+}
+
+.position-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.contenedor-boton {
+    position: relative;
 }
