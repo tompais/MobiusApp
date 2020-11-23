@@ -20,9 +20,9 @@ gameId: number;
 category: string;
 taskId: number;
 escrituraRequest: GameCategoryRequest = null;
-archivoTxt: string;
+archivoTxt: string[] = [];
 url = environmentProd.url;
-texto: string;
+texto = '';
 direc = '/texts/';
 respuesta: string[] = [];
 cargando = false;
@@ -30,6 +30,8 @@ errorCode = false;
 i: number;
 prueba = 'assets/img/prueba.txt';
 nameTest = '';
+archivoTexto: File;
+fileName: string;
 
   constructor(public commonService: CommonService, private router: Router, public escrituraServ: EscrituraService, public http: HttpClient) { }
 
@@ -80,8 +82,7 @@ nameTest = '';
       this.escrituraServ.traerDatos().subscribe((resp: any) => {
       this.nameTest = resp.name;
       this.descripcion = resp.tasks[0].description;
-      this.archivoTxt = resp.resources[0].fileName;
-      console.log(this.descripcion);
+      this.fileName = resp.resources[0].fileName;
       this.escrituraRequest.gameId = resp.id;
       this.escrituraRequest.category = resp.category;
       console.log(this.escrituraRequest.gameId);
@@ -90,29 +91,17 @@ nameTest = '';
       console.log(this.taskId);
       console.log(resp);
       console.log(this.escrituraRequest);
-      this.texto = `${this.url}${this.direc}${this.archivoTxt}`;
-      console.log(this.texto);
+      this.texto = `${this.url}${this.direc}${this.fileName}`;
+      console.log('GET');
+      this.http.get(this.texto, {responseType: 'text'}).subscribe((data: any) => {
+       this.frasesOrdenadas = data.split('-');
+       this.frases[3] = this.frasesOrdenadas[0];
+       this.frases[1] = this.frasesOrdenadas[1];
+       this.frases[0] = this.frasesOrdenadas[2];
+       this.frases[2] = this.frasesOrdenadas[3];
       });
-      this.obtenerFrase();
 
-  }
-
-  obtenerFrase(){
-    fetch(this.prueba)
-    .then(response => response.text())
-    .then(data => {
-    this.frasesOrdenadas = data.split('-');
-    // Do something with your data
-    this.frases[3] = this.frasesOrdenadas[0];
-    this.frases[1] = this.frasesOrdenadas[1];
-    this.frases[0] = this.frasesOrdenadas[2];
-    this.frases[2] = this.frasesOrdenadas[3];
-
-    console.log(this.frases);
-    console.log(this.frases.length);
-    console.log(data.length);
-    console.log(data);
-    });
+      });
   }
 
 }

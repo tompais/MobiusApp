@@ -11,8 +11,7 @@ export class FinalizacionService {
 
   obtenerResultado(id: string) {
     const urlService = `${environmentProd.url}/patients/${id}/mental-test/result`;
-    const mensaje = {
-    };
+    const mensaje = {};
     const respuesta = this.http.get(urlService, mensaje);
     return respuesta;
   }

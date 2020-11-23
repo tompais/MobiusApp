@@ -19,7 +19,8 @@ export class DibujoComponent implements OnInit {
 
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
   imgbase64: string;
-
+  imagenStatus: boolean;
+  imagenStatus2: boolean;
   base64TrimmedURL: string;
   base64DefaultURL: string;
   generatedImage: string;
@@ -55,6 +56,9 @@ export class DibujoComponent implements OnInit {
 
   ngOnInit() {
     // Dummy Sample image of how it will work
+    this.imagenStatus = true;
+    this.imagenStatus2 = false;
+    this.obtenerDatos();
     this.getImageWithoutWindowOpen(this.demoImage.imageBase64Url);
   }
 
@@ -276,6 +280,7 @@ export class DibujoComponent implements OnInit {
   }
 
   enviarDatos(){
+    console.log(this.dibujoRequest);
     const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
     task.taskId = this.taskId;
     task.patientAnswersRequest = this.nombreArchivo;
@@ -324,6 +329,17 @@ enviarImg(){
 
     this.enviarDatos();
   });
+}
+
+ocultarImg(){
+this.imagenStatus = false;
+this.imagenStatus2 = true;
+
+}
+
+mostrarImg(){
+  this.imagenStatus = true;
+  this.imagenStatus2 = false;
 }
 
 }
