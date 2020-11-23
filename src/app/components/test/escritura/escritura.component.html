@@ -1,9 +1,7 @@
 <mobi-header [titulo]="nameTest"></mobi-header>
 <ion-content class="ion-padding">
     <ion-grid>
-        <ion-text>
-            <h4>{{ descripcion }}.</h4>
-        </ion-text>
+        <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
         <ion-list>
             <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
 

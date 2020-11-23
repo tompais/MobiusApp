@@ -1,12 +1,7 @@
 <mobi-header [titulo]="repuesta.name"> </mobi-header>
 <ion-content class="ion-padding">
     <ion-grid>
-        <ion-text color="primary">
-            <h4 class="ion-text-uppercase bold">Repita las palabras</h4>
-        </ion-text>
-        <ion-text>
-            <h4 *ngFor="let item of repuesta.tasks">{{ item.description }}</h4>
-        </ion-text>
+        <mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="item.description"></mobi-descripcion>
         <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
         <ion-row class="centrar">
             <ion-col>

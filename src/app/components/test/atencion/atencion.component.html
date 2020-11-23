@@ -1,13 +1,7 @@
 <mobi-header [titulo]="nameTest"></mobi-header>
 <ion-content class="ion-padding">
     <ion-grid>
-        <ion-row>
-            <ion-col>
-                <ion-text>
-                    <h4>{{ descripcion }}</h4>
-                </ion-text>
-            </ion-col>
-        </ion-row>
+        <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
         <form (ngSubmit)="verificar(formAtencion)" #formAtencion="ngForm">
             <ion-item color="danger" *ngIf="formAtencion.submitted && (formAtencion.controls['res1'].errors || formAtencion.controls['res2'].errors || formAtencion.controls['res3'].errors || formAtencion.controls['res4'].errors || formAtencion.controls['res5'].errors)">
                 <ion-label>

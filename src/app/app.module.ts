@@ -49,13 +49,14 @@ import { BotonComponent } from './components/commons/generico/boton/boton.compon
 import { DemoImage } from './components/test/dibujo/DemoImage';
 import { HeaderComponent } from './components/commons/generico/header/header.component';
 import { FinalizacionService } from './services/test/finalizacion.service';
+import { DescripcionComponent } from './components/commons/generico/descripcion/descripcion.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
     EmailConfirmationComponent, CalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
     TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent,
     FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, InputGenericComponent, MemoriaComponent, RepeticionComponent,
-    DibujoComponent, HeaderComponent, BotonComponent],
+    DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule],
   providers: [
