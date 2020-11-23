@@ -1,18 +1,9 @@
 <mobi-header [titulo]=ori.name></mobi-header>
 <ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
-<ion-content>
+<ion-content class="ion-padding">
     <ion-grid class="color-fondo-test-orientacion">
         <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
-
-        <ion-row>
-            <ion-col size="12">
-                <ion-item>
-                    <p>
-                        {{ori.description}}
-                    </p>
-                </ion-item>
-            </ion-col>
-        </ion-row>
+        <mobi-descripcion [textoAmotrar]="ori.description"></mobi-descripcion>
         <form (ngSubmit)="enviarDatosOrientacion(formOrientacion)" #formOrientacion="ngForm">
             <ion-row>
                 <ion-col size="12">

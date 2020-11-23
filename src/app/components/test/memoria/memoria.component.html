@@ -2,20 +2,7 @@
 
 <ion-content class="ion-padding">
     <ion-grid>
-        <ion-row>
-            <ion-col size=12>
-                <ion-text color="primary">
-                    <h1 class="ion-text-uppercase bold">Repita las palabras</h1>
-                </ion-text>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col size=12>
-                <ion-text>
-                    <h4 *ngFor="let item of repuesta.tasks">{{ item.description }}</h4>
-                </ion-text>
-            </ion-col>
-        </ion-row>
+        <mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="item.description"></mobi-descripcion>
         <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
         <ion-row class="centrar">
             <ion-col>
