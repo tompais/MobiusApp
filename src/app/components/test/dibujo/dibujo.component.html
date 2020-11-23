@@ -3,20 +3,26 @@
     <ion-grid>
         <ion-row>
             <p>
-                En este test debera dibujar el contorno de una estrella de cinco puntas.
+                {{ descripcionTest }}
+            </p>
+            <p>
+                {{ descripcionTask }}
             </p>
         </ion-row>
+        <ion-row id="boton">
+            <ion-button *ngIf="imagenStatus" type="button" shape="round" expand="block" color="primary" (click)="ocultarImg()">Ocultar Imagen</ion-button>
+        </ion-row>
+        <ion-row id="boton">
+            <ion-button *ngIf="imagenStatus2" type="button" shape="round" expand="block" color="primary" (click)="mostrarImg()">Ver Imagen</ion-button>
+        </ion-row>
+            <img id="imagenMostrar" *ngIf="imagenStatus" src='{{ imagenUrl }}' width="400px">
             <signature-pad id="paleta" [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
             </signature-pad>
         <ion-row>
             <img id="bin" src="assets/img/bin.png" (click)="reset()" width="50px">
         </ion-row>
-      <ion-row id="boton">
-      <ion-button type="button" shape="round" expand="block" color="primary" (click)="finalizar()">Finalizar</ion-button>
-    </ion-row>
         <ion-row id="boton">
-            <ion-button type="button" shape="round" expand="block" color="primary" (click)="enviar()" routerLink="/test/finalizacion">Siguiente</ion-button>
-        </ion-row>
-
+            <ion-button type="button" shape="round" expand="block" color="primary" (click)="finalizar()">Finalizar</ion-button>
+          </ion-row>
     </ion-grid>
 </ion-content>

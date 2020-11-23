@@ -35,4 +35,9 @@ export class EscrituraService {
     return respuesta;
   }
 
+  getFile(url: string){
+    console.log('ENTRO GETFILE');
+    return this.http.get(url, {responseType: 'text'});
+  }
+
 }
