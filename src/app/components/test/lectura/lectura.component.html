@@ -1,15 +1,14 @@
 <mobi-header [titulo]="nameTest"></mobi-header>
-<ion-content>
+<ion-content class="ion-padding">
     <ion-grid>
-        <br/>
-        <p>
-            {{ descripcionTest }}
-        </p>
-        <p>
-            {{ descripcion }}
-        </p>
+        <ion-text>
+            <h4>{{ descripcionTest }}. </h4>
+        </ion-text>
+        <ion-text>
+            <h4>{{ descripcion }}.</h4>
+        </ion-text>
+
         <ion-row>
-            <!-- '{{ imagen }}' -->
             <img src="assets/img/lectura.png" alt="imagen" width="400px">
         </ion-row>
         <ion-row>
@@ -19,14 +18,15 @@
                         Debe Completar todos los campos.
                     </ion-label>
                 </ion-item>
-                <p>Indique el numero de la persona correcta.</p>
+                <ion-text>
+                    <h4>Indique el numero de la persona correcta. </h4>
+                </ion-text>
                 <ion-item>
                     <ion-label>Respuesta: </ion-label>
                     <ion-input type="number" maxlength="1" [(ngModel)]="respuesta[0]" name="res1" #res1="ngModel" required></ion-input>
                 </ion-item>
-                <br/>
-                <ion-button type="submit" shape="round" expand="block" color="primary">Siguiente</ion-button>
 
+                <mobi-boton [textoAMostrar]="'Siguiente'" [forma]="'round'" [tipoBoton]="'submit'"></mobi-boton>
             </form>
         </ion-row>
     </ion-grid>

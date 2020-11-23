@@ -24,6 +24,8 @@ export class AtencionComponent implements OnInit {
   errorCode = false;
   atencionRequest: GameCategoryRequest = null;
   nameTest = '';
+  private sigTextbox: any;
+  private textbox: any;
 
   constructor(public commonService: CommonService, private router: Router, public atencionServ: AtencionService) { }
 
@@ -73,7 +75,16 @@ export class AtencionComponent implements OnInit {
       console.log(resp);
       console.log(this.atencionRequest);
       });
-}
+  }
+
+  pasarTextbox(NameTextbox: string, NameSigTextbox: string){
+    this.textbox = document.getElementsByName(NameTextbox);
+    this.sigTextbox = document.getElementsByName(NameSigTextbox);
+
+    if (this.textbox[1].value.length === parseInt(this.textbox[1].getAttribute('maxlength'), 10)){
+        this.sigTextbox[1].focus();
+    }
+  }
 
 
 
