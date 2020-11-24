@@ -1,35 +1,32 @@
-<mobi-header [titulo]="'Dubujo'"></mobi-header>
-<ion-content>
+<mobi-header [titulo]="'Dibujo'"></mobi-header>
+<ion-content class="ion-padding">
     <ion-grid>
         <ion-row>
-            <p>
-                {{ descripcionTest }}
-            </p>
-            <p>
-                {{ descripcionTask }}
-            </p>
+            <ion-text>
+                <h4 class="bold">{{ descripcionTest }} {{ descripcionTask }}</h4>
+            </ion-text>
         </ion-row>
-        <ion-row id="boton">
-            <ion-button *ngIf="imagenStatus" type="button" shape="round" expand="block" color="primary" (click)="ocultarImg()">Ocultar Imagen</ion-button>
+        <ion-row class="boton">
+            <mobi-boton [forma]="'round'" *ngIf="imagenStatus" type="button" shape="round" expand="block" color="primary" (click)="ocultarImg()" [textoAMostrar]="'Ocultar imagen'"></mobi-boton>
         </ion-row>
-        <ion-row id="boton">
-            <ion-button *ngIf="imagenStatus2" type="button" shape="round" expand="block" color="primary" (click)="mostrarImg()">Ver Imagen</ion-button>
+        <ion-row class="boton">
+            <mobi-boton [forma]="'round'" *ngIf="imagenStatus2" type="button" shape="round" expand="block" color="primary" (click)="mostrarImg()" [textoAMostrar]="'Ver imagen'"></mobi-boton>
         </ion-row>
         <ion-row id="imagen-row">
             <img id="imagenMostrar" *ngIf="imagenStatus" src='{{ imagenUrl }}' width="400px">
         </ion-row>
             <ion-row>
-                <p>
-                    Dibuje aquí:
-                </p>
+                <ion-text>
+                    <h4 class="bold">Dibuje Aquí:</h4>
+                </ion-text>
             </ion-row>
             <signature-pad id="paleta" [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
             </signature-pad>
-        <ion-row>
-            <img id="bin" src="assets/img/bin.png" (click)="reset()" width="50px">
+        <ion-row class="boton">
+            <mobi-boton [forma]="'round'" type="button" shape="round" expand="block" color="primary" (click)="reset()" [textoAMostrar]="'Limpiar respuesta'"></mobi-boton>
         </ion-row>
-        <ion-row id="boton">
-            <ion-button type="button" shape="round" expand="block" color="primary" (click)="finalizar()">Finalizar</ion-button>
+        <ion-row class="boton">
+            <mobi-boton [forma]="'round'" type="button" shape="round" expand="block" color="primary" (click)="finalizar()" [textoAMostrar]="'Finalizar'"></mobi-boton>
           </ion-row>
     </ion-grid>
 </ion-content>

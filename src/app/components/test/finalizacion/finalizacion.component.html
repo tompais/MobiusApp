@@ -1,15 +1,8 @@
-<ion-header>
-  <ion-toolbar color="primary">
-      <ion-title>Finalizacion</ion-title>
-  </ion-toolbar>
-</ion-header>
-<ion-content>
+<mobi-header [titulo]="'RESULTADOS DEL TEST'"></mobi-header>
+<ion-content class="ion-padding">
   <ion-grid>
-    <ion-row>
-      <ion-col col="12">
-        <p>Haz realizado todos los ejercicios del Test</p>
-      </ion-col>
-    </ion-row>
+    <mobi-descripcion [textoAmotrar]="'Haz realizado todos los ejercicios del Test'"></mobi-descripcion>
+    <br><br>
     <ion-row>
       <ion-col col="12">
         <ion-list>
@@ -18,12 +11,16 @@
             <ion-text>{{finalizacionResponse.score}}</ion-text>
           </ion-item>
           <ion-item>
-            <ion-label>Nivel de demencia:</ion-label>
+            <ion-label>Resultado:</ion-label>
             <ion-text>{{finalizacionResponse.obtenerDescDementiaLevel(finalizacionResponse.dementiaLevel)}}</ion-text>
           </ion-item>
         </ion-list>
       </ion-col>
     </ion-row>
-    <ion-button shape="round" expand="block" class="btn_color">Ir a Juegos</ion-button>
+    <ion-row class="centrar">
+      <ion-col size="12">
+          <mobi-boton [textoAMostrar]="'Ir a Juegos'" [forma]="'round'" [tipoBoton]="'submit'"></mobi-boton>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
