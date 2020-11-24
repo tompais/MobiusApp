@@ -42,7 +42,7 @@ export class FijacionComponent implements OnInit {
   algo = '';
   storage: LocalStorageService;
   idUsuario: any;
-  descripcion: string = '';
+  descripcion = '';
 
   constructor(public app: AppComponent, private sr: SpeechRecognition, private fj: FijacionService, public router: Router) {
     this.primaryApp = app;
