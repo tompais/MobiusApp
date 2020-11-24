@@ -6,7 +6,11 @@
         <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
         <ion-row class="centrar">
             <ion-col>
-                <mobi-boton [name]="'btn-hablar'" [icono]="'mic-outline'" [tipoBoton]="'fab'" (click)="hablar()" [forma]="'round'"></mobi-boton>
+                <div class="aling-center">
+                    <div class="hijo">
+                        <mobi-boton [name]="'btn-hablar'" [icono]="'mic-outline'" [tipoBoton]="'fab'" (click)="hablar()" [forma]="'round'" [btnFabSolo]="true"></mobi-boton>
+                    </div>
+                </div>
             </ion-col>
         </ion-row>
     </ion-grid>

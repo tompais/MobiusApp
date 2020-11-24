@@ -9,7 +9,7 @@
                         Debe completar todos los campos.
                     </ion-label>
                 </ion-item>
-                <ion-item lines="none">
+                <ion-item lines="none" class="fondoblanco">
                     <ion-input type="text" maxlength="1" [(ngModel)]="respuesta[0]" name="res1" #res1="ngModel" required tabindex="1" (keyup)="pasarTextbox('res1','res2')"></ion-input>
 
                     <ion-input type="text" maxlength="1" [(ngModel)]="respuesta[1]" name="res2" #res2="ngModel" required tabindex="2" (keyup)="pasarTextbox('res2','res3')"></ion-input>
