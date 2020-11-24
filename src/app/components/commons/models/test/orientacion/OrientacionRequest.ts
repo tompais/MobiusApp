@@ -59,7 +59,7 @@ export class OrientacionRequest extends UserResponse {
 
     validarDiaMes(diaMes: any) {
         let resp = false;
-        const month = new Date().getUTCDate().toString();
+        const month = new Date().getDate().toString();
         if (month === diaMes) {
             resp = true;
         }
@@ -68,7 +68,7 @@ export class OrientacionRequest extends UserResponse {
 
     validarDiaSemana(diaSemana: any) {
         let resp = false;
-        const day = new Date().getUTCDay().toString();
+        const day = new Date().getDay().toString();
         if (day === diaSemana) {
             resp = true;
         }
