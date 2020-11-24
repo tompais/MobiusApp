@@ -73,6 +73,8 @@ export class FijacionComponent implements OnInit {
     });
   }
 
+  const descripcion = '';
+
   getFijacion(){
    // console.log('la tenes adentro');
     const errorSrv = this.erroresServicio.obtenerErrorServicio('getFijacion');
@@ -86,7 +88,10 @@ export class FijacionComponent implements OnInit {
 
       this.repuesta.tasks = new Array<Tasks>();
       this.task.id = resp.tasks[0].id;
+      // this.task.description = resp.tasks[0].description;
       this.task.description = resp.tasks[0].description;
+      this.descripcion = this.task.description.replace('<br><br>', '\n');
+      console.log('DESCRIPCION: ' + this.task.description.replace('<br><br>', '\n'));
       this.repuesta.tasks.push(this.task);
 
       this.input.id = resp.tasks[0].inputs[0].id;
