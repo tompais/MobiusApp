@@ -9,7 +9,17 @@
     </div>
 </div>
 
+<div class="centrar contenedor-boton" *ngIf="posForm === true && NombreEjercicio === 'visualizacion'">
+    <div class="position-bottom zindex10">
+        <ion-button *ngIf="tipoBoton === 'submit'" class="margin-botones" shape="{{forma}}" type="{{tipoBoton}}" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">{{textoAMostrar}}</ion-button>
+    </div>
+</div>
+
 <!-- Boton redondo usamos boton comun porque fab button no funciona bien para centrar -->
-<ion-button *ngIf="tipoBoton === 'fab'" size="large" class="btn-round" shape="{{forma}}" type="button" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">
+<ion-button *ngIf="tipoBoton === 'fab' && !btnFabSolo" size="large" class="btn-round" shape="{{forma}}" type="button" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">
     <ion-icon name="{{icono}}"></ion-icon>
+</ion-button>
+
+<ion-button *ngIf="tipoBoton === 'fab' && btnFabSolo" size="large" class="btn-round btn-fab-grande" shape="{{forma}}" type="button" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">
+    <ion-icon name="{{icono}}" class="icon-btn-grande"></ion-icon>
 </ion-button>
