@@ -9,7 +9,7 @@
                 <ion-col size="12">
                     <ion-item *ngFor="let task of ori.tasks" class="closed">
                         <ion-label position="floating" color="ligth" class="preguntas" style="margin-top: 5%;">{{task.description}}</ion-label><br>
-                        <ion-input *ngFor="let input of task.inputs; let i=index" type="{{input.type}}" name="{{task.id}}" [(ngModel)]="respuesta[task.id]" required minlength="1" maxlength="50" (keyup)="obtenerRespuestas()" placeholder="Respuesta"></ion-input>
+                        <ion-input *ngFor="let input of task.inputs; let i=index" type="{{input.type}}" name="{{task.id}}" [(ngModel)]="respuesta[task.id]" required minlength="1" maxlength="50" (keyup)="obtenerRespuestas()" placeholder="Respuesta..."></ion-input>
                     </ion-item>
                 </ion-col>
             </ion-row>

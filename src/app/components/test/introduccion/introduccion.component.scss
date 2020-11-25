@@ -1,5 +1,5 @@
     ion-slides {
-        height: 450;
+        height: 470px;
     }
     
     li {
@@ -36,9 +36,12 @@
         text-transform: uppercase;
     }
     
-     :host ::ng-deep .swiper-pagination {
+     /* :host ::ng-deep .swiper-pagination {
         .swiper-pagination-bullet {
+            position: fixed;
+            bottom: 0px;
+            padding-bottom: 3px;
             width: 15px;
             height: 15px;
         }
-    }
+    } */
