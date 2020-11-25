@@ -18,7 +18,8 @@ export class BotonComponent implements OnInit {
   @Input() name = '';
   @Input() deshabilitado = false;
   @Input() posForm = false;
-
+  @Input() btnFabSolo = false;
+  @Input() NombreEjercicio = '';
   constructor() { }
 
   ngOnInit() {
