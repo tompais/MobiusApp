@@ -1,7 +1,8 @@
 <mobi-header [titulo]="repuesta.name"> </mobi-header>
 <ion-content class="ion-padding">
     <ion-grid>
-        <mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="item.description"></mobi-descripcion>
+        <!--<mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="item.description"></mobi-descripcion>-->
+        <mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="descripcion"></mobi-descripcion>
         <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
         <ion-row class="centrar">
             <ion-col>
