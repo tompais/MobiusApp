@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { GameCategoryRequest } from 'src/app/components/commons/models/commons/GameCategoryRequest';
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
 import { Servicio } from 'src/app/components/commons/models/Servicio';
+import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.blue';
 import { environmentProd } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -22,6 +23,7 @@ export class DibujoService extends Servicio {
    // console.log('ID SESSION STORAGE');
    // console.log(id);
     // poner dentro de la ruta ${id} !!!!
+    // ${environmentProd.url}
     const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=drawing`;
     const respuesta = this.http.get(urlService);
     return respuesta;
