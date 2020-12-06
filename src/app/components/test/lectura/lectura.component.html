@@ -4,7 +4,7 @@
         <mobi-descripcion [textoAmotrar]="descripcionTest"></mobi-descripcion>
         <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
         <ion-row>
-            <img src="assets/img/lectura.png" alt="imagen" width="400px">
+            <img src={{imagen}} alt="imagen" width="400px">
         </ion-row>
         <ion-row>
             <form (ngSubmit)="verificar(formLectura)" #formLectura="ngForm">

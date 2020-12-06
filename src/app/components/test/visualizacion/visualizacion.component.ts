@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
 import { VisualizacionService } from 'src/app/services/test/visualizacion.service';
+import { environmentProd } from 'src/environments/environment.prod';
 import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 
@@ -20,7 +21,7 @@ export class VisualizacionComponent implements OnInit {
   category: string;
   taskId: number;
   descripcion: string;
-  url = 'https://prod-mobius-mind-api.herokuapp.com/';
+  url = environmentProd.url;
   img = 'images/';
   imgName: string;
   imagen: string;

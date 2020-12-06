@@ -1,0 +1,30 @@
+body {
+    background-color: #ffffff;
+}
+
+h1 {
+    text-align: center;
+}
+
+#numeroInicial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 350%;
+    text-align: center;
+    color: #ffffff;
+    width: 20%;
+    height: 20%;
+    margin: 0 auto;
+    background-color: #510f7a;
+}
+
+ion-item {
+    --background-focused: transparent;
+    --border-color: #7D329F;
+}
+
+:host(.ion-focused) .item-native::after {
+    background: transparent !important;
+}

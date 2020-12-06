@@ -1,3 +1,19 @@
-<p>
-  j-fijacion works!
-</p>
+<mobi-header [titulo]="repuesta.name"> </mobi-header>
+<ion-content class="ion-padding">
+    <ion-grid>
+        <!--<mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="item.description"></mobi-descripcion>-->
+        <mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="descripcion"></mobi-descripcion>
+        <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
+        <ion-row class="centrar">
+            <ion-col>
+                <div class="margin-left-right">
+                    <mobi-boton [name]="'btn-escuchar'" (click)="escuchar()" [icono]="'play-outline'" [tipoBoton]="'fab'" [forma]="'round'"></mobi-boton>
+                    <mobi-boton [name]="'btn-hablar'" [icono]="'mic-outline'" [tipoBoton]="'fab'" (click)="hablar()" [forma]="'round'"></mobi-boton>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+<div class="centrar margin-botones">
+    <mobi-boton [textoAMostrar]="'Finalizar'" [forma]="'round'" (click)="setFijacion()"></mobi-boton>
+</div>

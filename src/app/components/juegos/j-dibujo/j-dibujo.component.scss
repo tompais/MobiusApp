@@ -1,0 +1,56 @@
+#paleta{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+signature-pad{
+    margin: 0px;
+    width: 100%;
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #510f7a;
+}
+
+#row-paleta{
+    width: 90%;
+    height: 500px;
+    padding-top: 10px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-left: 5%;
+    margin-right: 5%;
+    }
+
+#bin{
+    margin-top: 1%;
+    margin-left: 5%;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+    
+    }
+
+.boton{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+        
+}
+
+ion-content{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#imagen-row{
+    justify-content: center;
+    text-align: center;
+}

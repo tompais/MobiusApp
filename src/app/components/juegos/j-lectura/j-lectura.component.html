@@ -1,3 +1,24 @@
-<p>
-  j-lectura works!
-</p>
+<mobi-header [titulo]="nameGame"></mobi-header>
+<ion-content class="ion-padding">
+    <ion-grid>
+        <mobi-descripcion [textoAmotrar]="descripcionGame"></mobi-descripcion>
+        <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
+        <ion-row>
+            <img src={{imagen}} alt="imagen" width="400px">
+        </ion-row>
+        <ion-row>
+            <form (ngSubmit)="verificar(formLectura)" #formLectura="ngForm">
+                <ion-item color="danger" *ngIf="formLectura.submitted && (formLectura.controls['res1'].errors)">
+                    <ion-label>
+                        Debe Completar todos los campos.
+                    </ion-label>
+                </ion-item>
+                <mobi-descripcion [textoAmotrar]="'Indique el número de la persona correcta'"></mobi-descripcion>
+                <ion-item class="closed">
+                    <ion-input type="number" maxlength="1" [(ngModel)]="respuesta[0]" name="res1" #res1="ngModel" required placeholder="Respuesta"></ion-input>
+                </ion-item>
+                <mobi-boton [textoAMostrar]="'Finalizar'" [forma]="'round'" [tipoBoton]="'submit'"></mobi-boton>
+            </form>
+        </ion-row>
+    </ion-grid>
+</ion-content>
