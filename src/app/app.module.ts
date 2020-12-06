@@ -50,13 +50,22 @@ import { DemoImage } from './components/test/dibujo/DemoImage';
 import { HeaderComponent } from './components/commons/generico/header/header.component';
 import { FinalizacionService } from './services/test/finalizacion.service';
 import { DescripcionComponent } from './components/commons/generico/descripcion/descripcion.component';
+import { JAtencionComponent } from './components/juegos/j-atencion/j-atencion.component';
+import { JCalculoComponent } from './components/juegos/j-calculo/j-calculo.component';
+import { JDibujoComponent } from './components/juegos/j-dibujo/j-dibujo.component';
+import { JEscrituraComponent } from './components/juegos/j-escritura/j-escritura.component';
+import { JFijacionComponent } from './components/juegos/j-fijacion/j-fijacion.component';
+import { JLecturaComponent } from './components/juegos/j-lectura/j-lectura.component';
+import { JOrdenesComponent } from './components/juegos/j-ordenes/j-ordenes.component';
+import { JVisualizacionComponent } from './components/juegos/j-visualizacion/j-visualizacion.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
     EmailConfirmationComponent, CalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
     TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent,
     FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, InputGenericComponent, MemoriaComponent, RepeticionComponent,
-    DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent],
+    DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, JAtencionComponent, JCalculoComponent, JDibujoComponent,
+    JEscrituraComponent, JFijacionComponent, JLecturaComponent, JOrdenesComponent, JVisualizacionComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule],
   providers: [
