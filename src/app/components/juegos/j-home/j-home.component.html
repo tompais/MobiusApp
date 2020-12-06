@@ -1,0 +1,17 @@
+<mobi-header [titulo]="'Juegos'"></mobi-header>
+<ion-content>
+    <ion-grid>      
+        <ion-row class="centrar">
+          <h4>Categoria recomendada:</h4>
+        </ion-row>
+        <ion-row class="centrar">
+          <ion-button class="boton_imagen" expand="full">{{ categoriaRecomendadaTraducida }}</ion-button>
+        </ion-row>
+        <ion-row class="centrar">
+          <h4>Todas las categorias:</h4>
+        </ion-row>
+        <ion-row class="centrar" *ngFor="let cat of categoriasTraducidas">
+          <ion-button class="boton_imagen" expand="full" routerLink="/juegos/{{cat}}">{{ cat }}</ion-button>
+        </ion-row>
+    </ion-grid>
+</ion-content>

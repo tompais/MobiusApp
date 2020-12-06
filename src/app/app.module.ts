@@ -58,6 +58,8 @@ import { JFijacionComponent } from './components/juegos/j-fijacion/j-fijacion.co
 import { JLecturaComponent } from './components/juegos/j-lectura/j-lectura.component';
 import { JOrdenesComponent } from './components/juegos/j-ordenes/j-ordenes.component';
 import { JVisualizacionComponent } from './components/juegos/j-visualizacion/j-visualizacion.component';
+import { JHomeComponent } from './components/juegos/j-home/j-home.component';
+import { JFinalizacionComponent } from './components/juegos/j-finalizacion/j-finalizacion.component';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
@@ -65,7 +67,7 @@ import { JVisualizacionComponent } from './components/juegos/j-visualizacion/j-v
     TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent,
     FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, InputGenericComponent, MemoriaComponent, RepeticionComponent,
     DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, JAtencionComponent, JCalculoComponent, JDibujoComponent,
-    JEscrituraComponent, JFijacionComponent, JLecturaComponent, JOrdenesComponent, JVisualizacionComponent],
+    JEscrituraComponent, JFijacionComponent, JLecturaComponent, JOrdenesComponent, JVisualizacionComponent, JHomeComponent, JFinalizacionComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule],
   providers: [

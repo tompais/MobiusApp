@@ -1,0 +1,18 @@
+<mobi-header [titulo]="'FINALIZACIÓN'"></mobi-header>
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row class="centrar">
+      <h2>¡Has completado el juego!</h2>
+    </ion-row>
+    <br><br><br><br>
+    <ion-row class="centrar">
+      <img src="assets/img/mobi.png" alt="imagen" width="350px">
+    </ion-row>
+    <br><br><br><br>
+    <ion-row class="centrar">
+      <ion-col size="12">
+          <mobi-boton [textoAMostrar]="'Ir a Juegos'" [forma]="'round'" [routerLink]="'/juegos/home'"></mobi-boton>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

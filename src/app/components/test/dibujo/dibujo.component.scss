@@ -8,24 +8,15 @@ signature-pad{
     margin: 0px;
     width: 100%;
     height: 400px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #510f7a;
+    border-top: 0px solid #510f7a;
+    border-bottom: 0px solid #510f7a;
 }
 
-#row-paleta{
-    width: 90%;
-    height: 500px;
-    padding-top: 10px;
-    padding-left: 10px;
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    margin-left: 5%;
-    margin-right: 5%;
+.row_pad{
+    width: 100%;
+    height: 400px;
+    border-top: 2px solid #510f7a;
+    border-bottom: 2px solid #510f7a;
     }
 
 #bin{

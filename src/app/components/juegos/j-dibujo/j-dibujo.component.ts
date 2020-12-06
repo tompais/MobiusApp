@@ -129,9 +129,9 @@ export class JDibujoComponent implements OnInit {
   ocultarImg(){
     this.imagenStatus = false;
     this.imagenStatus2 = true;
-    
+
   }
-    
+
   mostrarImg(){
       this.imagenStatus = true;
       this.imagenStatus2 = false;

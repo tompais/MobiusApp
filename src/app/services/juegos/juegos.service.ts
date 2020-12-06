@@ -8,7 +8,7 @@ import { environmentProd } from 'src/environments/environment.prod';
   providedIn: 'root'
 })
 export class JuegosService {
-  
+
   sessionStorage: StorageSession = new StorageSession();
 
   constructor(public http: HttpClient) { }
@@ -32,6 +32,14 @@ export class JuegosService {
 
     console.log(JSON.stringify(gcr));
     const respuesta = this.http.post(urlService, gcr);
+    return respuesta;
+  }
+
+  public traerDatosHome(){
+    const id = this.sessionStorage.consultar('id');
+
+    const urlService = `${environmentProd.url}/patients/${id}/home`;
+    const respuesta = this.http.get(urlService);
     return respuesta;
   }
 }

@@ -28,6 +28,8 @@ import { JFijacionComponent } from './components/juegos/j-fijacion/j-fijacion.co
 import { JLecturaComponent } from './components/juegos/j-lectura/j-lectura.component';
 import { JOrdenesComponent } from './components/juegos/j-ordenes/j-ordenes.component';
 import { JVisualizacionComponent } from './components/juegos/j-visualizacion/j-visualizacion.component';
+import { JHomeComponent } from './components/juegos/j-home/j-home.component';
+import { JFinalizacionComponent } from './components/juegos/j-finalizacion/j-finalizacion.component';
 
 const routes: Routes = [
   {
@@ -59,7 +61,9 @@ const routes: Routes = [
   {path: 'juegos/fijacion', component: JFijacionComponent},
   {path: 'juegos/lectura', component: JLecturaComponent},
   {path: 'juegos/ordenes', component: JOrdenesComponent},
-  {path: 'juegos/visualizacion', component: JVisualizacionComponent}
+  {path: 'juegos/visualizacion', component: JVisualizacionComponent},
+  {path: 'juegos/home', component: JHomeComponent},
+  {path: 'juegos/finalizacion', component: JFinalizacionComponent}
 ];
 
 @NgModule({
