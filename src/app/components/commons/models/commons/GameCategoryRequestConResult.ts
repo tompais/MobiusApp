@@ -3,6 +3,7 @@ import { PatientTaskAnswersRequestListConResult } from './PatientTaskAnswerReque
 export class GameCategoryRequestConResult {
     gameId: number;
     category: string;
+    areTestGameAnswers: boolean;
     // tslint:disable-next-line: ban-types
     patientTaskAnswersRequestList: PatientTaskAnswersRequestListConResult<String>[];
 
