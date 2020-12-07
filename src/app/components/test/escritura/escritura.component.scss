@@ -9,3 +9,12 @@ ion-item{
     color: #ffffff;
     margin: 1%;
 }
+
+.flex {
+    display: flex;
+}
+
+.valing {
+    min-height: calc(100vh - 350px);
+    min-width: calc(100vw - 50px);
+}

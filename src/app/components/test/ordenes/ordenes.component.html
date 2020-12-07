@@ -2,15 +2,15 @@
 <ion-content class="ion-padding">
     <ion-grid>
         <mobi-descripcion [textoAmotrar]="'Luego de escuchar el siguiente audio, debera apretar los botones en el orden que se le indicara'"></mobi-descripcion>
-        <ion-row class="centrar" *ngIf="audioStatus">
-            <ion-col>
-                <div class="aling-center">
-                    <div class="hijo">
+        <div class="valing ion-align-items-center ion-justify-content-center flex" *ngIf="audioStatus">
+            <div>
+                <ion-row>
+                    <ion-col class="flex ion-justify-content-center" size="12">
                         <mobi-boton [name]="'btn-escuchar'" (click)="audioStart()" [icono]="'play-outline'" [tipoBoton]="'fab'" [forma]="'round'" [btnFabSolo]="true"></mobi-boton>
-                    </div>
-                </div>
-            </ion-col>
-        </ion-row>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
         <ion-row *ngIf="rowsBotonesStatus">
             <ion-col><img class="botones" *ngIf="cuadradoStatus" (click)="cuadrado()" src="/assets/img/cuadrado.png" alt="Cuadrado" style="max-width: 80%;"></ion-col>
             <ion-col><img class="botones" *ngIf="trianguloStatus" (click)="triangulo()" src="/assets/img/triangulo.png" alt="Triangulo" style="max-width: 80%;"></ion-col>

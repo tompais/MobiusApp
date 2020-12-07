@@ -4,9 +4,8 @@
         <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
         <ion-list>
             <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
-
                 <ion-reorder *ngFor="let partesFrases of frases">
-                    <ion-item style="border-radius: 20px;">
+                    <ion-item style="border-radius: 5px;">
                         <ion-label style="text-align: center;">
                             {{ partesFrases }}
                         </ion-label>
@@ -14,6 +13,21 @@
                 </ion-reorder>
             </ion-reorder-group>
         </ion-list>
+        <!--<div class="valing ion-align-items-center ion-justify-content-center flex">
+            <div>
+                <ion-list>
+                    <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
+                        <ion-reorder *ngFor="let partesFrases of frases">
+                            <ion-item style="border-radius: 20px; padding-left: 90px; padding-right: 90px;">
+                                <ion-label class="ion-text-wrap">
+                                    {{ partesFrases }}
+                                </ion-label>
+                            </ion-item>
+                        </ion-reorder>
+                    </ion-reorder-group>
+                </ion-list>
+            </div>
+        </div>-->
     </ion-grid>
 </ion-content>
 <div class="centrar margin-botones">
