@@ -18,7 +18,8 @@ export class RepeticionService extends Servicio{
 
     public getFijacion() {
       const id = this.sessionStorage.consultar('id');
-      const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=repetition`;
+      const isTest = this.sessionStorage.consultar('EsTest');
+      const urlService = `${environmentProd.url}/patients/${id}/game?game-category=repetition&test=${isTest}`;
       const mensaje = {};
       const respuesta = this.http.get(urlService, mensaje);
       return respuesta;
@@ -26,7 +27,7 @@ export class RepeticionService extends Servicio{
 
     public setFijacion(respFijacion: GameCategoryRequest){
       const id = this.sessionStorage.consultar('id');
-      const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
+      const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
       const mensaje = {};
       const respuesta = this.http.post(urlService, respFijacion, this.obtenerToken());
       return respuesta;

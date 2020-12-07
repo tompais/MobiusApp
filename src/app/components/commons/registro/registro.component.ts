@@ -52,7 +52,7 @@ export class RegistroComponent implements OnInit {
     }
   }*/
 
-    public registro(form: NgForm) {
+    /*public registro(form: NgForm) {
      const errorSrv = this.erroresServicio.obtenerErrorServicio('registro');
      errorSrv.nuevoRequest();
      if (form.invalid) {
@@ -70,7 +70,7 @@ export class RegistroComponent implements OnInit {
             return true;
           });
         });*/
-        this.cargando = false;
+     /*   this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
           this.router.navigate(['/login']);
@@ -83,7 +83,7 @@ export class RegistroComponent implements OnInit {
       });
     this.user.retorno = true;
     }
-  }
+  }*/
 
   cambiarIcono(): string {
     let resp = '';

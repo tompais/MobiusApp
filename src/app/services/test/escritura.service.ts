@@ -19,7 +19,8 @@ export class EscrituraService {
    // console.log('ID SESSION STORAGE');
    // console.log(id);
     // poner dentro de la ruta ${id} !!!!
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=writing`;
+    const isTest = this.sessionStorage.consultar('EsTest');
+    const urlService = `${environmentProd.url}/patients/${id}/game?game-category=writing&test=${isTest}`;
     const respuesta = this.http.get(urlService);
     return respuesta;
   }
@@ -28,7 +29,7 @@ export class EscrituraService {
 
     const id = this.sessionStorage.consultar('id');
 
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
+    const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
 
     console.log(JSON.stringify(gcr));
     const respuesta = this.http.post(urlService, gcr);

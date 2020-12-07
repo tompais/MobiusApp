@@ -40,6 +40,7 @@ export class DibujoComponent implements OnInit {
   nameTest: string;
   descripcionTest: string;
   imagenUrl: string;
+  base64Solo: string[] = [];
 
   // tslint:disable-next-line: ban-types
   private signaturePadOptions: Object = {
@@ -69,7 +70,11 @@ export class DibujoComponent implements OnInit {
   drawComplete(){
     console.log('DRAW COMPLETE');
     this.imgbase64 = this.signaturePad.toDataURL();
+
+    this.base64Solo[0] = this.imgbase64.substring(22);
     // PRUEBA
+
+
     const dataURL = this.signaturePad.toDataURL('image/png');
     /*const data = atob(dataURL.substring('data:image/png;base64,'.length)),asArray = new Uint8Array(data.length);
     console.log('DATA: ' + data);
@@ -140,11 +145,12 @@ export class DibujoComponent implements OnInit {
 
   finalizar(imageUrl?: string) {
     imageUrl = this.imgbase64;
-    this.windowOPen = true;
+    this.enviarDatos();
+    /*this.windowOPen = true;
     this.getBase64ImageFromURL(imageUrl).subscribe((base64Data: string) => {
       this.base64TrimmedURL = base64Data;
       this.createBlobImageFileAndShow();
-    });
+    });*/
   }
 
   getImageWithoutWindowOpen(imageUrl: string) {
@@ -269,7 +275,6 @@ export class DibujoComponent implements OnInit {
     const blob = new Blob([ab], {type: 'image/png'}); // or mimeString if you want
     return blob;
     }
-
     console.log('DRAW COMPLETE');
     this.imgbase64 = this.signaturePad.toDataURL();
     console.log(this.imgbase64);
@@ -282,8 +287,9 @@ export class DibujoComponent implements OnInit {
   enviarDatos(){
     console.log(this.dibujoRequest);
     const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
+    task.patientAnswersRequest = this.base64Solo;
     task.taskId = this.taskId;
-    task.patientAnswersRequest = this.nombreArchivo;
+    // task.patientAnswersRequest = this.nombreArchivo;
     this.dibujoRequest.patientTaskAnswersRequestList.push(task);
     console.log(this.dibujoRequest);
 
@@ -313,6 +319,7 @@ export class DibujoComponent implements OnInit {
       this.descripcionTest = resp.description;
       this.dibujoRequest.gameId = resp.id;
       this.dibujoRequest.category = resp.category;
+      this.dibujoRequest.areTestGameAnswers = resp.isTestGame;
 
       this.taskId = resp.tasks[0].id;
 

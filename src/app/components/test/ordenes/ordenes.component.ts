@@ -134,6 +134,7 @@ export class OrdenesComponent implements OnInit {
       console.log(this.descripcion);
       this.ordenesRequest.gameId = resp.id;
       this.ordenesRequest.category = resp.category;
+      this.ordenesRequest.areTestGameAnswers = resp.isTestGame;
       console.log(this.ordenesRequest.gameId);
       console.log(this.ordenesRequest.category);
       this.taskId = resp.tasks[0].id;

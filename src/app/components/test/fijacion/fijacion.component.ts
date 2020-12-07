@@ -84,6 +84,7 @@ export class FijacionComponent implements OnInit {
       this.repuesta.name = resp.name;
       this.repuesta.description = resp.description;
       this.repuesta.category = resp.category;
+      this.repuesta.isTestGame = resp.isTestGame;
 
       this.repuesta.tasks = new Array<Tasks>();
       this.task.id = resp.tasks[0].id;
@@ -154,6 +155,7 @@ export class FijacionComponent implements OnInit {
     const errorSrv = this.errorresServicioSet.obtenerErrorServicio('setFijacion');
     errorSrv.nuevoRequest();
     this.fijacionRquest.gameId = this.repuesta.id;
+    this.fijacionRquest.areTestGameAnswers = this.repuesta.isTestGame;
     this.fijacionRquest.category = this.repuesta.category;
     // this.fijacionRquest.patientTaskAnswersList.taskId = this.repuesta.taskId[0].id;
     const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();

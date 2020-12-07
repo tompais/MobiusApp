@@ -1,16 +1,27 @@
 <ion-content color="secondary">
-    <ion-grid class="centrar">
-        <ion-row>
-            <ion-col size=12>
-                <img src="/assets/img/logo.png" alt="MobiusApp">
-            </ion-col>
-        </ion-row>
+    <ion-grid>
+        <div class="valing ion-align-items-center ion-justify-content-center flex">
+            <div>
+                <ion-row>
+                    <ion-col class="flex ion-justify-content-center" size="12">
+                        <img src="/assets/img/logo.png" alt="MobiusApp">
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col size="12" class="flex ion-justify-content-center">
+                        <mobi-boton [forma]="'round'" [link]="'/login'" [textoAMostrar]="'INGRESAR'"></mobi-boton>
+                    </ion-col>
+                </ion-row>
 
-        <ion-row>
-            <ion-col size="12">
-                <mobi-boton [forma]="'round'" [link]="'/login'" [textoAMostrar]="'INGRESAR'"></mobi-boton>
-                <mobi-boton [forma]="'round'" [link]="'/registrar'" [textoAMostrar]="'REGISTRARSE'"></mobi-boton>
-            </ion-col>
-        </ion-row>
+                <ion-row>
+                    <ion-col size="12" class="flex ion-justify-content-center">
+                        <mobi-boton [forma]="'round'" [link]="'/registrar'" [textoAMostrar]="'REGISTRARSE'"></mobi-boton>
+                    </ion-col>
+                </ion-row>
+
+            </div>
+        </div>
+
+
     </ion-grid>
 </ion-content>

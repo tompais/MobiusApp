@@ -1,0 +1,233 @@
+<app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
+<form (ngSubmit)="FormSubmit(formGeneric)" #formGeneric="ngForm" #form>
+
+    <!-- PARA TODOS LOS FORM -->
+    <div class="form" *ngIf="SoloForm && nombrePantalla.toUpperCase() !== 'LOGIN' && nombrePantalla.toUpperCase() !== 'REGISTRO' && nombrePantalla.toUpperCase() !== 'ATENCION'">
+
+        <ion-row *ngFor="let task of Dato.tasks">
+            <ion-col size="12">
+
+                <h4 color="ligth" *ngIf="nombrePantalla.toUpperCase() === 'ORIENTACION'">{{task.description}}</h4>
+
+                <div *ngIf="nombrePantalla !== 'atencion'">
+                    <ion-item class="closed" *ngFor="let input of task.inputs; let i=index">
+
+                        <ion-select *ngIf="input.type === 'select'" interface="popover" [(ngModel)]="respuesta[task.id]" name="{{task.id}}" required placeholder="Seleccionar Respuestas...">
+                            <div *ngFor="let posResp of input.possibleAnswers;let i=index">
+                                <ion-select-option *ngIf="posResp.text" value="{{posResp.text}}">{{posResp.text}}</ion-select-option>
+                                <ion-select-option *ngIf="posResp.number" value="{{posResp.number}}">{{posResp.number}}</ion-select-option>
+                            </div>
+                        </ion-select>
+
+                        <ion-input *ngIf="nombrePantalla !== 'atencion' && input.type !== 'select' && input.type !== 'country' && input.type !== 'state' && input.type !== 'city'" type="{{input.type}}" name="{{input.id}}" [(ngModel)]="respuesta[input.id]" required minlength="1"
+                            maxlength="50" (keyup)="obtenerRespuestas()" placeholder="Respuesta..."></ion-input>
+
+
+                        <ion-input *ngIf="input.type === 'country' || input.type === 'state' || input.type === 'city'" type="{{input.type}}" name="{{task.id}}" [(ngModel)]="respuesta[task.id]" required minlength="1" maxlength="50" (keyup)="obtenerRespuestas()" placeholder="Respuesta..."
+                            (selectedPlace)="placeChanged($event,task.id)" ngxAutocomPlace></ion-input>
+                    </ion-item>
+                </div>
+
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <div class="form flex ion-align-items-center" *ngIf="nombrePantalla.toUpperCase() === 'ATENCION'">
+        <ion-row *ngFor="let task of Dato.tasks">
+            <ion-col size="12">
+                <ion-item lines="none" class="sin-lines">
+                    <ion-input *ngFor="let input of task.inputs; let i=index" class="inputs-cuadrados" type="{{input.type}}" name="{{input.id}}" [(ngModel)]="respuesta[input.id]" required maxlength="1" (keyup)="obtenerRespuestas()"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <div class="NoSoloForm" *ngIf="!SoloForm">
+        <ion-row *ngFor="let task of Dato.tasks">
+            <ion-col size="12">
+
+                <h4 color="ligth" *ngIf="nombrePantalla.toUpperCase() === 'ORIENTACION'">{{task.description}}</h4>
+
+                <div *ngIf="nombrePantalla !== 'atencion'">
+                    <ion-item class="closed" *ngFor="let input of task.inputs; let i=index">
+
+                        <ion-select *ngIf="input.type === 'select'" interface="popover" [(ngModel)]="respuesta[task.id]" name="{{task.id}}" required placeholder="Seleccionar Respuestas...">
+                            <div *ngFor="let posResp of input.possibleAnswers;let i=index">
+                                <ion-select-option *ngIf="posResp.text" value="{{posResp.text}}">{{posResp.text}}</ion-select-option>
+                                <ion-select-option *ngIf="posResp.number" value="{{posResp.number}}">{{posResp.number}}</ion-select-option>
+                            </div>
+                        </ion-select>
+
+                        <ion-input *ngIf="nombrePantalla !== 'atencion' && input.type !== 'select' && input.type !== 'country' && input.type !== 'state' && input.type !== 'city'" type="{{input.type}}" name="{{input.id}}" [(ngModel)]="respuesta[input.id]" required minlength="1"
+                            maxlength="50" (keyup)="obtenerRespuestas()" placeholder="Respuesta..."></ion-input>
+
+
+                        <ion-input *ngIf="input.type === 'country' || input.type === 'state' || input.type === 'city'" type="{{input.type}}" name="{{task.id}}" [(ngModel)]="respuesta[task.id]" required minlength="1" maxlength="50" (keyup)="obtenerRespuestas()" placeholder="Respuesta..."
+                            (selectedPlace)="placeChanged($event,task.id)" ngxAutocomPlace></ion-input>
+                    </ion-item>
+                </div>
+
+            </ion-col>
+        </ion-row>
+    </div>
+    <!-- PARA LOGIN -->
+    <div *ngIf="nombrePantalla.toUpperCase() === 'LOGIN' ">
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top left2" *ngIf="formGeneric.submitted && (formGeneric.controls['email'].errors)">
+                    <span class="tiptext error">Email inválido</span>
+                </div>
+                <ion-item class="closed ion-item-blanco">
+                    <ion-label position="floating">Email</ion-label>
+                    <ion-input type="email" name="email" value="{{userRequest.email}}" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" [(ngModel)]="userRequest.email" required minlength="5" maxlength="50"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top left2" *ngIf="formGeneric.submitted && !validaCampo(userRequest.password,{'required' : true})">
+                    <span class="tiptext error">Ingrese Contraseña</span>
+                </div>
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.password,{'minlength': 6})">
+                    <span class="tiptext error font-size-12pt">Debe ingresar entre 6 y 16 caracteres</span>
+                </div>
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.password,{'maxlength': 16})">
+                    <span class="tiptext error font-size-12pt">Debe ingresar entre 6 y 16 caracteres</span>
+                </div>
+                <ion-item class="closed ion-item-blanco">
+                    <ion-label position="floating">Password</ion-label>
+                    <ion-input type="password" name="password" [(ngModel)]="userRequest.password" required minlength="6" maxlength="16"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <!-- PARA REGISTRO -->
+    <div *ngIf="nombrePantalla.toUpperCase() === 'REGISTRO' ">
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top" *ngIf="formGeneric.submitted && !validaCampo(userRequest.firstName,{'required' : true})">
+                    <span class="tiptext error">No ingreso el nombre</span>
+                </div>
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.firstName,{'minlength': 3})">
+                    <span class="tiptext error font-size-12pt">Debe ingresar entre 3 y 50 caracteres</span>
+                </div>
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.firstName,{'maxlength': 50})">
+                    <span class="tiptext error font-size-12pt">Debe ingresar entre 3 y 50 caracteres</span>
+                </div>
+                <ion-item class="closed ion-item-blanco" #item>
+                    <ion-label position="floating" color="ligth">Nombre</ion-label>
+                    <ion-input type="text" name="firstName" value="{{userRequest.firstName}}" [(ngModel)]="userRequest.firstName" required minlength="3" maxlength="50"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top" *ngIf="formGeneric.submitted && !validaCampo(userRequest.lastName,{'required' : true})">
+                    <span class="tiptext error">No ingreso el apellido</span>
+                </div>
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.lastName,{'minlength': 3})">
+                    <span class="tiptext error font-size-12pt">Debe ingresar entre 3 y 50 caracteres</span>
+                </div>
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.lastName,{'maxlength': 50})">
+                    <span class="tiptext error font-size-12pt">Debe ingresar entre 3 y 50 caracteres</span>
+                </div>
+                <ion-item class="closed ion-item-blanco">
+                    <ion-label position="floating">Apellido</ion-label>
+                    <ion-input type="text" name="lastName" [(ngModel)]="userRequest.lastName" required minlength="3" maxlength="50"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top" *ngIf="formGeneric.submitted && (formGeneric.controls['patientEmail'].errors)">
+                    <span class="tiptext error">Ingresar correo valido</span>
+                </div>
+                <ion-item class="closed ion-item-blanco">
+                    <ion-label position="floating">Correo electrónico</ion-label>
+                    <ion-input type="email" name="patientEmail" [(ngModel)]="userRequest.patientEmail" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required minlength="5" maxlength="50"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && (formGeneric.controls['guardianEmail'].errors)">
+                    <span class="tiptext error font-size-12pt">Ingresar correo valido y distinto</span>
+                </div>
+                <ion-item class="closed ion-item-blanco">
+                    <ion-label position="floating">Correo electrónico Guardián</ion-label>
+                    <ion-input type="email" name="guardianEmail" [(ngModel)]="userRequest.guardianEmail" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}" required minlength="5" maxlength="50"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.birthday,{'required' : true})">
+                    <span class="tiptext error">No ingreso la Fecha nacimiento</span>
+                </div>
+                <ion-item class="closed ion-item-blanco">
+                    <ion-label position="floating">Fecha de nacimiento</ion-label>
+                    <ion-datetime name="birthday" [(ngModel)]="userRequest.birthday" displayFormat="DD/MM/YYYY" required></ion-datetime>
+                    <ion-icon name="calendar-outline" slot="end" class="ion-align-self-end"></ion-icon>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.genre,{'required' : true})">
+                    <span class="tiptext error">No ingreso el género</span>
+                </div>
+                <ion-item class="closed" class="ion-item-blanco">
+                    <ion-select class="select-blanco" placeholder="Seleccionar género" interface="popover" name="genre" [(ngModel)]="userRequest.genre" required>
+                        <ion-select-option value="male" class="primary">Masculino</ion-select-option>
+                        <ion-select-option value="female">Femenino</ion-select-option>
+                        <ion-select-option value="other">Otro</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.password,{'required' : true})">
+                    <span class="tiptext error">No ingreso la contraseña</span>
+                </div>
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.password,{'minlength': 6})">
+                    <span class="tiptext error font-size-12pt">Debe ingresar entre 6 y 16 caracteres</span>
+                </div>
+                <div class="tooltip top left" *ngIf="formGeneric.submitted && !validaCampo(userRequest.password,{'maxlength': 16})">
+                    <span class="tiptext error font-size-12pt">Debe ingresar entre 6 y 16 caracteres</span>
+                </div>
+                <ion-item class="closed ion-item-blanco">
+                    <ion-label position="floating">Contraseña</ion-label>
+                    <ion-input type="{{tipoInpuPass}}" name="password" [(ngModel)]="userRequest.password" required minlength="6" maxlength="16"></ion-input>
+                    <ion-icon (click)="cambiarIcono()" *ngIf="cambiarIcono()" name="{{cambiarIcono()}}" slot="end" class="ion-align-self-end"></ion-icon>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="12">
+                <div class="tooltip top" *ngIf="formGeneric.submitted && !validaCampo(userRequest.password,{'required' : true})">
+                    <span class="tiptext error">Repita contraseña</span>
+                </div>
+                <ion-item class="closed ion-item-blanco">
+                    <ion-label position="floating">Repetir contraseña</ion-label>
+                    <ion-input type="{{tipoInpuPassRepeat}}" name="passwordRepeat" [(ngModel)]="userRequest.passwordRepeat" required minlength="6" maxlength="16"></ion-input>
+                    <ion-icon (click)="cambiarIconoRepeat()" *ngIf="cambiarIconoRepeat()" name="{{cambiarIconoRepeat()}}" slot="end" class="ion-align-self-end"></ion-icon>
+                </ion-item>
+                <div class="tooltip bottom" *ngIf="formGeneric.submitted && userRequest.passwordNoCoinciden()">
+                    <span class="tiptext error">Las contraseñas no coinciden</span>
+                </div>
+            </ion-col>
+        </ion-row>
+    </div>
+
+    <!-- BOTON SUBMIT -->
+    <ion-row class="ion-justify-content-center">
+        <ion-col size="12" class="flex ion-justify-content-center ion-align-items-end">
+            <mobi-boton *ngIf="nombrePantalla === 'registro'" [forma]="'round'" [textoAMostrar]="NombreBotonSubmit" [tipoBoton]="'submit'" [deshabilitado]="userRequest.passwordNoCoinciden()"></mobi-boton>
+            <mobi-boton *ngIf="nombrePantalla === 'login'" [forma]="'round'" [textoAMostrar]="NombreBotonSubmit" [tipoBoton]="'submit'"></mobi-boton>
+            <mobi-boton *ngIf="nombrePantalla !== 'registro' && nombrePantalla !== 'login'" [forma]="'round'" [posForm]="true" [textoAMostrar]="NombreBotonSubmit" [tipoBoton]="'submit'"></mobi-boton>
+        </ion-col>
+    </ion-row>
+
+</form>
