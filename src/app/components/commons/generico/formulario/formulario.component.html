@@ -42,7 +42,7 @@
         </ion-row>
     </div>
 
-    <div class="NoSoloForm" *ngIf="!SoloForm">
+    <div class="{{claseNoSoloForm()}}" *ngIf="!SoloForm">
         <ion-row *ngFor="let task of Dato.tasks">
             <ion-col size="12">
 
