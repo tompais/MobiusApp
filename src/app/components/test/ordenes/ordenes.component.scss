@@ -21,3 +21,11 @@ ion-row{
     align-items: center;
     text-align: center;
 }
+
+.flex {
+    display: flex;
+}
+
+.valing {
+    min-height: calc(100vh - 350px);
+}
