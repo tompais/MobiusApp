@@ -319,6 +319,7 @@ export class DibujoComponent implements OnInit {
       this.descripcionTest = resp.description;
       this.dibujoRequest.gameId = resp.id;
       this.dibujoRequest.category = resp.category;
+      this.dibujoRequest.areTestGameAnswers = resp.isTestGame;
 
       this.taskId = resp.tasks[0].id;
 

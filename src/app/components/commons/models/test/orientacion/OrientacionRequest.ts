@@ -36,75 +36,85 @@ export class OrientacionRequest extends UserResponse {
     validarEstacionAnio(estacion: string) {
         let resp = false;
         const mesActual = new Date().getUTCMonth() + 1;
-        const state = [];
-        if (mesActual >= 12 && mesActual <= 3) {
-            state.push('VERA');
+        const diaActual = new Date().getDate();
+        const state: string[] = [];
+        if ((mesActual === 12 && diaActual >= 21) || (mesActual === 3 && diaActual < 21) || (mesActual < 3)) {
+            state.push('VERANO');
         }
-        if (mesActual >= 3 && mesActual <= 5) {
-            state.push('OTOÑ');
+
+        if ((mesActual === 3 && diaActual >= 21) || (mesActual === 6 && diaActual < 21 ) || (mesActual > 3 && mesActual < 6 )) {
+            state.push('OTOÑO');
         }
-        if (mesActual >= 6 && mesActual <= 8) {
-            state.push('INVI');
+
+        if ((mesActual === 6 && diaActual >= 21) || (mesActual === 9 && diaActual < 21) || (mesActual > 6 && mesActual < 9)) {
+            state.push('INVIERNO');
         }
-        if (mesActual >= 9 && mesActual <= 11) {
-            state.push('PRIM');
+
+        if ((mesActual === 9 && diaActual >= 21) || (mesActual === 12 && diaActual < 21) || (mesActual > 9 && mesActual < 12)) {
+            state.push('PRIMAVERA');
         }
-        state.forEach((est: string) => {
-            if (est.indexOf(estacion.toUpperCase().substring(0, 4)) > -1) {
-                resp = true;
-            }
-        });
+
+        if (state[0] === estacion.toUpperCase()){
+            resp = true;
+        }
+
         return resp;
     }
 
-    validarDiaMes(diaMes: any) {
+    validarDiaMes(diaMes: string) {
         let resp = false;
-        const month = new Date().getDate().toString();
-        if (month === diaMes) {
+        const diaDelMesActual = new Date().getDate().toString();
+        if (diaDelMesActual === diaMes.toString()) {
             resp = true;
         }
         return resp;
     }
 
-    validarDiaSemana(diaSemana: any) {
+    validarDiaSemana(diaSemana: string) {
         let resp = false;
+        const diasSemana: string[] = ['DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
         const day = new Date().getDay().toString();
-        if (day === diaSemana) {
+        if (diasSemana[day] === diaSemana.toUpperCase()) {
             resp = true;
         }
         return resp;
     }
 
-    validarMesAnio(mes: any) {
+    validarMesAnio(mes: string) {
         let resp = false;
-        const monthYear = new Date().getMonth() + 1;
-        if (monthYear.toString() === mes) {
+        const meseDelAño: string[] = ['ENERO', 'FEBRERO', 'MARZO', 'ABRIL', 'MAYO', 'JUNIO', 'JULIO','AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE',
+                                        'DICIEMBRE'];
+        const mesActual = new Date().getMonth();
+        console.log(mesActual);
+        if (meseDelAño[mesActual] === mes.toUpperCase()) {
             resp = true;
         }
         return resp;
     }
 
-    validarPais(pais: string) {
+    validarPais(paisPantalla: string, paisLocalizado: string) {
         let resp = false;
-        const paises = ['ARG'];
-        paises.forEach((pa: string) => {
-            if (pa.indexOf(pais.toUpperCase().substring(0, 2)) > -1) {
-                resp = true;
-            }
-        });
+
+        if (paisLocalizado && paisPantalla.toUpperCase() === paisLocalizado.toUpperCase()){
+            resp = true;
+        }
         return resp;
     }
 
-    validarProvincia(provincia: string) {
+    validarProvincia(provinciaPantalla: string, provinciaLocalizada: string) {
         let resp = false;
-        const prov = ['BUENOS AIRES'];
-        prov.forEach((pr: string) => {
-            if (pr.indexOf(provincia.toUpperCase().substring(0, 3)) > -1) {
-                resp = true;
-            }
-        });
+        resp = provinciaLocalizada && provinciaLocalizada.toUpperCase().includes(provinciaPantalla.toUpperCase());
         return resp;
     }
 
+    validarCiudad(ciudadPantalla: string, ciudadLocalizada: string, localidadLocalizada: string){
+        let resp = false;
 
+        if ((ciudadLocalizada && ciudadPantalla.toUpperCase() === ciudadLocalizada.toUpperCase() ) ||
+           ( localidadLocalizada && ciudadPantalla.toUpperCase() === localidadLocalizada.toUpperCase())) {
+            resp = true;
+        }
+
+        return resp;
+    }
 }

@@ -36,7 +36,6 @@ import { ErrorComponent } from './components/commons/error/error.component';
 import { OrdenesComponent } from './components/test/ordenes/ordenes.component';
 import { VisualizacionComponent } from './components/test/visualizacion/visualizacion.component';
 import { FinalizacionComponent } from './components/test/finalizacion/finalizacion.component';
-import { InputGenericComponent } from './components/commons/input-generic/input-generic.component';
 import { AtencionComponent } from './components/test/atencion/atencion.component';
 import { EscrituraComponent } from './components/test/escritura/escritura.component';
 import { LocationService } from './services/location.service';
@@ -50,15 +49,17 @@ import { DemoImage } from './components/test/dibujo/DemoImage';
 import { HeaderComponent } from './components/commons/generico/header/header.component';
 import { FinalizacionService } from './services/test/finalizacion.service';
 import { DescripcionComponent } from './components/commons/generico/descripcion/descripcion.component';
+import { FormularioComponent } from './components/commons/generico/formulario/formulario.component';
+import { NgxAutocomPlaceModule } from 'ngx-autocom-place';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
     EmailConfirmationComponent, CalculoComponent, InfoConsultaServiceComponent, InfoConsultaServiceGrupoComponent, OlvidoPasswordComponent,
     TestOrientacionComponent, GoogleMapsComponent, FijacionComponent, ErrorComponent, OrdenesComponent, VisualizacionComponent,
-    FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, InputGenericComponent, MemoriaComponent, RepeticionComponent,
-    DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent],
+    FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, MemoriaComponent, RepeticionComponent,
+    DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, FormularioComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule, NgxAutocomPlaceModule],
   providers: [
     StatusBar,
     SplashScreen,

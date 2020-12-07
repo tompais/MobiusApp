@@ -6,6 +6,7 @@ import { CalculoService } from 'src/app/services/test/calculo.service';
 import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { Calculo } from '../models/Calculo';
+import { GameCategoryResponse } from '../../commons/models/commons/GameCategoryResponse';
 
 @Component({
   selector: 'app-calculo',
@@ -15,7 +16,7 @@ import { Calculo } from '../models/Calculo';
 export class CalculoComponent implements OnInit {
 
   ac: Calculo = new Calculo();
-  respuesta1: string[] = [];
+  respuesta1: any[] = [];
   respuesta2: string[] = [];
   respuestasCorrectas: number[] = [];
   puntaje: number;
@@ -31,29 +32,23 @@ export class CalculoComponent implements OnInit {
   descripcion1: string;
   descripcion2: string;
   calculoRequest: GameCategoryRequest = null;
+  calculoResponse: GameCategoryResponse = null;
   nameTest = '';
+  respuestaFinal: any[] = [];
+  task1: PatientTaskAnswersRequestList<string>;
 
   constructor(public commonService: CommonService, private router: Router, public calculoServ: CalculoService) { }
 
   ngOnInit() {
     this.obtenerDatos();
+    this.task1 = new PatientTaskAnswersRequestList<string>();
   }
 
-  verificar(form: NgForm){
-
-    if (form.invalid){
-      this.retorno = false;
-    }else{
-      const task1: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
-      task1.taskId = this.taskId1;
-      task1.patientAnswersRequest = this.respuesta1;
-      this.calculoRequest.patientTaskAnswersRequestList.push(task1);
-      // const task2: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
-      // task2.taskId = this.taskId2;
-      // task2.patientAnswersRequest = this.respuesta2;
-      // this.calculoRequest.patientTaskAnswersRequestList.push(task2);
-
-
+  EnviarDatos(){
+      this.task1.taskId = this.taskId1;
+      this.task1.patientAnswersRequest = this.respuestaFinal;
+      this.calculoRequest.patientTaskAnswersRequestList[0] = (this.task1);
+      console.log(this.calculoRequest);
       this.calculoServ.enviarDatos(this.calculoRequest).subscribe((resp: any) => {
         this.cargando = false;
         this.errorCode = false;
@@ -64,31 +59,37 @@ export class CalculoComponent implements OnInit {
         this.cargando = false;
         this.errorCode = true;
       });
-    }
   }
 
   obtenerDatos(){
-
     this.calculoRequest = new GameCategoryRequest();
     this.calculoRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
     this.calculoServ.traerDatos().subscribe((resp: any) => {
+      this.calculoResponse = resp;
       this.nameTest = resp.name;
       this.descripcion1 = resp.tasks[0].description;
-      // this.descripcion2 = resp.tasks[1].description;
-
       this.calculoRequest.gameId = resp.id;
-      this.calculoRequest.category = resp.category;
-      console.log(this.calculoRequest.gameId);
-      console.log(this.calculoRequest.category);
+      this.calculoRequest.areTestGameAnswers = resp.isTestGame;
       this.taskId1 = resp.tasks[0].id;
-      // this.taskId2 = resp.tasks[1].id;
-      console.log(this.taskId1);
-     // console.log(this.taskId2);
-      console.log(this.descripcion1);
-      console.log(resp);
-      console.log(this.calculoRequest);
+      this.calculoRequest.category = resp.category;
       });
 
-}
+  }
+
+  TomarDatosForm(datos: any[]){
+    this.respuesta1 = datos;
+    console.log(this.respuesta1.length);
+    let j = 0;
+
+    // tslint:disable-next-line: prefer-for-of
+    for (let i = 0; i < this.respuesta1.length; i++){
+      if ( this.respuesta1[i]){
+        this.respuestaFinal[j] = this.respuesta1[i];
+        j++;
+      }
+    }
+
+    this.EnviarDatos();
+  }
 }

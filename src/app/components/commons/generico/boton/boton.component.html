@@ -3,8 +3,8 @@
 <ion-button *ngIf="tipoBoton === 'submit' && posForm === false" class="margin-botones" shape="{{forma}}" type="{{tipoBoton}}" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">{{textoAMostrar}}</ion-button>
 
 
-<div class="centrar contenedor-boton" *ngIf="posForm === true">
-    <div class="position-bottom">
+<div *ngIf="posForm === true">
+    <div>
         <ion-button *ngIf="tipoBoton === 'submit'" class="margin-botones" shape="{{forma}}" type="{{tipoBoton}}" expand="{{expansion}}" color="{{color}}" [disabled]="deshabilitado">{{textoAMostrar}}</ion-button>
     </div>
 </div>

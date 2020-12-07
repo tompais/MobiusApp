@@ -23,8 +23,9 @@ export class DibujoService extends Servicio {
    // console.log('ID SESSION STORAGE');
    // console.log(id);
     // poner dentro de la ruta ${id} !!!!
+    const isTest = this.sessionStorage.consultar('EsTest');
+    const urlService = `${environmentProd.url}/patients/${id}/game?game-category=drawing&test=${isTest}`;
     // ${environmentProd.url}
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=drawing`;
     const respuesta = this.http.get(urlService);
     return respuesta;
   }
@@ -33,7 +34,7 @@ export class DibujoService extends Servicio {
 
     const id = this.sessionStorage.consultar('id');
 
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
+    const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
 
     console.log(JSON.stringify(gcr));
     const respuesta = this.http.post(urlService, gcr);

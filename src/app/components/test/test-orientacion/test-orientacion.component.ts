@@ -16,6 +16,8 @@ import { Tasks } from '../../commons/models/commons/Tasks';
 import { ErrorServicio } from '../../commons/models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from '../../commons/models/errors/ErrorServicioGrupo';
 import { OrientacionRequest } from '../../commons/models/test/orientacion/OrientacionRequest';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
 declare var google;
 
@@ -28,7 +30,6 @@ export class TestOrientacionComponent implements OnInit {
 
   orientacionRequest: OrientacionRequest;
   respuesta: any[];
-  retorno = true;
   patientTaskAnswersList: PatientTaskAnswersRequestList<boolean> = null;
   answer: Answer<boolean> = null;
   cargando = false;
@@ -42,41 +43,44 @@ export class TestOrientacionComponent implements OnInit {
   listaRespuestas: any[] = null;
   rsp: PatientAnswersRequest<any>[] = null;
   gameCategoryRequest: GameCategoryRequest;
-  sinRespuestas = false;
   latitud: any;
   longitud: any;
-  map: GoogleMap;
+  country: string; // pais
+  state: string; // provincia
+  locality: string; // localidad para verificar en ciudad ya que puede llegar a confundir
+  city: string; // ciudad
+  // configuracion de Geocoder
+  geoencoderOptions: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+  };
 
   constructor(public orientacionService: OrientacionService, public router: Router, public locationService: LocationService,
-              private platform: Platform) {
+              private platform: Platform, private geolocation: Geolocation,
+              private nativeGeocoder: NativeGeocoder) {
   }
 
   ngOnInit() {
-    // this.platform.ready();
-    // this.getLocation();
-    // this.loadMap();
+
     this.orientacionRequest = new OrientacionRequest();
     this.gameCategoryRequest = new GameCategoryRequest();
     this.respuesta = new Array<any>();
     this.patientTaskAnswersList = new PatientTaskAnswersRequestList<boolean>();
     this.answer = new Answer<boolean>();
     this.orientacion = new Array<GameCategoryResponse>();
-    this.ori = new GameCategoryResponse();
     this.tasks = new Array<Tasks>();
     this.task = new Tasks();
     this.erroresServicio = new ErrorServicioGrupo();
     this.erroresServicio.errores.push(new ErrorServicio('testOrientacionEnvio', true, '', false, 'Test Orientacion Envio'));
     this.erroresServicio.errores.push(new ErrorServicio('testOrientacion', true, '', false, 'Test Orientacion Consulta'));
     this.getOrientacion();
+    this.getGeolocation();
   }
 
   eventoError(error: ErrorServicio) {
     // tslint:disable-next-line: prefer-const
     let form: NgForm;
     switch (error.id) {
-      case 'testOrientacionEnvio':
-         this.enviarDatosOrientacion(form);
-         break;
       case 'testOrientacion':
         this.getOrientacion();
         break;
@@ -85,18 +89,17 @@ export class TestOrientacionComponent implements OnInit {
     }
   }
 
-  enviarDatosOrientacion(form: NgForm) {
+  enviarDatosOrientacion() {
     const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacionEnvio');
     errorSrv.nuevoRequest();
-    if (form.invalid) {
-      this.retorno = false;
-    } else {
-      this.cargando = true;
-      this.gameCategoryRequest = new GameCategoryRequest();
-      this.gameCategoryRequest.gameId = 1;
-      this.gameCategoryRequest.category = 'orientation';
-      this.gameCategoryRequest.patientTaskAnswersRequestList = new Array<any>();
-      this.validarRespuestas().forEach((obj: PatientAnswersRequest<any>) => {
+
+    this.cargando = true;
+    this.gameCategoryRequest = new GameCategoryRequest();
+    this.gameCategoryRequest.gameId = 1;
+    this.gameCategoryRequest.category = 'orientation';
+    this.gameCategoryRequest.areTestGameAnswers = this.ori.isTestGame;
+    this.gameCategoryRequest.patientTaskAnswersRequestList = new Array<any>();
+    this.validarRespuestas().forEach((obj: PatientAnswersRequest<any>) => {
         const task: PatientTaskAnswersRequestList<PatientAnswersRequest<any>> = new PatientTaskAnswersRequestList<PatientAnswersRequest<any>>();
         task.taskId = obj.id;
         task.patientAnswersRequest = new Array<any>();
@@ -105,8 +108,9 @@ export class TestOrientacionComponent implements OnInit {
         pt.isCorrect = obj.isCorrect;
         task.patientAnswersRequest.push(pt);
         this.gameCategoryRequest.patientTaskAnswersRequestList.push(task);
-      });
-      this.orientacionService.putOrientacion(this.gameCategoryRequest).subscribe((resp: any) => {
+    });
+
+    this.orientacionService.putOrientacion(this.gameCategoryRequest).subscribe((resp: any) => {
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
@@ -117,20 +121,13 @@ export class TestOrientacionComponent implements OnInit {
         this.cargando = false;
         this.errorCode = true;
       });
-      this.retorno = true;
-    }
   }
 
   getOrientacion() {
     const errorSrv = this.erroresServicio.obtenerErrorServicio('testOrientacion');
     errorSrv.nuevoRequest();
     this.orientacionService.getOrientacion().subscribe((resp: any) => {
-      this.ori.id = resp.id;
-      this.ori.name = resp.name;
-      this.ori.description = resp.description;
-      this.ori.category = resp.category;
-      this.ori.tasks = resp.tasks;
-      this.ori.resources = resp.resources;
+      this.ori = resp;
       this.orientacion.push(this.ori);
     }, (error: HttpErrorResponse) => {
       errorSrv.getError(error);
@@ -187,19 +184,19 @@ export class TestOrientacionComponent implements OnInit {
           break;
         case 6:
           patient.id = i;
-          patient.isCorrect = orientacion.validarPais(respuesta);
+          patient.isCorrect = orientacion.validarPais(respuesta, this.country);
           patient.answer = respuesta;
           this.rsp.push(patient);
           break;
         case 7:
           patient.id = i;
-          patient.isCorrect = orientacion.validarProvincia(respuesta);
+          patient.isCorrect = orientacion.validarProvincia(respuesta, this.state);
           patient.answer = respuesta;
           this.rsp.push(patient);
           break;
         case 8:
           patient.id = i;
-          patient.isCorrect = false;
+          patient.isCorrect = orientacion.validarCiudad(respuesta, this.city, this.locality);
           patient.answer = respuesta;
           this.rsp.push(patient);
           break;
@@ -219,41 +216,35 @@ export class TestOrientacionComponent implements OnInit {
     }
     return this.rsp;
   }
+  // Obtiene la localizacion actual del dispositivo
+  getGeolocation() {
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitud = resp.coords.latitude;
+      this.longitud = resp.coords.longitude;
+      this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
 
-  getLocation() {
-    this.locationService.getPosition().then(pos => {
-        this.latitud = pos.lat;
-        this.longitud = pos.lng;
-        console.log('LATITUD');
-        console.log(this.latitud);
-        console.log('LONGITUD');
-        console.log(this.longitud);
-        this.obtenerPosicion(this.latitud, this.longitud);
-        // this.obtenerPais(this.latitud, this.longitud);
+    }).catch((error) => {
+      alert('Error getting location' + JSON.stringify(error));
     });
   }
 
-  /*obtenerPais(latitud: any, longitud: any) {
-    const GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latitud + '%2C' + longitud + '&language=en';
-    console.log(GEOCODING);
-  }*/
-
-  loadMap() {
-    this.map = GoogleMaps.create('map_canvas');
+  // geocoder method to fetch address from coordinates passed as arguments
+  getGeoencoder(latitude, longitude) {
+    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
+      .then((result: NativeGeocoderResult[]) => {
+        this.country = result[0].countryName;
+        this.state = result[0].administrativeArea;
+        this.locality = result[0].subAdministrativeArea;
+        this.city = result[0].locality;
+      })
+      .catch((error: any) => {
+        alert('Error getting location' + JSON.stringify(error));
+      });
   }
 
-  obtenerPosicion(latitud: any, longitud: any) {
-    this.map.addMarker({
-      title: '@ionic-native/google-maps',
-      icon: 'blue',
-      animation: 'DROP',
-      position: {
-        lat: latitud,
-        lng: longitud
-      }
-    }).then((marker: Marker) => {
-      marker.showInfoWindow();
-    });
+  TomarDatosForm(datos: any[]){
+    this.respuesta = datos;
+    this.enviarDatosOrientacion();
   }
 
 }

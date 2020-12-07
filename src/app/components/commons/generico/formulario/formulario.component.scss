@@ -1,0 +1,182 @@
+:host(.ion-focused) .item-native::after {
+    background: transparent !important;
+}
+
+.form {
+    min-height: calc(100vh - 270px);
+}
+
+.NoSoloForm {
+    min-height: calc(100vh - 620px);
+}
+
+
+/* ION ITEM INPUTS */
+
+ion-item {
+    --background-focused: transparent;
+    --border-width: 1px 1px 1px 1px;
+    margin-bottom: 15px;
+    --border-radius: 10px
+}
+
+ion-item.item-has-focus {
+    --border-width: 2px 2px 2px 2px;
+}
+
+// para l
+.ion-item-blanco {
+    --border-color: #fff;
+    --border-width: 1px 1px 1px 1px;
+    color: #fff;
+}
+
+.select-blanco {
+    --placeholder-color: #fff;
+    --placeholder-opacity: 1;
+}
+
+.ion-item-blanco.item-has-focus>ion-label,
+.ion-item-blanco.item-has-focus>ion-input,
+.ion-item-blanco>ion-input,
+a,
+.ion-item-blanco>ion-label,
+.ion-item-blanco>ion-icon,
+.ion-item-blanco>ion-datetime {
+    color: #fff !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+ion-icon {
+    margin-bottom: 15px;
+}
+
+.ion-item-error {
+    --border-color: #eb445a;
+    --border-width: 0 0 2px 0;
+}
+
+.ion-item-error.item-has-focus>ion-label,
+.ion-item-error.item-has-focus>ion-input,
+.ion-item-error>ion-icon,
+.ion-item-error>ion-datetime,
+.ion-item-error>ion-label,
+.ion-item-error>ion-input {
+    color: #fff !important;
+}
+
+
+/* tooltip */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted #eb445a;
+}
+
+.tooltip .tiptext {
+    visibility: visible;
+    width: 200px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 6px 0;
+    position: absolute;
+    z-index: 10;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    font-size: 14pt;
+}
+
+.tooltip .tiptext::after {
+    content: "";
+    position: absolute;
+    border-width: 10px;
+    border-style: solid;
+}
+
+// .tooltip:hover .tiptext {
+//  visibility: visible;
+// }
+.tooltip.top .tiptext {
+    margin-left: -60px;
+    //bottom: 150%;
+    margin-top: -20px;
+    top: 0;
+    left: 50%;
+}
+
+.tooltip.top .tiptext::after {
+    margin-left: -5px;
+    top: 100%;
+    left: 50%;
+    border-color: #eb445a transparent transparent transparent;
+}
+
+.tooltip.left .tiptext {
+    margin-left: -155px;
+    width: 300px;
+}
+
+.tooltip.left2 .tiptext {
+    margin-left: 0px;
+    width: 200px;
+}
+
+.tooltip.bottom .tiptext {
+    margin-left: -155px;
+    margin-top: -7px;
+    top: 150%;
+    left: 50%;
+    width: 300px;
+}
+
+.tooltip.bottom .tiptext::after {
+    margin-left: -5px;
+    bottom: 100%;
+    left: 50%;
+    border-color: transparent transparent #eb445a transparent;
+}
+
+.error {
+    background-color: #eb445a !important;
+}
+
+.font-size-12pt {
+    font-size: 12pt !important;
+}
+
+// inputs cuadrados
+ion-item>ion-input.inputs-cuadrados {
+    background-color: #ffffff;
+    width: 15% !important;
+    height: 90px;
+    display: flex;
+    border: solid;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    font-size: 40pt !important;
+    text-align: center;
+    color: #510f7a;
+    margin: 1px;
+}
+
+.flex {
+    display: flex;
+}
+
+h4 {
+    margin-top: 0;
+}
+
+.sin-lines {
+    --border-width: 0px 0px 0px 0px;
+}
+
+.sin-lines.item-has-focus {
+    --border-width: 0px 0px 0px 0px;
+}

@@ -43,7 +43,6 @@ describe('LoginComponent', () => {
       },
       invalid: false
      } as NgForm;
-    component.login(testForm);
 
     tick(1);
     expect(component.retorno).toBe(true);
@@ -58,7 +57,6 @@ describe('LoginComponent', () => {
      invalid: true
     } as NgForm;
 
-    component.login(testForm);
     tick();
     expect(component.retorno).toBe(false);
  }));
