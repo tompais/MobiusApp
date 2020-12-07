@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { HttpClientModule } from '@angular/common/http';
 import { CommonService } from './services/common/common.service';
 import { RegistroComponent } from './components/commons/registro/registro.component';
@@ -49,6 +46,7 @@ import { DemoImage } from './components/test/dibujo/DemoImage';
 import { HeaderComponent } from './components/commons/generico/header/header.component';
 import { FinalizacionService } from './services/test/finalizacion.service';
 import { DescripcionComponent } from './components/commons/generico/descripcion/descripcion.component';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { FormularioComponent } from './components/commons/generico/formulario/formulario.component';
 import { NgxAutocomPlaceModule } from 'ngx-autocom-place';
 
@@ -59,7 +57,7 @@ import { NgxAutocomPlaceModule } from 'ngx-autocom-place';
     FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, MemoriaComponent, RepeticionComponent,
     DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, FormularioComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule, NgxAutocomPlaceModule],
+  imports: [BrowserModule, IonicModule.forRoot({hardwareBackButton: false}), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule, NgxAutocomPlaceModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -74,6 +72,7 @@ import { NgxAutocomPlaceModule } from 'ngx-autocom-place';
     LocationService,
     DemoImage,
     FinalizacionService,
+    ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
