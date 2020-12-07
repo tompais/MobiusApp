@@ -85,6 +85,7 @@ fileName: string;
       this.fileName = resp.resources[0].fileName;
       this.escrituraRequest.gameId = resp.id;
       this.escrituraRequest.category = resp.category;
+      this.escrituraRequest.areTestGameAnswers = resp.isTestGame;
       console.log(this.escrituraRequest.gameId);
       console.log(this.escrituraRequest.category);
       this.taskId = resp.tasks[0].id;

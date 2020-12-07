@@ -83,6 +83,7 @@ export class RepeticionComponent implements OnInit {
       this.repuesta.name = resp.name;
       this.repuesta.description = resp.description;
       this.repuesta.category = resp.category;
+      this.repuesta.isTestGame = resp.isTestGame;
 
       this.repuesta.tasks = new Array<Tasks>();
       this.task.id = resp.tasks[0].id;
@@ -141,6 +142,7 @@ export class RepeticionComponent implements OnInit {
     errorSrv.nuevoRequest();
     this.repeticionRquest.gameId = this.repuesta.id;
     this.repeticionRquest.category = this.repuesta.category;
+    this.repeticionRquest.areTestGameAnswers = this.repuesta.isTestGame;
     // this.fijacionRquest.patientTaskAnswersList.taskId = this.repuesta.taskId[0].id;
     const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
     task.taskId = this.repuesta.tasks[0].id;
