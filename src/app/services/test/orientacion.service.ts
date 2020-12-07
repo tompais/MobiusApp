@@ -24,10 +24,12 @@ export class OrientacionService extends Servicio {
     const mensaje = {
       category: null,
       gameId: null,
+      areTestGameAnswers: null,
       patientTaskAnswersRequestList: null
     };
     mensaje.category = gameCategoryRequest.category;
     mensaje.gameId = gameCategoryRequest.gameId;
+    mensaje.areTestGameAnswers = gameCategoryRequest.areTestGameAnswers;
     mensaje.patientTaskAnswersRequestList = gameCategoryRequest.patientTaskAnswersRequestList;
     const respuesta = this.http.post(urlService, mensaje, this.obtenerToken());
     return respuesta;
