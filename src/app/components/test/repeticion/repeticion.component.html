@@ -3,14 +3,16 @@
     <ion-grid>
         <mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="item.description"></mobi-descripcion>
         <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
-        <ion-row class="centrar">
-            <ion-col>
-                <div class="margin-left-right" style="margin-top:25%;">
-                    <mobi-boton [name]="'btn-escuchar'" (click)="escuchar()" [icono]="'play-outline'" [tipoBoton]="'fab'" [forma]="'round'"></mobi-boton>
-                    <mobi-boton [name]="'btn-hablar'" [icono]="'mic-outline'" [tipoBoton]="'fab'" (click)="hablar()" [forma]="'round'"></mobi-boton>
-                </div>
-            </ion-col>
-        </ion-row>
+        <div class="valing ion-align-items-center ion-justify-content-center flex">
+            <div>
+                <ion-row>
+                    <ion-col class="flex ion-justify-content-center" size="12">
+                        <mobi-boton [name]="'btn-escuchar'" (click)="escuchar()" [icono]="'play-outline'" [tipoBoton]="'fab'" [forma]="'round'"></mobi-boton>
+                        <mobi-boton [name]="'btn-hablar'" [icono]="'mic-outline'" [tipoBoton]="'fab'" (click)="hablar()" [forma]="'round'"></mobi-boton>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
     </ion-grid>
 </ion-content>
 <div class="centrar margin-botones">
