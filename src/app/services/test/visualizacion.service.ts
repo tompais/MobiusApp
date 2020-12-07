@@ -17,7 +17,7 @@ export class VisualizacionService {
 
     const id = this.sessionStorage.consultar('id');
 
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
+    const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
 
     console.log(JSON.stringify(gcr));
     const respuesta = this.http.post(urlService, gcr);
@@ -27,10 +27,11 @@ export class VisualizacionService {
   public traerDatos(){
     // VISUALIZATION
     const id = this.sessionStorage.consultar('id');
+    const isTest = this.sessionStorage.consultar('EsTest');
    // console.log('ID SESSION STORAGE');
    // console.log(id);
     // poner dentro de la ruta ${id} !!!!
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=visualization`;
+    const urlService = `${environmentProd.url}/patients/${id}/game?game-category=visualization&test=${isTest}`;
     const respuesta = this.http.get(urlService);
     return respuesta;
   }
