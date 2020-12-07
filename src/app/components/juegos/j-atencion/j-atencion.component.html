@@ -1,0 +1,7 @@
+<mobi-header [titulo]="nameGame"></mobi-header>
+<ion-content class="ion-padding">
+    <ion-grid>
+        <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
+        <mobi-form *ngIf="atencionResponse" [nombrePantalla]="'atencion'" [Datos]="atencionResponse" [UrlProxPantalla]="'/juegos/finalizacion'" [NombreBotonSubmit]="'FINALIZAR'" (DevolverDatos)="TomarDatosForm($event)"></mobi-form>
+    </ion-grid>
+</ion-content>

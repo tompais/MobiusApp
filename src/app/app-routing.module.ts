@@ -20,6 +20,16 @@ import { LecturaComponent } from './components/test/lectura/lectura.component';
 import { MemoriaComponent } from './components/test/memoria/memoria.component';
 import { RepeticionComponent } from './components/test/repeticion/repeticion.component';
 import { DibujoComponent } from './components/test/dibujo/dibujo.component';
+import { JDibujoComponent } from './components/juegos/j-dibujo/j-dibujo.component';
+import { JEscrituraComponent } from './components/juegos/j-escritura/j-escritura.component';
+import { JOrdenesComponent } from './components/juegos/j-ordenes/j-ordenes.component';
+import { JHomeComponent } from './components/juegos/j-home/j-home.component';
+import { JFinalizacionComponent } from './components/juegos/j-finalizacion/j-finalizacion.component';
+import { JAtencionComponent } from './components/juegos/j-atencion/j-atencion.component';
+import { JCalculoComponent } from './components/juegos/j-calculo/j-calculo.component';
+import { JFijacionComponent } from './components/juegos/j-fijacion/j-fijacion.component';
+import { JLecturaComponent } from './components/juegos/j-lectura/j-lectura.component';
+import { JVisualizacionComponent } from './components/juegos/j-visualizacion/j-visualizacion.component';
 
 const routes: Routes = [
   {
@@ -43,7 +53,17 @@ const routes: Routes = [
   {path: 'test/lectura', component: LecturaComponent},
   {path: 'test/memoria', component: MemoriaComponent},
   {path: 'test/repeticion', component: RepeticionComponent},
-  {path: 'test/dibujo', component: DibujoComponent}
+  {path: 'test/dibujo', component: DibujoComponent},
+  {path: 'juegos/atencion', component: JAtencionComponent},
+  {path: 'juegos/calculo', component: JCalculoComponent},
+  {path: 'juegos/dibujo', component: JDibujoComponent},
+  {path: 'juegos/escritura', component: JEscrituraComponent},
+  {path: 'juegos/fijacion', component: JFijacionComponent},
+  {path: 'juegos/lectura', component: JLecturaComponent},
+  {path: 'juegos/ordenes', component: JOrdenesComponent},
+  {path: 'juegos/visualizacion', component: JVisualizacionComponent},
+  {path: 'juegos/home', component: JHomeComponent},
+  {path: 'juegos/finalizacion', component: JFinalizacionComponent}
 ];
 
 @NgModule({

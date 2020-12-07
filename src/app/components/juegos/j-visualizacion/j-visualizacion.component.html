@@ -1,0 +1,14 @@
+<mobi-header [titulo]="nameGame"></mobi-header>
+<ion-content class="ion-padding">
+    <ion-grid>
+        <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
+        <ion-row>
+            <ion-col>
+                <div class="marginTop-20">
+                    <img src='{{ imagen }}' alt="imagen" width="400px">
+                </div>
+            </ion-col>
+        </ion-row>
+        <mobi-form *ngIf="visualizacionResponse" [SoloForm]="false" [nombrePantalla]="'visualizacion'" [Datos]="visualizacionResponse" [UrlProxPantalla]="'/juegos/finalizacion'" [NombreBotonSubmit]="'FINALIZAR'" (DevolverDatos)="TomarDatosForm($event)"></mobi-form>
+    </ion-grid>
+</ion-content>

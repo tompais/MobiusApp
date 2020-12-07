@@ -1,0 +1,21 @@
+<mobi-header [titulo]="nameGame"></mobi-header>
+<ion-content class="ion-padding">
+    <ion-grid>
+        <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
+        <ion-list>
+            <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
+
+                <ion-reorder *ngFor="let partesFrases of frases">
+                    <ion-item>
+                        <ion-label>
+                            {{ partesFrases }}
+                        </ion-label>
+                    </ion-item>
+                </ion-reorder>
+            </ion-reorder-group>
+        </ion-list>
+    </ion-grid>
+</ion-content>
+<div class="centrar margin-botones">
+    <mobi-boton [textoAMostrar]="'Finalizar'" [forma]="'round'" (click)="enviarRespuesta()"></mobi-boton>
+</div>

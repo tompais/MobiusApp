@@ -7,13 +7,14 @@ import { environmentProd } from 'src/environments/environment.prod';
 import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
 import { GameCategoryResponse } from 'src/app/components/commons/models/commons/GameCategoryResponse';
+import { JuegosService } from 'src/app/services/juegos/juegos.service';
 
 @Component({
-  selector: 'app-visualizacion',
-  templateUrl: './visualizacion.component.html',
-  styleUrls: ['./visualizacion.component.scss'],
+  selector: 'app-j-visualizacion',
+  templateUrl: './j-visualizacion.component.html',
+  styleUrls: ['./j-visualizacion.component.scss'],
 })
-export class VisualizacionComponent implements OnInit {
+export class JVisualizacionComponent implements OnInit {
   respuesta: string[] = [];
   retorno: boolean;
   cargando = false;
@@ -28,10 +29,10 @@ export class VisualizacionComponent implements OnInit {
   imagen: string;
   visualizacionRequest: GameCategoryRequest = null;
   visualizacionResponse: GameCategoryResponse = null;
-  nameTest = '';
+  nameGame = '';
   respuestaFinal: any[] = [];
 
-  constructor(public commonService: CommonService, private router: Router, public visualizacionServ: VisualizacionService) { }
+  constructor(public commonService: CommonService, private router: Router, public juegosServ: JuegosService) { }
 
   ngOnInit() {
     this.obtenerDatos();
@@ -44,11 +45,11 @@ export class VisualizacionComponent implements OnInit {
       this.visualizacionRequest.patientTaskAnswersRequestList.push(task);
       console.log(this.visualizacionRequest);
 
-      this.visualizacionServ.enviarDatos(this.visualizacionRequest).subscribe((resp: any) => {
+      this.juegosServ.enviarDatos(this.visualizacionRequest).subscribe((resp: any) => {
         this.cargando = false;
         this.errorCode = false;
         if (this.errorCode === false) {
-          this.router.navigate(['/test/repeticion']);
+          this.router.navigate(['/juegos/finalizacion']);
         }
       }, (error: Error) => {
         this.cargando = false;
@@ -61,10 +62,10 @@ export class VisualizacionComponent implements OnInit {
     this.visualizacionRequest = new GameCategoryRequest();
     this.visualizacionRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
-    this.visualizacionServ.traerDatos().subscribe((resp: any) => {
+    this.juegosServ.traerDatos('visualization').subscribe((resp: any) => {
       this.visualizacionResponse = resp;
       this.descripcion = resp.tasks[0].description;
-      this.nameTest = resp.name;
+      this.nameGame = resp.name;
       this.imgName = resp.resources[0].fileName;
       this.visualizacionRequest.gameId = resp.id;
       this.visualizacionRequest.category = resp.category;

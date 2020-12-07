@@ -3,7 +3,7 @@
     <ion-grid>
         <ion-row>
             <ion-text>
-                <h4 class="bold">{{ descripcionTest }} {{ descripcionTask }}</h4>
+                <h4 class="bold">{{ descripcionGame }} {{ descripcionTask }}</h4>
             </ion-text>
         </ion-row>
         <ion-row class="boton">
@@ -21,8 +21,8 @@
                 </ion-text>
             </ion-row>
             <ion-row class="row_pad">
-                <signature-pad id="paleta" [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
-                </signature-pad>
+            <signature-pad id="paleta" [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
+            </signature-pad>
             </ion-row>
         <ion-row class="boton">
             <mobi-boton [forma]="'round'" type="button" shape="round" expand="block" color="primary" (click)="reset()" [textoAMostrar]="'Limpiar respuesta'"></mobi-boton>
@@ -32,3 +32,4 @@
           </ion-row>
     </ion-grid>
 </ion-content>
+

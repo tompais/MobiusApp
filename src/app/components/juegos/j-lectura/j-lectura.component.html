@@ -1,0 +1,12 @@
+<mobi-header [titulo]="nameGame"></mobi-header>
+<ion-content class="ion-padding">
+    <ion-grid>
+        <mobi-descripcion [textoAmotrar]="descripcionGame"></mobi-descripcion>
+        <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
+        <ion-row>
+            <img src="{{imagen}}" alt="lectura" width="400px">
+        </ion-row>
+        <mobi-descripcion [textoAmotrar]="'Indique el número de la persona correcta'"></mobi-descripcion>
+        <mobi-form *ngIf="lecturaResponse" [nombrePantalla]="'lectura'" [SoloForm]="false" [Datos]="lecturaResponse" [UrlProxPantalla]="'/juegos/finalizacion'" [NombreBotonSubmit]="'FINALIZAR'" (DevolverDatos)="TomarDatosForm($event)"></mobi-form>
+    </ion-grid>
+</ion-content>

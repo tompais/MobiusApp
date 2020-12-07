@@ -1,0 +1,28 @@
+h1 {
+    text-align: center;
+}
+
+ion-grid {
+    height: 100%;
+}
+
+ion-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+ion-item {
+    --background-focused: transparent;
+    --border-color: #7D329F;
+}
+
+img {
+    margin-bottom: 20px;
+    ;
+}
+
+:host(.ion-focused) .item-native::after {
+    background: transparent !important;
+}
