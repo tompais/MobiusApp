@@ -50,6 +50,7 @@ import { DemoImage } from './components/test/dibujo/DemoImage';
 import { HeaderComponent } from './components/commons/generico/header/header.component';
 import { FinalizacionService } from './services/test/finalizacion.service';
 import { DescripcionComponent } from './components/commons/generico/descripcion/descripcion.component';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 
 @NgModule({
   declarations: [AppComponent, HomeComponent, RegistroComponent, LoginComponent, TextValidationComponent, IntroduccionComponent,
@@ -58,7 +59,7 @@ import { DescripcionComponent } from './components/commons/generico/descripcion/
     FinalizacionComponent, AtencionComponent, EscrituraComponent, LecturaComponent, InputGenericComponent, MemoriaComponent, RepeticionComponent,
     DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule],
+  imports: [BrowserModule, IonicModule.forRoot({hardwareBackButton: false}), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -73,6 +74,7 @@ import { DescripcionComponent } from './components/commons/generico/descripcion/
     LocationService,
     DemoImage,
     FinalizacionService,
+    ScreenOrientation,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

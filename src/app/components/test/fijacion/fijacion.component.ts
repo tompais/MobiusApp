@@ -14,7 +14,6 @@ import { PatientTaskAnswersRequestList } from '../../commons/models/commons/Pati
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LocalStorageService } from '../../../services/common/localstorage.service';
-import { environmentDevStageBlue } from '../../../../environments/environment.dev.stage.blue';
 import { environmentProd } from '../../../../environments/environment.prod';
 
 @Component({
@@ -27,7 +26,8 @@ export class FijacionComponent implements OnInit {
   texto = '';
   audio: any;
   puedeEnviar = false;
-  reproduirAudio = false;
+  // reproduirAudio = false;
+  reproduirAudio = true;
   erroresServicio: ErrorServicioGrupo = null;
   errorresServicioSet: ErrorServicioGrupo = null;
   repuesta: GameCategoryResponse = null;
@@ -43,6 +43,7 @@ export class FijacionComponent implements OnInit {
   storage: LocalStorageService;
   idUsuario: any;
   descripcion = '';
+  cantidadEscuchadas = 0;
 
   constructor(public app: AppComponent, private sr: SpeechRecognition, private fj: FijacionService, public router: Router) {
     this.primaryApp = app;
@@ -86,9 +87,15 @@ export class FijacionComponent implements OnInit {
 
       this.repuesta.tasks = new Array<Tasks>();
       this.task.id = resp.tasks[0].id;
-      // this.task.description = resp.tasks[0].description;
       this.task.description = resp.tasks[0].description;
-      this.descripcion = this.task.description.replace('<br><br>', '\n');
+      // this.task.description = resp.tasks[0].description;
+      // this.descripcion = 'Escuche atentamente el siguiente audio y repita las palabras por el micrófono. Solo podrá reproducirlo 3 veces. Utilice el botón izquierdo para reproducir y el derecho para hablar';
+      // this.descripcion.replace('mundo', '<br>');
+      // var desc = '';
+      // console.log(desc = this.descripcion.replace('.', '<br>'));
+      // console.log(document.write(`<h1>${desc}</h1>`));
+      // document.write(`<h1>${this.task.description}</h1>`);
+      // this.descripcion = this.task.description.replace('<br><br>', '\n');
       this.repuesta.tasks.push(this.task);
 
       this.input.id = resp.tasks[0].inputs[0].id;
@@ -133,9 +140,14 @@ export class FijacionComponent implements OnInit {
     );
   }
 
-  escuchar(){
-    this.audio.play();
-    this.reproduirAudio = true;
+  escuchar() {
+    this.cantidadEscuchadas++;
+    if (this.cantidadEscuchadas <= 3) {
+      this.audio.play();
+      this.reproduirAudio = true;
+    } else {
+      this.reproduirAudio = false;
+    }
   }
 
   setFijacion(){

@@ -1,13 +1,14 @@
-<mobi-header [titulo]="repuesta.name"> </mobi-header>
+<mobi-header [titulo]="repuesta.name"></mobi-header>
+<ion-progress-bar type="indeterminate" *ngIf="cargando"></ion-progress-bar>
 <ion-content class="ion-padding">
     <ion-grid>
-        <!--<mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="item.description"></mobi-descripcion>-->
-        <mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="descripcion"></mobi-descripcion>
+        <mobi-descripcion *ngFor="let item of repuesta.tasks" [textoAmotrar]="item.description"></mobi-descripcion>
         <app-info-consulta-service-grupo [primaryApp]="primaryApp" [erroresServicio]="erroresServicio" (eventoError)="eventoError($event)"></app-info-consulta-service-grupo>
-        <ion-row class="centrar">
-            <ion-col>
-                <div class="margin-left-right">
-                    <mobi-boton [name]="'btn-escuchar'" (click)="escuchar()" [icono]="'play-outline'" [tipoBoton]="'fab'" [forma]="'round'"></mobi-boton>
+        <ion-row class="centrar ion-align-items-end">
+            <!--<ion-col class="ion-align-self-center" size="7" offset="2" style="margin-top: 35%;">-->
+            <ion-col style="display: flex; justify-content: center;">
+                <div class="margin-left-right" style="width: 90vw;">
+                    <mobi-boton [name]="'btn-escuchar'" [deshabilitado]="!reproduirAudio" (click)="escuchar()" [icono]="'play-outline'" [tipoBoton]="'fab'" [forma]="'round'"></mobi-boton>
                     <mobi-boton [name]="'btn-hablar'" [icono]="'mic-outline'" [tipoBoton]="'fab'" (click)="hablar()" [forma]="'round'"></mobi-boton>
                 </div>
             </ion-col>
