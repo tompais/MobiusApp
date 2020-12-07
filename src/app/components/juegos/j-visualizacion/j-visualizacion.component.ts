@@ -28,7 +28,7 @@ export class JVisualizacionComponent implements OnInit {
   imagen: string;
   visualizacionRequest: GameCategoryRequest = null;
   nameGame = '';
-  
+
   constructor(public commonService: CommonService, private router: Router, public juegosServ: JuegosService) { }
 
   ngOnInit() {
@@ -64,7 +64,7 @@ export class JVisualizacionComponent implements OnInit {
     this.visualizacionRequest = new GameCategoryRequest();
     this.visualizacionRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
-    this.juegosServ.traerDatos().subscribe((resp: any) => {
+    this.juegosServ.traerDatos('visualization').subscribe((resp: any) => {
       this.descripcion = resp.tasks[0].description;
       this.nameGame = resp.name;
       this.imgName = resp.resources[0].fileName;

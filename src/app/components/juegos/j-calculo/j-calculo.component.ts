@@ -72,7 +72,7 @@ export class JCalculoComponent implements OnInit {
     this.calculoRequest = new GameCategoryRequest();
     this.calculoRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
-    this.juegosServ.traerDatos().subscribe((resp: any) => {
+    this.juegosServ.traerDatos('calculation').subscribe((resp: any) => {
       this.nameGame = resp.name;
       this.descripcion1 = resp.tasks[0].description;
       // this.descripcion2 = resp.tasks[1].description;

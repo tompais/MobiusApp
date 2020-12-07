@@ -128,7 +128,7 @@ export class JOrdenesComponent implements OnInit {
     this.ordenesRequest = new GameCategoryRequest();
     this.ordenesRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
-    this.juegosServ.traerDatos().subscribe((resp: any) => {
+    this.juegosServ.traerDatos('comprehension').subscribe((resp: any) => {
       this.descripcion = resp.tasks[0].description;
       this.nameGame = resp.name;
       this.audioName = resp.resources[0].fileName;

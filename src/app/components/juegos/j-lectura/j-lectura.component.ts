@@ -43,7 +43,7 @@ export class JLecturaComponent implements OnInit {
     this.lecturaRequest = new GameCategoryRequest();
     this.lecturaRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
     console.log(this.url);
-    this.juegosServ.traerDatos().subscribe((resp: any) => {
+    this.juegosServ.traerDatos('reading').subscribe((resp: any) => {
       this.descripcion = resp.tasks[0].description;
       this.nameGame = resp.name;
       this.imgName = resp.resources[0].fileName;

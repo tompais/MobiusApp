@@ -109,7 +109,7 @@ export class JDibujoComponent implements OnInit {
     this.dibujoRequest = new GameCategoryRequest();
     this.dibujoRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
     console.log(this.url);
-    this.juegosServ.traerDatos().subscribe((resp: any) => {
+    this.juegosServ.traerDatos('drawing').subscribe((resp: any) => {
 
       this.descripcionTask = resp.tasks[0].description;
       this.nameGame = resp.name;

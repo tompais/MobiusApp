@@ -22,7 +22,7 @@ export class VisualizacionComponent implements OnInit {
   taskId: number;
   descripcion: string;
   url = environmentProd.url;
-  img = 'images/';
+  img = '/images/';
   imgName: string;
   imagen: string;
   visualizacionRequest: GameCategoryRequest = null;

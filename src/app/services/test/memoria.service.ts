@@ -28,6 +28,10 @@ import { GameCategoryRequestConResult } from '../../components/commons/models/co
 
     public setMemoria(respMemoria: GameCategoryRequestConResult){
       const id = this.storage.get('id');
+
+      console.log('Json a Enviar: ');
+      console.log(respMemoria);
+
       const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
       const mensaje = {};
       const respuesta = this.http.post(urlService, respMemoria, this.obtenerToken());

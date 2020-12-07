@@ -16,6 +16,9 @@ export class CalculoService {
 
     const id = this.sessionStorage.consultar('id');
 
+    console.log('Json a Enviar: ');
+    console.log(gcr);
+
     const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
 
     console.log(JSON.stringify(gcr));

@@ -12,22 +12,24 @@ import { JuegosService } from 'src/app/services/juegos/juegos.service';
 export class JHomeComponent implements OnInit {
 
   categoriaRecomendada: string[] = [];
-  categoriaRecomendadaTraducida: string[] = ['calculo'];
+  categoriaRecomendadaTraducida: string[] = [];
   categorias: string[] = [];
-  categoriasTraducidas: string[] = ['visualizacion', 'fijacion', 'atencion', 'dibujo'];
+  categoriasTraducidas: string[] = [];
 
   constructor(public commonService: CommonService, private router: Router, public juegosServ: JuegosService, public http: HttpClient) { }
 
   ngOnInit() {
-    // this.obtenerDatosHome();
-    // this.categoriaRecomendadaTraducida = this.traducirCategorias(this.categoriaRecomendada);
-    // this.categoriasTraducidas = this.traducirCategorias(this.categorias);
+    this.obtenerDatosHome();
   }
 
   obtenerDatosHome(){
     this.juegosServ.traerDatosHome().subscribe((resp: any) => {
       this.categoriaRecomendada[0] = resp.recommendedCategory;
       this.categorias = resp.categories;
+
+      this.categoriaRecomendadaTraducida = this.traducirCategorias(this.categoriaRecomendada);
+      this.categoriasTraducidas = this.traducirCategorias(this.categorias);
+
     });
   }
 
@@ -35,6 +37,9 @@ export class JHomeComponent implements OnInit {
     const catTrad: string[] = [];
 
     for (let i = 0; i < cat.length; i++) {
+      console.log('nombre');
+      console.log(cat[i]);
+
       if (cat[i] === 'attention'){
         catTrad[i] = 'atencion';
       }

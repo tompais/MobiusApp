@@ -75,38 +75,38 @@ export class JFijacionComponent implements OnInit {
     // console.log('la tenes adentro');
      const errorSrv = this.erroresServicio.obtenerErrorServicio('getFijacion');
      errorSrv.nuevoRequest();
- 
-     this.juegosServ.traerDatos().subscribe((resp: any) => {
+
+     this.juegosServ.traerDatos('fixation').subscribe((resp: any) => {
        this.repuesta.id = resp.id;
        this.repuesta.name = resp.name;
        this.repuesta.description = resp.description;
        this.repuesta.category = resp.category;
- 
+
        this.repuesta.tasks = new Array<Tasks>();
        this.task.id = resp.tasks[0].id;
        // this.task.description = resp.tasks[0].description;
        this.task.description = resp.tasks[0].description;
        this.descripcion = this.task.description.replace('<br><br>', '\n');
        this.repuesta.tasks.push(this.task);
- 
+
        this.input.id = resp.tasks[0].inputs[0].id;
        this.input.type = resp.tasks[0].inputs[0].type;
        this.repuesta.tasks[0].inputs = new Array<Inputs>();
        this.repuesta.tasks[0].inputs.push(this.input);
- 
+
        this.resource.id = resp.resources[0].id;
        this.resource.type = resp.resources[0].type;
        this.resource.fileName = resp.resources[0].fileName;
        this.repuesta.resources = new Array<Resources>();
        this.repuesta.resources.push(this.resource);
- 
+
        // agregamos la url del audio
        this.audio = new Audio(environmentProd.url + '/audios/' + this.repuesta.resources[0].fileName);
- 
+
        // guardamos en local storage el texto del file que es la repuesta correcta para luego utilizarlo en memoria
        this.idUsuario =  this.storage.get('id');
        this.storage.set(this.idUsuario + 'palabrasCorrectas', this.repuesta.resources[0].fileName.split('.')[0]);
- 
+
         // tslint:disable-next-line: no-shadowed-variable
        /*errorSrv.procesarRespuesta(resp, (resp: any): void => {
        });*/
@@ -119,7 +119,7 @@ export class JFijacionComponent implements OnInit {
        }
      );
    }
- 
+
    hablar(){
        this.sr.startListening()
      .subscribe(
@@ -130,12 +130,12 @@ export class JFijacionComponent implements OnInit {
        (onerror) => console.log('error:', onerror)
      );
    }
- 
+
    escuchar(){
      this.audio.play();
      this.reproduirAudio = true;
    }
- 
+
    setFijacion(){
      const errorSrv = this.errorresServicioSet.obtenerErrorServicio('setFijacion');
      errorSrv.nuevoRequest();
@@ -145,7 +145,7 @@ export class JFijacionComponent implements OnInit {
      const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
      task.taskId = this.repuesta.tasks[0].id;
      task.patientAnswersRequest = new Array<string>();
- 
+
      if (this.texto.length > 0){
          const textoSeparado: string[] = this.texto.split(' ');
          // tslint:disable-next-line: prefer-for-of
@@ -156,11 +156,11 @@ export class JFijacionComponent implements OnInit {
          // console.log(this.fijacionRquest);
         // console.log(task);
      }
- 
+
      this.fijacionRquest.patientTaskAnswersRequestList.push(task);
- 
+
      JSON.stringify(this.fijacionRquest);
- 
+
      this.algo = JSON.stringify(this.fijacionRquest);
      console.log(JSON.stringify(this.fijacionRquest));
      // console.log(JSON.stringify(this.fijacionRquest));

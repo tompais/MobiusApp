@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { GameCategoryRequest } from 'src/app/components/commons/models/commons/GameCategoryRequest';
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
 import { environmentProd } from 'src/environments/environment.prod';
+import { EnvironmentDevStageRed } from 'src/environments/environment.dev.stage.red';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,11 @@ export class JuegosService {
 
   constructor(public http: HttpClient) { }
 
-  public traerDatos(){
-    // VISUALIZATION
+  public traerDatos(categoria: string){
+
     const id = this.sessionStorage.consultar('id');
-   // console.log('ID SESSION STORAGE');
-   // console.log(id);
-    // poner dentro de la ruta ${id} !!!!
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=attention`;
+
+    const urlService = `${environmentProd.url}/patients/${id}/game?game-category=${categoria}&test=false`;
     const respuesta = this.http.get(urlService);
     return respuesta;
   }
@@ -28,7 +27,7 @@ export class JuegosService {
 
     const id = this.sessionStorage.consultar('id');
 
-    const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
+    const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
 
     console.log(JSON.stringify(gcr));
     const respuesta = this.http.post(urlService, gcr);
@@ -37,7 +36,8 @@ export class JuegosService {
 
   public traerDatosHome(){
     const id = this.sessionStorage.consultar('id');
-
+    // ${environmentProd.url}
+    // ${EnvironmentDevStageRed.url}
     const urlService = `${environmentProd.url}/patients/${id}/home`;
     const respuesta = this.http.get(urlService);
     return respuesta;

@@ -61,7 +61,7 @@ export class JAtencionComponent implements OnInit {
     this.atencionRequest = new GameCategoryRequest();
     this.atencionRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
 
-    this.juegosServ.traerDatos().subscribe((resp: any) => {
+    this.juegosServ.traerDatos('attention').subscribe((resp: any) => {
       this.nameGame = resp.name;
       this.descripcion = resp.tasks[0].description;
       console.log(this.descripcion);

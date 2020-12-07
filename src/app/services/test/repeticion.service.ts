@@ -26,6 +26,10 @@ export class RepeticionService extends Servicio{
 
     public setFijacion(respFijacion: GameCategoryRequest){
       const id = this.sessionStorage.consultar('id');
+
+      console.log('Json a Enviar: ');
+      console.log(respFijacion);
+
       const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
       const mensaje = {};
       const respuesta = this.http.post(urlService, respFijacion, this.obtenerToken());

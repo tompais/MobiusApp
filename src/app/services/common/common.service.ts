@@ -4,6 +4,8 @@ import { Servicio } from 'src/app/components/commons/models/Servicio';
 import { User } from 'src/app/components/commons/models/User';
 import { UserRequest } from 'src/app/components/commons/models/user/UserRequest';
 import { environmentProd } from 'src/environments/environment.prod';
+import { EnvironmentDevStageRed } from 'src/environments/environment.dev.stage.red';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +18,17 @@ export class CommonService extends Servicio {
    }
 
   public login(user: User) {
+    // ${environmentProd.url}
     const urlService = `${environmentProd.url}/security/signin`;
     const mensaje = {
       email: null,
       password: null
     };
     mensaje.email = user.email;
-    mensaje.password = user.password;
+    // mensaje.password = user.password;
+    mensaje.password = btoa(user.password);
+    console.log('Respuesta a:');
+    console.log(mensaje);
     const respuesta = this.http.post(urlService, mensaje, this.generarToken(mensaje.email, mensaje.password));
     return respuesta;
   }
