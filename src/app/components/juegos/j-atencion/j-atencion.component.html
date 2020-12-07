@@ -2,26 +2,6 @@
 <ion-content class="ion-padding">
     <ion-grid>
         <mobi-descripcion [textoAmotrar]="descripcion"></mobi-descripcion>
-        <form (ngSubmit)="verificar(formAtencion)" #formAtencion="ngForm">
-            <div class="fondoblanco">
-                <ion-item color="danger" *ngIf="formAtencion.submitted && (formAtencion.controls['res1'].errors || formAtencion.controls['res2'].errors || formAtencion.controls['res3'].errors || formAtencion.controls['res4'].errors || formAtencion.controls['res5'].errors)">
-                    <ion-label>
-                        Debe completar todos los campos.
-                    </ion-label>
-                </ion-item>
-                <ion-item lines="none" class="fondoblanco">
-                    <ion-input type="text" maxlength="1" [(ngModel)]="respuesta[0]" name="res1" #res1="ngModel" required tabindex="1" (keyup)="pasarTextbox('res1','res2')"></ion-input>
-
-                    <ion-input type="text" maxlength="1" [(ngModel)]="respuesta[1]" name="res2" #res2="ngModel" required tabindex="2" (keyup)="pasarTextbox('res2','res3')"></ion-input>
-
-                    <ion-input type="text" maxlength="1" [(ngModel)]="respuesta[2]" name="res3" #res3="ngModel" required tabindex="3" (keyup)="pasarTextbox('res3','res4')"></ion-input>
-
-                    <ion-input type="text" maxlength="1" [(ngModel)]="respuesta[3]" name="res4" #res4="ngModel" required tabindex="4" (keyup)="pasarTextbox('res4','res5')"></ion-input>
-
-                    <ion-input type="text" maxlength="1" [(ngModel)]="respuesta[4]" name="res5" #res5="ngModel" required tabindex="5"></ion-input>
-                </ion-item>
-            </div>
-            <mobi-boton [textoAMostrar]="'Finalizar'" [forma]="'round'" [tipoBoton]="'submit'" [posForm]="true"></mobi-boton>
-        </form>
+        <mobi-form *ngIf="atencionResponse" [nombrePantalla]="'atencion'" [Datos]="atencionResponse" [UrlProxPantalla]="'/juegos/finalizacion'" [NombreBotonSubmit]="'FINALIZAR'" (DevolverDatos)="TomarDatosForm($event)"></mobi-form>
     </ion-grid>
 </ion-content>

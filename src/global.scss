@@ -65,11 +65,13 @@
     }
     
     .position-bottom {
-        position: absolute;
+        /*position: absolute;*/
+        position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: -1;
+        /*z-index: -1;*/
+        z-index: -10;
     }
     
     body {
@@ -94,4 +96,35 @@
     .margin-left-right {
         display: flex;
         justify-content: space-around;
+    }
+    
+    // GOOGLE MAP PLACE AUTOCOMPLATE
+    .pac-container {
+        min-width: 312px !important;
+        margin-left: -20px !important;
+    }
+    
+    .pac-item-query,
+    .pac-item {
+        font-size: 13pt !important;
+        color: #000;
+    }
+    
+    .pac-item:hover {
+        background-color: #c591dd;
+    }
+    
+    .pac-icon {
+        color: #000;
+    }
+    
+    // TOAST
+    ion-toast {
+        --background: #eb445a;
+        font-size: 14pt;
+    }
+    
+    // SELECT 
+    ion-select {
+        font-size: 14pt;
     }

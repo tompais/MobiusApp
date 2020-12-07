@@ -82,6 +82,7 @@ export class MemoriaComponent implements OnInit {
 
      this.memo.getMemoria().subscribe((resp: any) => {
        this.repuesta = resp;
+       this.MemoriaRquest.areTestGameAnswers = resp.isTestGame;
        // llamamos del local storage el texto con la respuesta correcta
        this.idUsuario =  this.storage.get('id');
        this.textoGuardado = this.storage.get(this.idUsuario + 'palabrasCorrectas');

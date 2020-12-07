@@ -18,6 +18,11 @@ ion-item {
     --border-color: #7D329F;
 }
 
+img {
+    margin-bottom: 20px;
+    ;
+}
+
 :host(.ion-focused) .item-native::after {
     background: transparent !important;
 }

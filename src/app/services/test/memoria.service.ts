@@ -20,7 +20,8 @@ import { GameCategoryRequestConResult } from '../../components/commons/models/co
 
     public getMemoria() {
       const id = this.storage.get('id');
-      const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=memory`;
+      const isTest = this.storage.get('EsTest');
+      const urlService = `${environmentProd.url}/patients/${id}/game?game-category=memory&test=${isTest}`;
       const mensaje = {};
       const respuesta = this.http.get(urlService, mensaje);
       return respuesta;
@@ -28,11 +29,7 @@ import { GameCategoryRequestConResult } from '../../components/commons/models/co
 
     public setMemoria(respMemoria: GameCategoryRequestConResult){
       const id = this.storage.get('id');
-
-      console.log('Json a Enviar: ');
-      console.log(respMemoria);
-
-      const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
+      const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
       const mensaje = {};
       const respuesta = this.http.post(urlService, respMemoria, this.obtenerToken());
       return respuesta;

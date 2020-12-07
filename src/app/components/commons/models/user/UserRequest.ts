@@ -1,16 +1,20 @@
-export class UserRequest {
+import { User } from '../User';
+
+export class UserRequest extends User {
 
     firstName: string;
     lastName: string;
     birthday: string;
     patientEmail: string;
     guardianEmail: string;
+    genre: string;
     password: string;
     passwordRepeat: string;
     age: number;
     retorno: boolean;
 
     constructor() {
+        super();
         this.firstName = '';
         this.lastName = '';
         this.birthday = '';
@@ -51,7 +55,10 @@ export class UserRequest {
 
     parsearFecha(fecha: string) {
         const resp = fecha.substring(0, 10);
-        resp.replace('-', '/');
+       // const resp2 = resp.split('-');
+
+        // resp = resp2[2] + '/' + resp2[1] + '/' + resp2[0];
+        console.log(resp);
         return resp;
     }
 

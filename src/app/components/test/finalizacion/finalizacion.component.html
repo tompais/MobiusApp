@@ -1,9 +1,14 @@
-<mobi-header [titulo]="'RESULTADOS DEL TEST'"></mobi-header>
+<mobi-header [titulo]="'Resultados del test'"></mobi-header>
 <ion-content class="ion-padding">
   <ion-grid>
-    <mobi-descripcion [textoAmotrar]="'Haz realizado todos los ejercicios del Test'"></mobi-descripcion>
-    <br><br>
-    <ion-row>
+    <mobi-descripcion [textoAmotrar]="'¡Haz completado el Test!'"></mobi-descripcion>
+    <mobi-descripcion [textoAmotrar]="'Se ha detectado una alteración en las funciones mentales superiores'"></mobi-descripcion>
+    <ion-row class="centrar" style="height: 55vh;">
+      <ion-col size="12">
+        <img src="assets/img/imagen_rompecabeza.png" />
+      </ion-col>
+    </ion-row>
+    <!--<ion-row>
       <ion-col col="12">
         <ion-list>
           <ion-item>
@@ -16,11 +21,11 @@
           </ion-item>
         </ion-list>
       </ion-col>
-    </ion-row>
-    <ion-row class="centrar">
-      <ion-col size="12">
-          <mobi-boton [textoAMostrar]="'Ir a Juegos'" [forma]="'round'" [tipoBoton]="'submit'"></mobi-boton>
-      </ion-col>
-    </ion-row>
+    </ion-row>-->
   </ion-grid>
 </ion-content>
+<ion-row class="centrar">
+  <ion-col size="12">
+      <mobi-boton [textoAMostrar]="'Ir a Juegos'" [forma]="'round'" [link]="'/juegos/home'"></mobi-boton>
+  </ion-col>
+</ion-row>

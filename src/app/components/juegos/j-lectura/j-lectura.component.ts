@@ -3,10 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
-import { JuegosService } from 'src/app/services/juegos/juegos.service';
+import { LecturaService } from 'src/app/services/test/lectura.service';
 import { environmentProd } from 'src/environments/environment.prod';
 import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
+import { GameCategoryResponse } from 'src/app/components/commons/models/commons/GameCategoryResponse';
+import { JuegosService } from 'src/app/services/juegos/juegos.service';
 
 @Component({
   selector: 'app-j-lectura',
@@ -14,8 +16,8 @@ import { PatientTaskAnswersRequestList } from '../../commons/models/commons/Pati
   styleUrls: ['./j-lectura.component.scss'],
 })
 export class JLecturaComponent implements OnInit {
-
   respuesta: string[] = [];
+  respuestaFinal: any[] = [];
   retorno: boolean;
   cargando = false;
   errorCode = false;
@@ -28,6 +30,7 @@ export class JLecturaComponent implements OnInit {
   imgName: string;
   imagen: string;
   lecturaRequest: GameCategoryRequest = null;
+  lecturaResponse: GameCategoryResponse = null;
   descripcionGame: string;
   nameGame = '';
 
@@ -35,40 +38,31 @@ export class JLecturaComponent implements OnInit {
 
   ngOnInit() {
     this.obtenerDatos();
-
   }
 
   obtenerDatos(){
 
     this.lecturaRequest = new GameCategoryRequest();
     this.lecturaRequest.patientTaskAnswersRequestList = new Array<PatientTaskAnswersRequestList<string>>();
-    console.log(this.url);
+
     this.juegosServ.traerDatos('reading').subscribe((resp: any) => {
+      this.lecturaResponse = resp;
       this.descripcion = resp.tasks[0].description;
       this.nameGame = resp.name;
       this.imgName = resp.resources[0].fileName;
-      console.log(this.descripcion);
       this.descripcionGame = resp.description;
       this.lecturaRequest.gameId = resp.id;
       this.lecturaRequest.category = resp.category;
-      console.log(this.lecturaRequest.gameId);
-      console.log(this.lecturaRequest.category);
+      this.lecturaRequest.areTestGameAnswers = resp.isTestGame;
       this.taskId = resp.tasks[0].id;
-      console.log(this.taskId);
-      console.log(resp);
-      console.log(this.lecturaRequest);
       this.imagen = `${this.url}/${this.img}${this.imgName}`;
-      console.log(this.imagen);
       });
 }
 
-verificar(form: NgForm){
-  if (form.invalid){
-    this.retorno = false;
-  }else{
+EnviarDatos(){
     const task: PatientTaskAnswersRequestList<string> = new PatientTaskAnswersRequestList<string>();
     task.taskId = this.taskId;
-    task.patientAnswersRequest = this.respuesta;
+    task.patientAnswersRequest = this.respuestaFinal;
     this.lecturaRequest.patientTaskAnswersRequestList.push(task);
     console.log(this.lecturaRequest);
 
@@ -82,6 +76,22 @@ verificar(form: NgForm){
       this.cargando = false;
       this.errorCode = true;
     });
+
+}
+ // metodo que toma los datos del evento emitido por el form
+ TomarDatosForm(datos: any){
+  this.respuesta = datos;
+  let j = 0;
+
+  // tslint:disable-next-line: prefer-for-of
+  for (let i = 0; i < this.respuesta.length; i++){
+    if ( this.respuesta[i]){
+      this.respuestaFinal[j] = this.respuesta[i];
+      j++;
+    }
   }
-  }
+
+  this.EnviarDatos();
+}
+
 }

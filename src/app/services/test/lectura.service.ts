@@ -20,7 +20,8 @@ public traerDatos(){
  // console.log('ID SESSION STORAGE');
  // console.log(id);
   // poner dentro de la ruta ${id} !!!!
-  const urlService = `${environmentProd.url}/patients/${id}/mental-test/game?next-game-category=reading`;
+  const isTest = this.sessionStorage.consultar('EsTest');
+  const urlService = `${environmentProd.url}/patients/${id}/game?game-category=reading&test=${isTest}`;
   const respuesta = this.http.get(urlService);
   return respuesta;
 }
@@ -29,10 +30,7 @@ public enviarDatos(gcr: GameCategoryRequest){
 
   const id = this.sessionStorage.consultar('id');
 
-  console.log('Json a Enviar: ');
-  console.log(gcr);
-
-  const urlService = `${environmentProd.url}/patients/${id}/mental-test/game/answers`;
+  const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
 
   console.log(JSON.stringify(gcr));
   const respuesta = this.http.post(urlService, gcr);

@@ -6,8 +6,8 @@
             <ion-reorder-group (ionItemReorder)="reorderItems($event)" disabled="false">
 
                 <ion-reorder *ngFor="let partesFrases of frases">
-                    <ion-item>
-                        <ion-label>
+                    <ion-item style="border-radius: 20px;">
+                        <ion-label style="text-align: center;">
                             {{ partesFrases }}
                         </ion-label>
                     </ion-item>
