@@ -3,27 +3,8 @@ ion-content {
 }
 
 img {
-    margin-top: 25%;
-    margin-bottom: 2%;
     width: 150px;
-}
-
-ion-item.item-has-focus>ion-label,
-ion-item.item-has-focus>ion-input {
-    color: #fff !important;
-}
-
-:host(.ion-focused) .item-native::after {
-    background: transparent !important;
-}
-
-ion-item {
-    --background-focused: transparent;
-    --border-color: #fff;
-}
-
-ion-item>ion-input {
-    color: #fff !important;
+    margin-bottom: 20px;
 }
 
 a,
@@ -37,4 +18,12 @@ ion-item.item-has-focus>ion-label {
 
 a {
     text-decoration: none;
+}
+
+.flex {
+    display: flex;
+}
+
+.valing {
+    min-height: calc(100vh - 100px);
 }
