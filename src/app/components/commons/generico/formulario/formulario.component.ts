@@ -124,8 +124,7 @@ export class FormularioComponent implements OnInit {
           this.errorCode = false;
 
           // guardamos url de la home de juegos para luego redireccionar
-          if (this.nombrePantalla.toUpperCase() !== 'REGISTRO' && this.nombrePantalla.toUpperCase() !== 'LOGIN'
-          && resp.testStatus !== 'in_progress') {
+          if (this.nombrePantalla.toUpperCase() !== 'REGISTRO' && resp.testStatus !== 'in_progress') {
             this.UrlProxPantalla = '/juegos/home';
           }
 
