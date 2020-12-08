@@ -42,4 +42,14 @@ export class FinalizacionComponent implements OnInit {
     });
   }
 
+  getMensaje(): string {
+    let resp = '';
+    if (this.finalizacionResponse.score < 32) {
+      resp = 'Se ha detectado una alteración en las funciones mentales superiores';
+    } else {
+      resp = 'No se ha detectado una alteración en las funciones mentales superiores';
+    }
+    return resp;
+  }
+
 }
