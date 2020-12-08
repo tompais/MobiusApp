@@ -124,7 +124,8 @@ export class FormularioComponent implements OnInit {
           this.errorCode = false;
 
           // guardamos url de la home de juegos para luego redireccionar
-          if (resp.testStatus !== 'in_progress') {
+          if (this.nombrePantalla.toUpperCase() !== 'REGISTRO' && this.nombrePantalla.toUpperCase() !== 'LOGIN'
+          && resp.testStatus !== 'in_progress') {
             this.UrlProxPantalla = '/juegos/home';
           }
 
@@ -152,6 +153,13 @@ export class FormularioComponent implements OnInit {
     toast.present();
   }
 
+  claseNoSoloForm(){
+    if (this.nombrePantalla === 'visualizacion'){
+      return 'NoSoloFormVisual';
+    }else{
+      return 'NoSoloForm';
+    }
+  }
 
   validaCampo(control: any, Valid: any){
     let retorno = true;
