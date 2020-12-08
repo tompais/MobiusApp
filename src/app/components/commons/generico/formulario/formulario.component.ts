@@ -104,7 +104,7 @@ export class FormularioComponent implements OnInit {
       console.log('SOY INVALID');
 
       if (this.nombrePantalla.toUpperCase() !== 'LOGIN' && this.nombrePantalla.toUpperCase() !== 'REGISTRO'){
-        this.presentToast('Verifique en ingreasar todos los datos.');
+        this.presentToast('Verifique en ingresar todos los datos.');
       }
 
       this.retorno = false;
