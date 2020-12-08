@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common/common.service';
 import { JuegosService } from 'src/app/services/juegos/juegos.service';
 
@@ -16,13 +16,17 @@ export class JHomeComponent implements OnInit {
   categorias: string[] = [];
   categoriasTraducidas: string[] = [];
 
-  constructor(public commonService: CommonService, private router: Router, public juegosServ: JuegosService, public http: HttpClient) { }
+  constructor(public route:ActivatedRoute, public commonService: CommonService, private router: Router, public juegosServ: JuegosService, public http: HttpClient) { 
+    route.params.subscribe(val => {
+      this.obtenerDatosHome();    });
+  }
 
   ngOnInit() {
-    this.obtenerDatosHome();
+    
   }
 
   obtenerDatosHome(){
+
     this.juegosServ.traerDatosHome().subscribe((resp: any) => {
       this.categoriaRecomendada[0] = resp.recommendedCategory;
       this.categorias = resp.categories;
