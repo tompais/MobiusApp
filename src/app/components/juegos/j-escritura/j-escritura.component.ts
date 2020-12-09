@@ -67,7 +67,7 @@ export class JEscrituraComponent implements OnInit {
       this.cargando = false;
       this.errorCode = false;
       if (this.errorCode === false) {
-        this.router.navigate(['/test/dibujo']);
+        this.router.navigate(['/juegos/finalizacion']);
       }
     }, (error: HttpErrorResponse) => {
       this.cargando = false;
