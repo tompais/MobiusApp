@@ -2,26 +2,12 @@
 <ion-content class="ion-padding">
   <ion-grid>
     <mobi-descripcion [textoAmotrar]="'¡Haz completado el Test!'"></mobi-descripcion>
-    <mobi-descripcion [textoAmotrar]="'Se ha detectado una alteración en las funciones mentales superiores'"></mobi-descripcion>
+    <mobi-descripcion [textoAmotrar]="getMensaje()"></mobi-descripcion>
     <ion-row class="centrar" style="height: 55vh;">
       <ion-col size="12">
         <img src="assets/img/imagen_rompecabeza.png" />
       </ion-col>
     </ion-row>
-    <!--<ion-row>
-      <ion-col col="12">
-        <ion-list>
-          <ion-item>
-            <ion-label>Puntaje:</ion-label>
-            <ion-text>{{finalizacionResponse.score}}</ion-text>
-          </ion-item>
-          <ion-item>
-            <ion-label>Resultado:</ion-label>
-            <ion-text>{{finalizacionResponse.obtenerDescDementiaLevel(finalizacionResponse.dementiaLevel)}}</ion-text>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>-->
   </ion-grid>
 </ion-content>
 <ion-row class="centrar">
