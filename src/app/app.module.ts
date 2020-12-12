@@ -59,6 +59,8 @@ import { JFinalizacionComponent } from './components/juegos/j-finalizacion/j-fin
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import { FormularioComponent } from './components/commons/generico/formulario/formulario.component';
 import { NgxAutocomPlaceModule } from 'ngx-autocom-place';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 
 @NgModule({
@@ -87,6 +89,8 @@ import { NgxAutocomPlaceModule } from 'ngx-autocom-place';
     DemoImage,
     FinalizacionService,
     ScreenOrientation,
+    Diagnostic,
+    LocationAccuracy,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
