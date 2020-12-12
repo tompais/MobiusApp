@@ -38,6 +38,7 @@ export class FormularioComponent implements OnInit {
   @Input() UrlProxPantalla = '/test/introduccion';
   @Input() NombreBotonSubmit = '';
   @Input() SoloForm = true;
+  @Input() btnDeshabilitado = false;
 
   // SALIDAS
   @Output() Cargando = new EventEmitter<boolean>();
