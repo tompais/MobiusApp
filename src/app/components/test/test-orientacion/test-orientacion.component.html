@@ -3,6 +3,6 @@
 <ion-content class="ion-padding">
     <ion-grid class="color-fondo-test-orientacion">
         <mobi-descripcion *ngIf="ori" [textoAmotrar]="ori.description"></mobi-descripcion>
-        <mobi-form *ngIf="ori" [nombrePantalla]="'orientacion'" [Datos]="ori" [UrlProxPantalla]="'/test/fijacion'" [NombreBotonSubmit]="'SIGUIENTE'" (DevolverDatos)="TomarDatosForm($event)"></mobi-form>
+        <mobi-form *ngIf="ori" [nombrePantalla]="'orientacion'" [Datos]="ori" [UrlProxPantalla]="'/test/fijacion'" [NombreBotonSubmit]="'SIGUIENTE'" (DevolverDatos)="TomarDatosForm($event)" [btnDeshabilitado]="deshabilitarBoton"></mobi-form>
     </ion-grid>
 </ion-content>
