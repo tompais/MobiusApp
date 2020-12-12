@@ -72,7 +72,7 @@ export class OrientacionRequest extends UserResponse {
 
     validarDiaSemana(diaSemana: string) {
         let resp = false;
-        const diasSemana: string[] = ['DOMINGO', 'LUNES', 'MARTES', 'MIERCOLES', 'JUEVES', 'VIERNES', 'SABADO'];
+        const diasSemana: string[] = ['DOMINGO', 'LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES', 'SÁBADO'];
         const day = new Date().getDay().toString();
         if (diasSemana[day] === diaSemana.toUpperCase()) {
             resp = true;
