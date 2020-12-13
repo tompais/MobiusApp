@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { GameCategoryRequest } from 'src/app/components/commons/models/commons/GameCategoryRequest';
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
 import { Servicio } from 'src/app/components/commons/models/Servicio';
-import { OrientacionRequest } from 'src/app/components/commons/models/test/orientacion/OrientacionRequest';
-import { environmentProd } from 'src/environments/environment.prod';
 import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.blue';
+import { environmentProd } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +19,7 @@ export class OrientacionService extends Servicio {
 
   public putOrientacion(gameCategoryRequest: GameCategoryRequest) {
     const id = this.sessionStorage.consultar('id');
-    const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
+    const urlService = `${environmentDevStageBlue.url}/patients/${id}/game/answers`;
     const mensaje = {
       category: null,
       gameId: null,
@@ -38,10 +37,8 @@ export class OrientacionService extends Servicio {
   public getOrientacion() {
     const id = this.sessionStorage.consultar('id');
     const isTest = this.sessionStorage.consultar('EsTest');
-    const urlService = `${environmentProd.url}/patients/${id}/game?game-category=orientation&test=${isTest}`;
-    console.log(urlService);
-    const mensaje = {};
-    const respuesta = this.http.get(urlService, mensaje);
+    const urlService = `${environmentDevStageBlue.url}/patients/${id}/game?game-category=orientation&test=${isTest}`;
+    const respuesta = this.http.get(urlService, this.obtenerToken());
     return respuesta;
   }
 

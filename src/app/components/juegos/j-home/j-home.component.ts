@@ -28,6 +28,8 @@ export class JHomeComponent implements OnInit {
   obtenerDatosHome(){
 
     this.juegosServ.traerDatosHome().subscribe((resp: any) => {
+      console.log('datos home juegos');
+      console.log(resp);
       this.categoriaRecomendada[0] = resp.recommendedCategory;
       this.categorias = resp.categories;
 

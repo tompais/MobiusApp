@@ -15,38 +15,27 @@ export class DibujoService extends Servicio {
 
   constructor(public http: HttpClient) {
     super();
-   }
+  }
 
-  public traerDatos(){
-    // VISUALIZATION
+  public traerDatos() {
     const id = this.sessionStorage.consultar('id');
-   // console.log('ID SESSION STORAGE');
-   // console.log(id);
-    // poner dentro de la ruta ${id} !!!!
     const isTest = this.sessionStorage.consultar('EsTest');
-    const urlService = `${environmentProd.url}/patients/${id}/game?game-category=drawing&test=${isTest}`;
-    // ${environmentProd.url}
-    const respuesta = this.http.get(urlService);
+    const urlService = `${environmentDevStageBlue.url}/patients/${id}/game?game-category=drawing&test=${isTest}`;
+    const respuesta = this.http.get(urlService, this.obtenerToken());
     return respuesta;
   }
 
-  public enviarDatos(gcr: GameCategoryRequest){
-
+  public enviarDatos(gcr: GameCategoryRequest) {
     const id = this.sessionStorage.consultar('id');
-
-    const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
-
-    console.log(JSON.stringify(gcr));
-    const respuesta = this.http.post(urlService, gcr);
+    const urlService = `${environmentDevStageBlue.url}/patients/${id}/game/answers`;
+    const respuesta = this.http.post(urlService, gcr, this.obtenerToken());
     return respuesta;
   }
 
-  public enviarImagen(imagen: File){
-    const urlUpload = `${environmentProd.url}/images`;
-    // cambiar /image/upload por /images
+  public enviarImagen(imagen: File) {
+    const urlUpload = `${environmentDevStageBlue.url}/images`;
     const form = new FormData();
     form.append('imageFile', imagen);
-
     const resp = this.http.post(urlUpload, form, this.obtenerToken());
     return resp;
   }

@@ -16,40 +16,31 @@ export class CommonService extends Servicio {
     this.http = new HttpClient(httpHandler);
    }
 
-  public enviarDatos(datos: any, nombrePantalla: string){
-    switch (nombrePantalla.toUpperCase()){
-      case 'LOGIN': this.repuestaE = this.login(datos); break;
-      case 'REGISTRO': this.repuestaE = this.registro(datos); break;
+  public enviarDatos(datos: any, nombrePantalla: string) {
+    switch (nombrePantalla.toUpperCase()) {
+      case 'LOGIN':
+        this.repuestaE = this.login(datos); 
+        break;
+      case 'REGISTRO':
+        this.repuestaE = this.registro(datos);
+        break;
     }
-
     return this.repuestaE;
   }
 
   private login(user: UserRequest) {
     const urlService = `${environmentDevStageBlue.url}/security/signin`;
-    const mensaje = {
-      email: null,
-      password: null
-    };
+    const mensaje = user;
     mensaje.email = user.email;
     mensaje.password = btoa(user.password);
-    console.log(JSON.stringify(mensaje));
-    const respuesta = this.http.post(urlService, mensaje, { observe: 'response'} );
+    // const respuesta = this.http.post(urlService, mensaje, { observe: 'response'} );
+    const respuesta = this.http.post(urlService, mensaje);
     return respuesta;
   }
 
   private registro(user: UserRequest) {
     const urlService = `${environmentProd.url}/security/signup`;
-    const mensaje = {
-      firstName: null,
-      lastName: null,
-      birthday: null,
-      genre: null,
-      patientEmail: null,
-      guardianEmail: null,
-      password: null,
-      passwordRepeat: null
-    };
+    const mensaje = user;
     mensaje.firstName = user.firstName;
     mensaje.lastName = user.lastName;
     mensaje.birthday = user.parsearFecha(user.birthday);

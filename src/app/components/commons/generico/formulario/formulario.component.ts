@@ -115,12 +115,13 @@ export class FormularioComponent implements OnInit {
 
       if (this.nombrePantalla.toUpperCase() === 'LOGIN' || this.nombrePantalla.toUpperCase() === 'REGISTRO'){
         this.commonService.enviarDatos(this.userRequest, this.nombrePantalla).subscribe((resp: any) => {
-          // para login guardamos en storage el id, nombre y apellido del usuario
+          console.log(resp);
+          // para login guardamos en storage el id, nombre y apellido del usuario y el token JWT
           if (this.nombrePantalla.toUpperCase() === 'LOGIN') {
-            this.storage.set('id', resp.body.id);
-            this.storage.set('nombreUsuario', resp.body.firstName + resp.body.lastName);
-            this.storage.set('EsTest', resp.body.testStatus === 'in_progress' ? true : false);
-            this.storage.set('token', resp.body.token);
+            this.storage.set('id', resp.id);
+            this.storage.set('nombreUsuario', resp.firstName + resp.lastName);
+            this.storage.set('EsTest', resp.testStatus === 'in_progress' ? true : false);
+            this.storage.set('token', `Bearer ${resp.token}`);
           }
 
           this.Cargando.emit(false);

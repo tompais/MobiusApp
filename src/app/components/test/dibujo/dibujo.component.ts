@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import { Observable, Observer } from 'rxjs';
 import { DibujoService } from 'src/app/services/test/dibujo.service';
+import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.blue';
 import { environmentProd } from 'src/environments/environment.prod';
 import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
@@ -34,7 +35,7 @@ export class DibujoComponent implements OnInit {
   category: string;
   taskId: number;
   descripcionTask: string;
-  url = environmentProd.url;
+  url = environmentDevStageBlue.url;
   img = 'images/';
   imgName: string;
   nameTest: string;
