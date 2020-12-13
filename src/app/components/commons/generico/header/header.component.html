@@ -3,6 +3,11 @@
         <ion-buttons slot="start" *ngIf="iconoBack">
             <ion-back-button defaultHref="{{urlAVolver}}"></ion-back-button>
         </ion-buttons>
+        <ion-buttons slot="start" *ngIf="!iconoBack && mostrarmenu">
+            <ion-button (click)="abrirMenu()">
+                <ion-icon slot="icon-only" name="menu"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>{{ titulo }}</ion-title>
     </ion-toolbar>
 </ion-header>
