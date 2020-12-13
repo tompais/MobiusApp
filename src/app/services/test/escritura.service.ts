@@ -20,14 +20,14 @@ export class EscrituraService extends Servicio {
   public traerDatos() {
     const id = this.sessionStorage.consultar('id');
     const isTest = this.sessionStorage.consultar('EsTest');
-    const urlService = `${environmentDevStageBlue.url}/patients/${id}/game?game-category=writing&test=${isTest}`;
+    const urlService = `${environmentProd.url}/patients/${id}/game?game-category=writing&test=${isTest}`;
     const respuesta = this.http.get(urlService, this.obtenerToken());
     return respuesta;
   }
 
   public enviarDatos(gcr: GameCategoryRequest) {
     const id = this.sessionStorage.consultar('id');
-    const urlService = `${environmentDevStageBlue.url}/patients/${id}/game/answers`;
+    const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
     const respuesta = this.http.post(urlService, gcr, this.obtenerToken());
     return respuesta;
   }

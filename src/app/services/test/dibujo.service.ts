@@ -20,20 +20,20 @@ export class DibujoService extends Servicio {
   public traerDatos() {
     const id = this.sessionStorage.consultar('id');
     const isTest = this.sessionStorage.consultar('EsTest');
-    const urlService = `${environmentDevStageBlue.url}/patients/${id}/game?game-category=drawing&test=${isTest}`;
+    const urlService = `${environmentProd.url}/patients/${id}/game?game-category=drawing&test=${isTest}`;
     const respuesta = this.http.get(urlService, this.obtenerToken());
     return respuesta;
   }
 
   public enviarDatos(gcr: GameCategoryRequest) {
     const id = this.sessionStorage.consultar('id');
-    const urlService = `${environmentDevStageBlue.url}/patients/${id}/game/answers`;
+    const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
     const respuesta = this.http.post(urlService, gcr, this.obtenerToken());
     return respuesta;
   }
 
   public enviarImagen(imagen: File) {
-    const urlUpload = `${environmentDevStageBlue.url}/images`;
+    const urlUpload = `${environmentProd.url}/images`;
     const form = new FormData();
     form.append('imageFile', imagen);
     const resp = this.http.post(urlUpload, form, this.obtenerToken());

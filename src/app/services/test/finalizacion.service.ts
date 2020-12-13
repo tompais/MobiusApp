@@ -14,7 +14,7 @@ export class FinalizacionService extends Servicio {
   }
 
   obtenerResultado(id: string) {
-    const urlService = `${environmentDevStageBlue.url}/patients/${id}/mental-test/result`;
+    const urlService = `${environmentProd.url}/patients/${id}/mental-test/result`;
     const respuesta = this.http.get(urlService, this.obtenerToken());
     return respuesta;
   }

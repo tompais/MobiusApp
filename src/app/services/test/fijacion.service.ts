@@ -21,14 +21,14 @@ import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.
     public getFijacion() {
       const id = this.sessionStorage.consultar('id');
       const isTest = this.sessionStorage.consultar('EsTest');
-      const urlService = `${environmentDevStageBlue.url}/patients/${id}/game?game-category=fixation&test=${isTest}`;
+      const urlService = `${environmentProd.url}/patients/${id}/game?game-category=fixation&test=${isTest}`;
       const respuesta = this.http.get(urlService, this.obtenerToken());
       return respuesta;
     }
 
     public setFijacion(respFijacion: GameCategoryRequest){
       const id = this.sessionStorage.consultar('id');
-      const urlService = `${environmentDevStageBlue.url}/patients/${id}/game/answers`;
+      const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
       const respuesta = this.http.post(urlService, respFijacion, this.obtenerToken());
       return respuesta;
     }

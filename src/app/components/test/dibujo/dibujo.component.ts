@@ -35,7 +35,7 @@ export class DibujoComponent implements OnInit {
   category: string;
   taskId: number;
   descripcionTask: string;
-  url = environmentDevStageBlue.url;
+  url = environmentProd.url;
   img = 'images/';
   imgName: string;
   nameTest: string;
@@ -45,11 +45,11 @@ export class DibujoComponent implements OnInit {
 
   // tslint:disable-next-line: ban-types
   private signaturePadOptions: Object = {
-    maxWidth: 5,
-    minWidth: 5,
+    maxWidth: 8,
+    minWidth: 8,
     canvasWidth: 400,
     canvasHeight: 400,
-    // backgroundColor: 'rgb(255, 255, 255)',
+    backgroundColor: 'rgb(255, 255, 255)',
   };
 
   constructor(private router: Router, private domSanitizer: DomSanitizer, private demoImage: DemoImage, private dibujoServ: DibujoService) {

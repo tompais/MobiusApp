@@ -4,6 +4,7 @@ import { GameCategoryRequest } from 'src/app/components/commons/models/commons/G
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
 import { environmentProd } from 'src/environments/environment.prod';
 import { Servicio } from 'src/app/components/commons/models/Servicio';
+import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.blue';
 
 @Injectable({
   providedIn: 'root'

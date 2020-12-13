@@ -121,7 +121,7 @@ export class FormularioComponent implements OnInit {
             this.storage.set('id', resp.id);
             this.storage.set('nombreUsuario', resp.firstName + ' ' + resp.lastName);
             this.storage.set('EsTest', resp.testStatus === 'in_progress' ? true : false);
-            this.storage.set('token', `Bearer ${resp.token}`);
+            this.storage.set('token', resp.token);
           }
 
           this.Cargando.emit(false);

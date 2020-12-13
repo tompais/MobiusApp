@@ -9,7 +9,7 @@ export class Servicio {
         const token = this.sessionStorage.consultar('token');
         const httpOptions = {
             headers: new HttpHeaders({
-              Authorization: token
+              Authorization: 'Bearer ' + token
             })
           };
         return httpOptions;

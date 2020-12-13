@@ -22,14 +22,14 @@ import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.
     public getMemoria() {
       const id = this.storage.get('id');
       const isTest = this.storage.get('EsTest');
-      const urlService = `${environmentDevStageBlue.url}/patients/${id}/game?game-category=memory&test=${isTest}`;
+      const urlService = `${environmentProd.url}/patients/${id}/game?game-category=memory&test=${isTest}`;
       const respuesta = this.http.get(urlService, this.obtenerToken());
       return respuesta;
     }
 
     public setMemoria(respMemoria: GameCategoryRequestConResult) {
       const id = this.storage.get('id');
-      const urlService = `${environmentDevStageBlue.url}/patients/${id}/game/answers`;
+      const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
       const respuesta = this.http.post(urlService, respMemoria, this.obtenerToken());
       return respuesta;
     }

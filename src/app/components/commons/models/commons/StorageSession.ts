@@ -5,6 +5,6 @@ export class StorageSession {
     }
 
     consultar(key: string): string {
-        return localStorage.getItem(key);
+        return JSON.parse(localStorage.getItem(key));
     }
 }
