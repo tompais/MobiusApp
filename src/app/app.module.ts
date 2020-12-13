@@ -61,6 +61,7 @@ import { FormularioComponent } from './components/commons/generico/formulario/fo
 import { NgxAutocomPlaceModule } from 'ngx-autocom-place';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
+import { MenuComponent } from './components/commons/generico/menu/menu.component';
 
 
 @NgModule({
@@ -71,7 +72,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
     DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, JAtencionComponent, JCalculoComponent, JDibujoComponent,
     JEscrituraComponent, JFijacionComponent, JLecturaComponent, JOrdenesComponent, JVisualizacionComponent, JHomeComponent, JFinalizacionComponent,
     AtencionComponent, EscrituraComponent, LecturaComponent, MemoriaComponent, RepeticionComponent,
-    DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, FormularioComponent],
+    DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, FormularioComponent, MenuComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot({hardwareBackButton: false}), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule, NgxAutocomPlaceModule],
   providers: [

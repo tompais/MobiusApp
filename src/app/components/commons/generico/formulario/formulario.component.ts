@@ -119,7 +119,7 @@ export class FormularioComponent implements OnInit {
           // para login guardamos en storage el id, nombre y apellido del usuario y el token JWT
           if (this.nombrePantalla.toUpperCase() === 'LOGIN') {
             this.storage.set('id', resp.id);
-            this.storage.set('nombreUsuario', resp.firstName + resp.lastName);
+            this.storage.set('nombreUsuario', resp.firstName + ' ' + resp.lastName);
             this.storage.set('EsTest', resp.testStatus === 'in_progress' ? true : false);
             this.storage.set('token', `Bearer ${resp.token}`);
           }
