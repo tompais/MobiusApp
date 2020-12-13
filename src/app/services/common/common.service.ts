@@ -1,7 +1,6 @@
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Servicio } from 'src/app/components/commons/models/Servicio';
-import { User } from 'src/app/components/commons/models/User';
 import { UserRequest } from 'src/app/components/commons/models/user/UserRequest';
 import { environmentProd } from 'src/environments/environment.prod';
 import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.blue';
@@ -27,7 +26,7 @@ export class CommonService extends Servicio {
   }
 
   private login(user: UserRequest) {
-    const urlService = `${environmentProd.url}/security/signin`;
+    const urlService = `${environmentDevStageBlue.url}/security/signin`;
     const mensaje = {
       email: null,
       password: null
@@ -35,7 +34,7 @@ export class CommonService extends Servicio {
     mensaje.email = user.email;
     mensaje.password = btoa(user.password);
     console.log(JSON.stringify(mensaje));
-    const respuesta = this.http.post(urlService, mensaje, this.generarToken(mensaje.email, mensaje.password));
+    const respuesta = this.http.post(urlService, mensaje, { observe: 'response'} );
     return respuesta;
   }
 
@@ -57,10 +56,9 @@ export class CommonService extends Servicio {
     mensaje.genre = user.genre;
     mensaje.patientEmail = user.patientEmail;
     mensaje.guardianEmail = user.guardianEmail;
-    mensaje.password = btoa(user.password); // user.password;
+    mensaje.password = btoa(user.password);
     mensaje.passwordRepeat = user.passwordRepeat;
-    console.log(JSON.stringify(mensaje));
-    const respuesta = this.http.post(urlService, mensaje, this.generarToken(mensaje.patientEmail, mensaje.password));
+    const respuesta = this.http.post(urlService, mensaje);
     return respuesta;
   }
 }
