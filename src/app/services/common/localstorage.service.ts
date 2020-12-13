@@ -23,4 +23,12 @@ export class LocalStorageService{
             console.log(error);
         }
     }
+
+    clear(){
+        try{
+            localStorage.clear();
+        }catch(error){
+            console.log(error);
+        }
+    }
 }
