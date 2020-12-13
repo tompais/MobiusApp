@@ -18,6 +18,9 @@ import { ErrorServicioGrupo } from '../../commons/models/errors/ErrorServicioGru
 import { OrientacionRequest } from '../../commons/models/test/orientacion/OrientacionRequest';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { AlertController } from '@ionic/angular';
+import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 
 declare var google;
 
@@ -54,10 +57,11 @@ export class TestOrientacionComponent implements OnInit {
     useLocale: true,
     maxResults: 5
   };
+  deshabilitarBoton = false;
 
   constructor(public orientacionService: OrientacionService, public router: Router, public locationService: LocationService,
-              private platform: Platform, private geolocation: Geolocation,
-              private nativeGeocoder: NativeGeocoder) {
+              private platform: Platform, private geolocation: Geolocation,public alertController: AlertController,
+              private nativeGeocoder: NativeGeocoder, private diagnostic: Diagnostic, private locationAccuracy: LocationAccuracy) {
   }
 
   ngOnInit() {
@@ -74,7 +78,7 @@ export class TestOrientacionComponent implements OnInit {
     this.erroresServicio.errores.push(new ErrorServicio('testOrientacionEnvio', true, '', false, 'Test Orientacion Envio'));
     this.erroresServicio.errores.push(new ErrorServicio('testOrientacion', true, '', false, 'Test Orientacion Consulta'));
     this.getOrientacion();
-    this.getGeolocation();
+    this.getGPSYGeolocation();
   }
 
   eventoError(error: ErrorServicio) {
@@ -216,15 +220,52 @@ export class TestOrientacionComponent implements OnInit {
     }
     return this.rsp;
   }
+
+  async presentAlert(header: string,mensaje: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: mensaje,
+      buttons: ['ACEPTAR']
+    });
+
+    await alert.present();
+  }
   // Obtiene la localizacion actual del dispositivo
-  getGeolocation() {
+  getGPSYGeolocation() {
+   
+    this.diagnostic.isGpsLocationEnabled().then((habilitado) => {
+      if (!habilitado) {
+        this.locationAccuracy.canRequest().then((canRequest: boolean) => {
+          if(canRequest) {
+            this.getGeolocation();
+          }else{           
+             // the accuracy option will be ignored by iOS
+             this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => { this.getGeolocation();
+            },
+              error => this.deshabilitarBoton = true
+            );
+          }        
+        });
+      }else{
+        this.getGeolocation();
+      }
+    }).catch((error) => {this.presentAlert("ERROR",error);
+  
+    this.deshabilitarBoton = true
+  });
+
+  }
+
+  getGeolocation(){
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitud = resp.coords.latitude;
       this.longitud = resp.coords.longitude;
       this.getGeoencoder(resp.coords.latitude, resp.coords.longitude);
 
     }).catch((error) => {
-      alert('Error getting location' + JSON.stringify(error));
+      this.presentAlert("ERROR",error)
+      this.deshabilitarBoton = true
     });
   }
 
@@ -238,7 +279,8 @@ export class TestOrientacionComponent implements OnInit {
         this.city = result[0].locality;
       })
       .catch((error: any) => {
-        alert('Error getting location' + JSON.stringify(error));
+        this.presentAlert("ERROR",error)
+        this.deshabilitarBoton = true
       });
   }
 

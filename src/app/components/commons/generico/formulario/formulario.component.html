@@ -226,7 +226,7 @@
         <ion-col size="12" class="flex ion-justify-content-center ion-align-items-end">
             <mobi-boton *ngIf="nombrePantalla === 'registro'" [forma]="'round'" [textoAMostrar]="NombreBotonSubmit" [tipoBoton]="'submit'" [deshabilitado]="userRequest.passwordNoCoinciden()"></mobi-boton>
             <mobi-boton *ngIf="nombrePantalla === 'login'" [forma]="'round'" [textoAMostrar]="NombreBotonSubmit" [tipoBoton]="'submit'"></mobi-boton>
-            <mobi-boton *ngIf="nombrePantalla !== 'registro' && nombrePantalla !== 'login'" [forma]="'round'" [posForm]="true" [textoAMostrar]="NombreBotonSubmit" [tipoBoton]="'submit'"></mobi-boton>
+            <mobi-boton *ngIf="nombrePantalla !== 'registro' && nombrePantalla !== 'login'" [forma]="'round'" [posForm]="true" [textoAMostrar]="NombreBotonSubmit" [tipoBoton]="'submit'" [deshabilitado]="btnDeshabilitado"></mobi-boton>
         </ion-col>
     </ion-row>
 
