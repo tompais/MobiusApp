@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { SignaturePad } from 'angular2-signaturepad';
 import { Observable, Observer } from 'rxjs';
 import { DibujoService } from 'src/app/services/test/dibujo.service';
+import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.blue';
 import { environmentProd } from 'src/environments/environment.prod';
 import { GameCategoryRequest } from '../../commons/models/commons/GameCategoryRequest';
 import { PatientTaskAnswersRequestList } from '../../commons/models/commons/PatientTaskAnswersRequestList';
@@ -44,11 +45,11 @@ export class DibujoComponent implements OnInit {
 
   // tslint:disable-next-line: ban-types
   private signaturePadOptions: Object = {
-    maxWidth: 5,
-    minWidth: 5,
+    maxWidth: 8,
+    minWidth: 8,
     canvasWidth: 400,
     canvasHeight: 400,
-    // backgroundColor: 'rgb(255, 255, 255)',
+    backgroundColor: 'rgb(255, 255, 255)',
   };
 
   constructor(private router: Router, private domSanitizer: DomSanitizer, private demoImage: DemoImage, private dibujoServ: DibujoService) {

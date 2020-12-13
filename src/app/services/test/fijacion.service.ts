@@ -4,6 +4,7 @@ import { StorageSession } from 'src/app/components/commons/models/commons/Storag
 import { GameCategoryRequest } from 'src/app/components/commons/models/commons/GameCategoryRequest';
 import { environmentProd } from 'src/environments/environment.prod';
 import { Servicio } from 'src/app/components/commons/models/Servicio';
+import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.blue';
 
 @Injectable({
     providedIn: 'root'
@@ -21,15 +22,13 @@ import { Servicio } from 'src/app/components/commons/models/Servicio';
       const id = this.sessionStorage.consultar('id');
       const isTest = this.sessionStorage.consultar('EsTest');
       const urlService = `${environmentProd.url}/patients/${id}/game?game-category=fixation&test=${isTest}`;
-      const mensaje = {};
-      const respuesta = this.http.get(urlService, mensaje);
+      const respuesta = this.http.get(urlService, this.obtenerToken());
       return respuesta;
     }
 
     public setFijacion(respFijacion: GameCategoryRequest){
       const id = this.sessionStorage.consultar('id');
       const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
-      const mensaje = {};
       const respuesta = this.http.post(urlService, respFijacion, this.obtenerToken());
       return respuesta;
     }

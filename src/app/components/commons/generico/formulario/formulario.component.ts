@@ -4,7 +4,7 @@ import { AppComponent } from 'src/app/app.component';
 import { User } from '../../models/User';
 import { ErrorServicio } from '../../models/errors/ErrorServicio';
 import { ErrorServicioGrupo } from '../../models/errors/ErrorServicioGrupo';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { CommonService } from 'src/app/services/common/common.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/common/localstorage.service';
@@ -13,6 +13,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 import { LocationService } from 'src/app/services/location.service';
 import { ToastController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 declare var google;
 
@@ -114,11 +115,13 @@ export class FormularioComponent implements OnInit {
 
       if (this.nombrePantalla.toUpperCase() === 'LOGIN' || this.nombrePantalla.toUpperCase() === 'REGISTRO'){
         this.commonService.enviarDatos(this.userRequest, this.nombrePantalla).subscribe((resp: any) => {
-          // para login guardamos en storage el id, nombre y apellido del usuario
+          console.log(resp);
+          // para login guardamos en storage el id, nombre y apellido del usuario y el token JWT
           if (this.nombrePantalla.toUpperCase() === 'LOGIN') {
             this.storage.set('id', resp.id);
             this.storage.set('nombreUsuario', resp.firstName + ' ' + resp.lastName);
             this.storage.set('EsTest', resp.testStatus === 'in_progress' ? true : false);
+            this.storage.set('token', resp.token);
           }
 
           this.Cargando.emit(false);

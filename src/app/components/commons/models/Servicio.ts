@@ -1,16 +1,18 @@
-const TYPE_AUTHORIZATION = 'Bearer ';
+import { HttpHeaders } from "@angular/common/http";
+import { StorageSession } from './commons/StorageSession';
 
 export class Servicio {
 
-    hash: any;
-
-    generarToken(email: string, password: string): any {
-        this.hash = TYPE_AUTHORIZATION.concat(btoa(email + password));
-        return this.hash;
-    }
+    sessionStorage: StorageSession = new StorageSession();
 
     obtenerToken(): any {
-        return this.hash;
+        const token = this.sessionStorage.consultar('token');
+        const httpOptions = {
+            headers: new HttpHeaders({
+              Authorization: 'Bearer ' + token
+            })
+          };
+        return httpOptions;
     }
 
 }

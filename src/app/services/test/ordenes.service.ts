@@ -2,37 +2,33 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GameCategoryRequest } from 'src/app/components/commons/models/commons/GameCategoryRequest';
 import { StorageSession } from 'src/app/components/commons/models/commons/StorageSession';
+import { Servicio } from 'src/app/components/commons/models/Servicio';
+import { environmentDevStageBlue } from 'src/environments/environment.dev.stage.blue';
 import { environmentProd } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
-export class OrdenesService {
+export class OrdenesService extends Servicio {
 
   sessionStorage: StorageSession = new StorageSession();
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient) {
+    super();
+  }
 
-  public enviarDatos(gcr: GameCategoryRequest){
-
+  public enviarDatos(gcr: GameCategoryRequest) {
     const id = this.sessionStorage.consultar('id');
-
     const urlService = `${environmentProd.url}/patients/${id}/game/answers`;
-
-    console.log(JSON.stringify(gcr));
-    const respuesta = this.http.post(urlService, gcr);
+    const respuesta = this.http.post(urlService, gcr, this.obtenerToken());
     return respuesta;
   }
 
-  public traerDatos(){
-    // VISUALIZATION
+  public traerDatos() {
     const id = this.sessionStorage.consultar('id');
-   // console.log('ID SESSION STORAGE');
-   // console.log(id);
-    // poner dentro de la ruta ${id} !!!!
     const isTest = this.sessionStorage.consultar('EsTest');
     const urlService = `${environmentProd.url}/patients/${id}/game?game-category=comprehension&test=${isTest}`;
-    const respuesta = this.http.get(urlService);
+    const respuesta = this.http.get(urlService, this.obtenerToken());
     return respuesta;
   }
 }
