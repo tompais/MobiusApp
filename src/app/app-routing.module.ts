@@ -30,6 +30,7 @@ import { JCalculoComponent } from './components/juegos/j-calculo/j-calculo.compo
 import { JFijacionComponent } from './components/juegos/j-fijacion/j-fijacion.component';
 import { JLecturaComponent } from './components/juegos/j-lectura/j-lectura.component';
 import { JVisualizacionComponent } from './components/juegos/j-visualizacion/j-visualizacion.component';
+import { JRepeticionComponent } from './components/juegos/j-repeticion/j-repeticion.component';
 
 const routes: Routes = [
   {
@@ -63,7 +64,8 @@ const routes: Routes = [
   {path: 'juegos/ordenes', component: JOrdenesComponent},
   {path: 'juegos/visualizacion', component: JVisualizacionComponent},
   {path: 'juegos/home', component: JHomeComponent},
-  {path: 'juegos/finalizacion', component: JFinalizacionComponent}
+  {path: 'juegos/finalizacion', component: JFinalizacionComponent},
+  {path: 'juegos/repeticion', component: JRepeticionComponent}
 ];
 
 @NgModule({

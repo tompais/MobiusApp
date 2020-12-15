@@ -1,0 +1,12 @@
+ion-header ion-toolbar ion-back-button,
+ion-header ion-toolbar ion-title {
+    color: #fff !important;
+}
+
+.flex {
+    display: flex;
+}
+
+.valing {
+    min-height: calc(100vh - 350px);
+}
