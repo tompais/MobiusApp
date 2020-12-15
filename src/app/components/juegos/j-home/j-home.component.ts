@@ -70,6 +70,9 @@ export class JHomeComponent implements OnInit {
       if (cat[i] === 'visualization'){
         catTrad[i] = 'visualizacion';
       }
+      if (cat[i] === 'repetition'){
+        catTrad[i] = 'repeticion';
+      }
     }
 
     return catTrad;
