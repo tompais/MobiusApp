@@ -62,6 +62,7 @@ import { NgxAutocomPlaceModule } from 'ngx-autocom-place';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { LocationAccuracy } from '@ionic-native/location-accuracy/ngx';
 import { MenuComponent } from './components/commons/generico/menu/menu.component';
+import { JRepeticionComponent } from './components/juegos/j-repeticion/j-repeticion.component';
 
 
 @NgModule({
@@ -72,7 +73,7 @@ import { MenuComponent } from './components/commons/generico/menu/menu.component
     DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, JAtencionComponent, JCalculoComponent, JDibujoComponent,
     JEscrituraComponent, JFijacionComponent, JLecturaComponent, JOrdenesComponent, JVisualizacionComponent, JHomeComponent, JFinalizacionComponent,
     AtencionComponent, EscrituraComponent, LecturaComponent, MemoriaComponent, RepeticionComponent,
-    DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, FormularioComponent, MenuComponent],
+    DibujoComponent, HeaderComponent, BotonComponent, DescripcionComponent, FormularioComponent, MenuComponent, JRepeticionComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot({hardwareBackButton: false}), AppRoutingModule, HttpClientModule, FormsModule, CommonModule, SignaturePadModule, NgxAutocomPlaceModule],
   providers: [
